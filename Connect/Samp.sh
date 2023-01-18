@@ -9,7 +9,7 @@ vermelho=$(echo -en "\e[31m")
    echo "${bold}${lightgreen}=============================================================================="
    echo "${bold}${lightgreen}==>                   Sistema De Suporte Iniciado                          <=="
 # if do samp03svr
-if [ "${Arquitetura}" == "arm64" ]; then 
+if [[ "${Arquitetura}" == "arm64" ]]; then 
       echo -n "${bold}${lightgreen}==> Arquitetura :ARM64 (Usa Emulação box86)                                <=="
    else
       echo -n "${bold}${lightgreen}==> Arquitetura :AMD64 (Executando em 86X)                                 <=="
