@@ -12,7 +12,7 @@ if [[ -f "./samp03svr" ]]; then
    chmod 777 samp03svr
    echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt. <=="
    # if da pasta Logs
-   if [[ -f "/Logs_Do_Servidor/" ]]; then
+   if [[ -f "./Logs_Do_Servidor/Log_Completa_do_servidor.txt" ]]; then
        echo "${bold}${lightgreen}==> Pasta de Logs encontrada, Copiando Server_log.txt.<=="
        else 
        echo "${bold}${lightgreen}==> Pasta de Logs ${bold}${vermelho}não encontrada${bold}${lightgreen}, criando uma nova.<=="
