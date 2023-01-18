@@ -14,7 +14,8 @@ if [ "${Arquitetura}" == "arm64" ]; then
    else
       echo -n "${bold}${lightgreen}==> Arquitetura :AMD64 (Executando em 86X)                                 <=="
    fi
-   echo "\n${bold}${lightgreen}=============================================================================="
+   echo ""
+   echo "${bold}${lightgreen}=============================================================================="
 if [[ -f "./samp03svr" ]]; then
    echo "${bold}${lightgreen}==> O Samp Linux foi detectado, O Sistema de download não será necessario. <=="
    echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
