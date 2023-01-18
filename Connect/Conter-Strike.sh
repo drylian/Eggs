@@ -18,3 +18,6 @@ if [ "${Arquitetura}" == "arm64" ]; then
    echo "${bold}${lightgreen}="
    echo "${bold}${lightgreen}=============================================================================="
    # Inicio do COdigo
+   if [[ -f "./Steam/config/config.vdf" ]]; then
+   echo "${bold}${lightgreen}==> A Steam foi detectada, O Sistema de download não será necessario. <=="
+   ./steamcmd/steamcmd.sh +force_install_dir /mnt/server +login anonymous +app_update 90 +app_set_config 90 mod cstrike +quit
