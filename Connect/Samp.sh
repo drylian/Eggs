@@ -7,12 +7,13 @@ lightgreen=$(echo -en "\e[92m")
 vermelho=$(echo -en "\e[31m")
 # ${bold}${vermelho}
    echo "${bold}${lightgreen}=============================================================================="
-   echo "${bold}${lightgreen}==>                   Sistema De Suporte Iniciado                          <=="
+   echo "${bold}${lightgreen}==>                      Sistema De Suporte Iniciado.                      <=="
+   echo "${bold}${lightgreen}==>                                                                        <=="
 # if do samp03svr
 if [ "${Arquitetura}" == "arm64" ]; then 
-      echo -n "${bold}${lightgreen}==> Arquitetura :ARM64 (Usa Emulação box86)                                <="
+      echo -n "${bold}${lightgreen}==> Arquitetura :Arm64x (Usa Emulação box86)                               <="
    else
-      echo -n "${bold}${lightgreen}==> Arquitetura :AMD64 (Executando em 86X)                                 <="
+      echo -n "${bold}${lightgreen}==> Arquitetura :AMD64x (Executando em 86X)                                <="
    fi
    echo "${bold}${lightgreen}="
    echo "${bold}${lightgreen}=============================================================================="
