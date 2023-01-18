@@ -19,11 +19,11 @@ if [ "${Arquitetura}" == "arm64" ]; then
    echo "${bold}${lightgreen}=============================================================================="
    # Inicio do COdigo
    curl -sSL -o steamcmd.tar.gz http://media.steampowered.com/installer/steamcmd_linux.tar.gz
-   mkdir -p /mnt/server/steamcmd
-   tar -xzvf steamcmd.tar.gz -C /mnt/server/steamcmd
+   mkdir -p /home/container/steamcmd
+   tar -xzvf steamcmd.tar.gz -C /home/container/steamcmd
    echo "${bold}${lightgreen}Teste de egg"
-   ./steamcmd/steamcmd.sh +force_install_dir /mnt/server +login anonymous +app_update 90 +app_set_config 90 mod cstrike +quit
-   mkdir -p /mnt/server/.steam/sdk32
+   ./steamcmd/steamcmd.sh +force_install_dir /home/container/ +login anonymous +app_update 90 +app_set_config 90 mod cstrike +quit
+   mkdir -p /home/container/.steam/sdk32
    cp -v linux32/steamclient.so ../.steam/sdk32/steamclient.so
    ## install end
 echo "-----------------------------------------"
