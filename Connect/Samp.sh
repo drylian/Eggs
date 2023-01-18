@@ -47,10 +47,10 @@ if [[ -f "./samp03svr" ]]; then
          #echo -n "./samp03svr"
    #fi
 else
-   echo "${bold}${lightgreen}==> O Samp Linux ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado. <=="
+   echo "${bold}${lightgreen}==> O Samp Linux ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.       <=="
    curl -L -o /home/container/samp03svr "https://github.com/drylian/tralhas/releases/latest/download/samp03svr"
    echo "${bold}${lightgreen}==> Download Terminado, iniciando configurações padrões.                   <=="
-   echo "${bold}${lightgreen}==> Setando permissões padrões. <=="
+   echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
    chmod 777 samp03svr
    echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt.                     <=="
       if [[ -f "./Logs_Do_Servidor/Log_Completa_do_servidor.txt" ]]; then
