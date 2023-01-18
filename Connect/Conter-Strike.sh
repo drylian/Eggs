@@ -23,14 +23,14 @@ if [ "${Arquitetura}" == "arm64" ]; then
    else
       echo "${bold}${lightgreen}==> A Steam Cmd ${bold}${vermelho}Não Detectada${bold}${lightgreen}, O Sistema de download será iniciado."
       curl -sSL -o steamcmd.tar.gz http://media.steampowered.com/installer/steamcmd_linux.tar.gz
-      "${bold}${lightgreen}==> O Download foi Terminado Criando Diretorio Steamcmd."
+      echo "${bold}${lightgreen}==> O Download foi Terminado Criando Diretorio Steamcmd."
       mkdir ./steamcmd
-      "${bold}${lightgreen}Copiando e deletando arquivos desnecessarios."
+      echo "${bold}${lightgreen}Copiando e deletando arquivos desnecessarios."
       cp steamcmd.tar.gz ./steamcmd/
       rm -r ./steamcmd.tar.gz
-      "${bold}${lightgreen}Iniciando extração de arquivos."
+      echo "${bold}${lightgreen}Iniciando extração de arquivos."
       tar -xzvf ./steamcmd/steamcmd.tar.gz ./steamcmd/
-      "${bold}${lightgreen}Extração de arquivos Terminada."
+      echo "${bold}${lightgreen}Extração de arquivos Terminada."
    fi
 done
       
