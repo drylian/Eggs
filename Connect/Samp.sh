@@ -1,4 +1,6 @@
 #!/bin/bash
+
+Arquitetura=$([ "$(uname -m)" == "x86_64" ] && echo "amd64" || echo "arm64") 
 # Cores do Sistema 
 bold=$(echo -en "\e[1m")
 lightgreen=$(echo -en "\e[92m")
@@ -7,6 +9,11 @@ vermelho=$(echo -en "\e[31m")
    echo "${bold}${lightgreen}=============================================================================="
    echo "${bold}${lightgreen}==>                   Sistema De Suporte Iniciado                          <=="
 # if do samp03svr
+if [ "${Arquitetura}" == "arm64" ]; then 
+      echo -n "${bold}${lightgreen}==> Arquitetura :ARM64 (Usa Emulação box86)                                <=="
+   else
+      echo -n "${bold}${lightgreen}==> Arquitetura :AMD64 (Executando em 86X)                                 <=="
+   fi
 if [[ -f "./samp03svr" ]]; then
    echo "${bold}${lightgreen}==> O Samp Linux foi detectado, O Sistema de download não será necessario. <=="
    echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
@@ -30,7 +37,11 @@ if [[ -f "./samp03svr" ]]; then
       fi
    echo "${bold}${lightgreen}==> Iniciando Servidor.                                                    <=="
    echo "${bold}${lightgreen}=============================================================================="
-   ./samp03svr
+   if [ "${Arquitetura}" == "arm64" ]; then 
+      echo -n "box86 ./samp03svr"
+   else
+      echo -n "./samp03svr"
+   fi
 else
    echo "${bold}${lightgreen}==> O Samp Linux ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado. <=="
    curl -L -o /home/container/samp03svr "https://github.com/drylian/tralhas/releases/latest/download/samp03svr"
@@ -54,6 +65,10 @@ else
    fi
    echo "${bold}${lightgreen}==> Iniciando Servidor.                                                    <=="
    echo "${bold}${lightgreen}=============================================================================="
-   ./samp03svr
+   if [ "${Arquitetura}" == "arm64" ]; then 
+      echo -n "box86 ./samp03svr"
+   else
+      echo -n "./samp03svr"
+   fi
 fi
 done
