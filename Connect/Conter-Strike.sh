@@ -20,7 +20,7 @@ if [ "${Arquitetura}" == "arm64" ]; then
    if [[ -f "./steamcmd/steamcmd.sh" ]]; then
       echo "${bold}${lightgreen}==> A Steam Cmd foi detectada, Download não será necessario."
       ./steamcmd/steamcmd.sh +force_install_dir /home/container/ +login anonymous +app_update 90 +app_set_config 90 mod cstrike +quit
-      ./hlds_run -console -game {{HLDS_GAME}} -{{SRV_SECURE}} -port {{SERVER_PORT}} -sport {{VAC_PORT}} +map {{SRCDS_MAP}} +maxplayers {{SRV_SLOTS}} +ip 0.0.0.0 -pingboost {{SRV_PINGBOOST}} -strictportbind -norestart
+      ./hlds_run -console -game cstrike -{{SRV_SECURE}} -port {{SERVER_PORT}} -sport {{VAC_PORT}} +map {{SRCDS_MAP}} +maxplayers {{SRV_SLOTS}} +ip 0.0.0.0 -pingboost {{SRV_PINGBOOST}} -strictportbind -norestart
    else
       echo "${bold}${lightgreen}==> A Steam Cmd ${bold}${vermelho}Não Detectada${bold}${lightgreen}, O Sistema de download será iniciado."
       curl -sSL -o steamcmd.tar.gz http://media.steampowered.com/installer/steamcmd_linux.tar.gz
