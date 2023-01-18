@@ -14,7 +14,6 @@ if [ "${Arquitetura}" == "arm64" ]; then
    else
       echo -n "${bold}${lightgreen}==> Arquitetura :AMD64 (Executando em 86X)                                 <=="
    fi
-done
    echo "${bold}${lightgreen}=============================================================================="
 if [[ -f "./samp03svr" ]]; then
    echo "${bold}${lightgreen}==> O Samp Linux foi detectado, O Sistema de download não será necessario. <=="
@@ -39,11 +38,12 @@ if [[ -f "./samp03svr" ]]; then
       fi
    echo "${bold}${lightgreen}==> Iniciando Servidor.                                                    <=="
    echo "${bold}${lightgreen}=============================================================================="
-      if [ "${Arquitetura}" == "arm64" ]; then 
-         echo -n "box86 ./samp03svr"
-      else
-         echo -n "./samp03svr"
-   fi
+   $(if [ "${Arquitetura}" == "arm64" ]; then echo -n "box86 ./samp03svr"; else echo -n "./samp03svr"; fi)
+      #if [ "${Arquitetura}" == "arm64" ]; then 
+         #echo -n "box86 ./samp03svr"
+      #else
+         #echo -n "./samp03svr"
+   #fi
 else
    echo "${bold}${lightgreen}==> O Samp Linux ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado. <=="
    curl -L -o /home/container/samp03svr "https://github.com/drylian/tralhas/releases/latest/download/samp03svr"
@@ -67,10 +67,11 @@ else
    fi
    echo "${bold}${lightgreen}==> Iniciando Servidor.                                                    <=="
    echo "${bold}${lightgreen}=============================================================================="
-      if [ "${Arquitetura}" == "arm64" ]; then 
-         echo -n "box86 ./samp03svr"
-      else
-         echo -n "./samp03svr"
-   fi
-fi
+   $(if [ "${Arquitetura}" == "arm64" ]; then echo -n "box86 ./samp03svr"; else echo -n "./samp03svr"; fi)
+      #if [ "${Arquitetura}" == "arm64" ]; then 
+         #echo -n "box86 ./samp03svr"
+      #else
+         #echo -n "./samp03svr"
+   #fi
+  fi
 done
