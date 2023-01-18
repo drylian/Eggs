@@ -29,7 +29,10 @@ if [ "${Arquitetura}" == "arm64" ]; then
       cp steamcmd.tar.gz ./steamcmd/
       rm -r ./steamcmd.tar.gz
       echo "${bold}${lightgreen}Iniciando extração de arquivos."
-      tar -xzvf ./steamcmd/steamcmd.tar.gz ./steamcmd/
+      cd ./steamcmd/
+      tar -xzvf steamcmd.tar.gz
+      cd
+      mkdir ./teste
       echo "${bold}${lightgreen}Extração de arquivos Terminada."
    fi
 done
