@@ -36,5 +36,5 @@ if [ "${Arquitetura}" == "arm64" ]; then
       mkdir ./teste
       echo "${bold}${lightgreen}Extração de arquivos Terminada."
    fi
-echo "${bold}${lightgreen}Suporte terminado."
+echo "${bold}${lightgreen}Suporte terminado com erro."
       
