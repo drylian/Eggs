@@ -1,10 +1,10 @@
 #!/bin/bash
-echo "${bold}${lightgreen}==> Sistema De Suporte Iniciado <=="
 # Cores do Sistema 
 bold=$(echo -en "\e[1m")
 lightgreen=$(echo -en "\e[92m")
 vermelho=$(echo -en "\e[31m")
 # ${bold}${vermelho}
+echo "${bold}${lightgreen}==> Sistema De Suporte Iniciado <=="
 # if do samp03svr
 if [[ -f "./samp03svr" ]]; then
    echo "${bold}${lightgreen}==> O Samp Linux foi detectado, O Sistema de download não será necessario. <=="
@@ -36,7 +36,7 @@ else
     echo "${bold}${lightgreen}==> Setando permissões padrões. <=="
     chmod 777 samp03svr
     echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt. <=="
-   if [[ -f "./Logs_Do_Servidor/" ]]; then
+   if [[ -f "./Logs_Do_Servidor/Log_Completa_do_servidor.txt" ]]; then
        echo "${bold}${lightgreen}==> Pasta de Logs encontrada, Copiando Server_log.txt.<=="
        else
        echo "${bold}${lightgreen}==> Pasta de Logs ${bold}${vermelho}não encontrada${bold}${lightgreen}, criando uma nova.<=="
