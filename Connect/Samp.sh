@@ -22,7 +22,7 @@ if [[ -f "./samp03svr" ]]; then
    if [[ -f "./samp-npc" ]]; then
       echo "${bold}${lightgreen}==> O Samp Npc foi detectado, O Sistema de download não será necessario.   <=="
       else 
-      echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.          <=="
+      echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
       curl -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
       fi
       echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
@@ -60,7 +60,7 @@ else
    if [[ -f "./samp-npc" ]]; then
       echo "${bold}${lightgreen}==> O Samp Npc foi detectado, O Sistema de download não será necessario.   <=="
       else 
-      echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.          <=="
+      echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
       curl -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
    fi
    echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
