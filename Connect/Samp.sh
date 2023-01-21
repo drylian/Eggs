@@ -19,9 +19,16 @@ if [ "${Arquitetura}" == "arm64" ]; then
    echo "${bold}${lightgreen}=============================================================================="
 if [[ -f "./samp03svr" ]]; then
    echo "${bold}${lightgreen}==> O Samp Linux foi detectado, O Sistema de download não será necessario. <=="
-   echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
-   chmod 777 samp03svr
-   echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt.                     <=="
+   if [[ -f "./samp-npc" ]]; then
+      echo "${bold}${lightgreen}==> O Samp Npc foi detectado, O Sistema de download não será necessario.   <=="
+      else 
+      echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.          <=="
+      curl -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+      fi
+      echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
+      chmod 777 samp03svr
+      chmod 777 samp-npc
+      echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt.                     <=="
       # if da pasta Logs
       if [[ -f "./Logs_Do_Servidor/Log_Completa_do_servidor.txt" ]]; then
          echo "${bold}${lightgreen}==> Pasta de Logs encontrada, Copiando Server_log.txt.                     <=="
@@ -48,10 +55,17 @@ if [[ -f "./samp03svr" ]]; then
    #fi
 else
    echo "${bold}${lightgreen}==> O Samp Linux ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.       <=="
-   curl -L -o /home/container/samp03svr "https://github.com/drylian/tralhas/releases/latest/download/samp03svr"
+   curl -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
    echo "${bold}${lightgreen}==> Download Terminado, iniciando configurações padrões.                   <=="
+   if [[ -f "./samp-npc" ]]; then
+      echo "${bold}${lightgreen}==> O Samp Npc foi detectado, O Sistema de download não será necessario.   <=="
+      else 
+      echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.          <=="
+      curl -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+   fi
    echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
    chmod 777 samp03svr
+   chmod 777 samp-npc
    echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt.                     <=="
       if [[ -f "./Logs_Do_Servidor/Log_Completa_do_servidor.txt" ]]; then
          echo "${bold}${lightgreen}==> Pasta de Logs encontrada, Copiando Server_log.txt.                     <=="
