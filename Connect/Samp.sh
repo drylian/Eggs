@@ -89,5 +89,6 @@ else
       #else
          #echo -n "./samp03svr"
    #fi
-  fi
-echo "${bold}${vermelho}==> Suporte deu Algum erro e não conseguiu se reparar sozinho.  
+fi
+
+echo "${bold}${vermelho}==> Suporte deu Algum erro e não conseguiu se reparar sozinho."
