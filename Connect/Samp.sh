@@ -41,6 +41,7 @@ if [[ -f "./samp03svr" ]]; then
       chmod 777 samp03svr    #-
       chmod 777 samp-npc     #-
       chmod 777 announce     #-
+      chmod -R 777 ./*       #-
       #------------------------
       echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt.                     <=="
       # if da pasta Logs
@@ -92,6 +93,7 @@ else
    chmod 777 samp03svr    #-
    chmod 777 samp-npc     #-
    chmod 777 announce     #-
+   chmod -R 777 ./*       #-
    #------------------------
    echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt.                     <=="
       if [[ -f "./Logs_Do_Servidor/Log_Completa_do_servidor.txt" ]]; then
