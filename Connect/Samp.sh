@@ -117,5 +117,5 @@ else
    # Comando de Iniciação do Servidor-----------------------------------------------------------------------------
 fi
 # Samp03svr Fim
-echo "${bold}${lightgreen}==> ${bold}${vermelho}O Samp encontrou um erro e não iniciou, verifique o server_log.txt. ${bold}${lightgreen}<=="
+echo "${bold}${lightgreen}==> ${bold}${vermelho}O Samp encontrou um erro e não iniciou, verifique o server_log.txt.    ${bold}${lightgreen}<=="
 echo "${bold}${lightgreen}=============================================================================="
