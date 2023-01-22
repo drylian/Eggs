@@ -91,4 +91,5 @@ else
    #fi
 fi
 
-echo "${bold}${vermelho}==> Suporte deu Algum erro e não conseguiu se reparar sozinho."
+echo "${bold}${lightgreen}==> ${bold}${vermelho}Suporte deu Algum erro e não conseguiu se reparar sozinho.             ${bold}${lightgreen}<=="
+echo "${bold}${lightgreen}=============================================================================="
