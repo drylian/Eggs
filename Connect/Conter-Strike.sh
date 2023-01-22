@@ -16,24 +16,24 @@ if [ "${Arquitetura}" == "arm64" ]; then
    fi
    echo "${bold}${lightgreen}="
    echo "${bold}${lightgreen}=============================================================================="
-   # Inicio do COdigo
-   if [[ -f "./steamcmd/steamcmd.sh" ]]; then
-      echo "${bold}${lightgreen}==> A Steam Cmd foi detectada, Download não será necessario."
-      ./steamcmd/steamcmd.sh +force_install_dir /home/container/ +login anonymous +app_update 90 +app_set_config 90 mod cstrike +quit
-   else
-      echo "${bold}${lightgreen}==> A Steam Cmd ${bold}${vermelho}Não Detectada${bold}${lightgreen}, O Sistema de download será iniciado."
-      curl -sSL -o steamcmd.tar.gz http://media.steampowered.com/installer/steamcmd_linux.tar.gz
-      echo "${bold}${lightgreen}==> O Download foi Terminado Criando Diretorio Steamcmd."
-      mkdir ./steamcmd
-      echo "${bold}${lightgreen}Copiando e deletando arquivos desnecessarios."
-      cp steamcmd.tar.gz ./steamcmd/
-      rm -r ./steamcmd.tar.gz
-      echo "${bold}${lightgreen}Iniciando extração de arquivos."
-      cd ./steamcmd/
-      tar -xzvf steamcmd.tar.gz
-      cd
-      mkdir ./teste
-      echo "${bold}${lightgreen}Extração de arquivos Terminada."
-   fi
+   
+   # Verificar Steam
+if [[ -f "./steamcmd/steamcmd.sh" ]]; then
+   echo "${bold}${lightgreen}==> A Steam Cmd foi detectada, Download não será necessario."
+else
+   echo "${bold}${lightgreen}==> A Steam Cmd ${bold}${vermelho}Não Detectada${bold}${lightgreen}, O Sistema de download será iniciado."
+   curl -sSL -o steamcmd.tar.gz http://media.steampowered.com/installer/steamcmd_linux.tar.gz
+   echo "${bold}${lightgreen}==> O Download da Steam Cmd foi Terminado, Criando Diretorio Steamcmd."
+   mkdir ./steamcmd
+   echo "${bold}${lightgreen}Copiando e deletando arquivos desnecessarios."
+   cp steamcmd.tar.gz ./steamcmd/
+   rm -r ./steamcmd.tar.gz
+   echo "${bold}${lightgreen}Iniciando extração de arquivos."
+   cd ./steamcmd/
+   tar -xzvf steamcmd.tar.gz
+   cd
+   echo "${bold}${lightgreen}Extração de arquivos Terminada."
+fi
+  
 echo "${bold}${lightgreen}Suporte terminado com erro."
       
