@@ -17,17 +17,31 @@ if [ "${Arquitetura}" == "arm64" ]; then
    fi
    echo "${bold}${lightgreen}="
    echo "${bold}${lightgreen}=============================================================================="
+# Samp03svr verificado
 if [[ -f "./samp03svr" ]]; then
    echo "${bold}${lightgreen}==> O Samp Linux foi detectado, O Sistema de download não será necessario. <=="
+   # Samp-NPC verificado
    if [[ -f "./samp-npc" ]]; then
       echo "${bold}${lightgreen}==> O Samp Npc foi detectado, O Sistema de download não será necessario.   <=="
       else 
       echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
       curl -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
-      fi
+   fi
+   # Samp-NPC Fim
+   # Announce verificado
+   if [[ -f "./announce" ]]; then
+      echo "${bold}${lightgreen}==> O Announce foi detectado, O Sistema de download não será necessario.   <=="
+      else
+      echo "${bold}${lightgreen}==> O Announce ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
+      curl -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+   fi
+   # Announce Fim
       echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
-      chmod 777 samp03svr
-      chmod 777 samp-npc
+      # Permissões-------------
+      chmod 777 samp03svr    #-
+      chmod 777 samp-npc     #-
+      chmod 777 announce     #-
+      #------------------------
       echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt.                     <=="
       # if da pasta Logs
       if [[ -f "./Logs_Do_Servidor/Log_Completa_do_servidor.txt" ]]; then
@@ -47,25 +61,38 @@ if [[ -f "./samp03svr" ]]; then
       fi
    echo "${bold}${lightgreen}==> Iniciando Servidor.                                                    <=="
    echo "${bold}${lightgreen}=============================================================================="
-   $(if [ "${Arquitetura}" == "arm64" ]; then echo -n "box86 ./samp03svr"; else echo -n "./samp03svr"; fi)
-      #if [ "${Arquitetura}" == "arm64" ]; then 
-         #echo -n "box86 ./samp03svr"
-      #else
-         #echo -n "./samp03svr"
-   #fi
+   # Comando de Iniciação do Servidor-----------------------------------------------------------------------------
+   $(if [ "${Arquitetura}" == "arm64" ]; then echo -n "box86 ./samp03svr"; else echo -n "./samp03svr"; fi)      #-
+   # Comando de Iniciação do Servidor-----------------------------------------------------------------------------
+
 else
+# Samp03svr download
    echo "${bold}${lightgreen}==> O Samp Linux ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.       <=="
    curl -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
+   # Samp03svr download
    echo "${bold}${lightgreen}==> Download Terminado, iniciando configurações padrões.                   <=="
+   # Samp-NPC verificado
    if [[ -f "./samp-npc" ]]; then
       echo "${bold}${lightgreen}==> O Samp Npc foi detectado, O Sistema de download não será necessario.   <=="
       else 
       echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
       curl -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
    fi
+   # Samp-NPC Fim
+   # Announce verificado
+      if [[ -f "./announce" ]]; then
+      echo "${bold}${lightgreen}==> O Announce foi detectado, O Sistema de download não será necessario.   <=="
+      else
+      echo "${bold}${lightgreen}==> O Announce ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
+      curl -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+      fi
+   # Announce Fim
    echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
-   chmod 777 samp03svr
-   chmod 777 samp-npc
+   # Permissões-------------
+   chmod 777 samp03svr    #-
+   chmod 777 samp-npc     #-
+   chmod 777 announce     #-
+   #------------------------
    echo "${bold}${lightgreen}==> Permissões Setadas, Iniciando nova Server_log.txt.                     <=="
       if [[ -f "./Logs_Do_Servidor/Log_Completa_do_servidor.txt" ]]; then
          echo "${bold}${lightgreen}==> Pasta de Logs encontrada, Copiando Server_log.txt.                     <=="
@@ -83,13 +110,10 @@ else
    fi
    echo "${bold}${lightgreen}==> Iniciando Servidor.                                                    <=="
    echo "${bold}${lightgreen}=============================================================================="
-   $(if [ "${Arquitetura}" == "arm64" ]; then echo -n "box86 ./samp03svr"; else echo -n "./samp03svr"; fi)
-      #if [ "${Arquitetura}" == "arm64" ]; then 
-         #echo -n "box86 ./samp03svr"
-      #else
-         #echo -n "./samp03svr"
-   #fi
+   # Comando de Iniciação do Servidor-----------------------------------------------------------------------------
+   $(if [ "${Arquitetura}" == "arm64" ]; then echo -n "box86 ./samp03svr"; else echo -n "./samp03svr"; fi)      #-
+   # Comando de Iniciação do Servidor-----------------------------------------------------------------------------
 fi
-
+# Samp03svr Fim
 echo "${bold}${lightgreen}==> ${bold}${vermelho}Suporte deu Algum erro e não conseguiu se reparar sozinho.             ${bold}${lightgreen}<=="
 echo "${bold}${lightgreen}=============================================================================="
