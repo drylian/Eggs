@@ -63,6 +63,7 @@ if [ "${Arquitetura}" == "arm64" ]; then
   
    echo "${bold}${lightgreen}==> Removendo Arquivos Temporarios "
    rm -rf /home/container/tmp/*
+   rm -f ./start.sh
    
    echo "${bold}${lightgreen}==> Removendo Arquivos Temporarios "
    echo "${bold}${lightgreen}==> Versão do script: 1.0 "
