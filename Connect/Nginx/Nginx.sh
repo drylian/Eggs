@@ -30,7 +30,6 @@ if [ "${Arquitetura}" == "arm64" ]; then
        git clone https://github.com/drylian/nginx-explorer ./site
        touch ./site/assets/explorer_instalado
    fi
-   ln -s /etc/nginx/sites-available/panel.conf /etc/nginx/sites-enabled/panel.conf
    
    echo "${bold}${lightgreen}==> Verificando Arquivos."
    
