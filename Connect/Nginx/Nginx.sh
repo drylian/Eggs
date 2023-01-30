@@ -54,6 +54,7 @@ if [ "${Arquitetura}" == "arm64" ]; then
    touch ./nginx/site/assets/nginx_instalado
    touch ./nginx/site/files/exemplo
    fi
+   
    echo "${bold}${lightgreen}==> Verificação Completa."
    echo "${bold}${lightgreen}==> Setando permissções padrões."
    chmod 777 ./*
@@ -72,5 +73,4 @@ if [ "${Arquitetura}" == "arm64" ]; then
    echo "${bold}${lightgreen}==> Iniciando Nginx "
    echo "${bold}${lightgreen}==> ✅ Inicializado com sucesso"
    echo "${bold}${lightgreen}==> ✅ Finalizando iniciador online"
-   mv ./Nginx.sh ./tmp
    /usr/sbin/nginx -c /home/container/nginx/nginx.conf -p /home/container/nginx
