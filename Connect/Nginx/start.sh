@@ -1,3 +1,4 @@
+#!/bin/ash
 echo "iniciando Nginx"
 rm -f Nginx.sh
 echo "Baixando iniciador"
