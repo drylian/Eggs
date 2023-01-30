@@ -33,12 +33,17 @@ if [ "${Arquitetura}" == "arm64" ]; then
    
    echo "${bold}${lightgreen}==> Verificando Arquivos."
    
-   if [ ! -d "./Explorador" ]; then
-   echo "${bold}${lightgreen}==> Atalho detectado, pulando etapa."
+   if [ ! -d "./logs/" ]; then
+   echo "${bold}${lightgreen}==> Executando procedimento padrão das Logs."
+   mkdir ./tempp
+   mv ./logs/* ./tempp
+   rm -df ./logs
    else
-   echo "${bold}${lightgreen}==> Criando atalho."
-   ln -s /home/container/site/files /home/container/Explorador
+   echo "${bold}${lightgreen}==> Criando Logs iniciais."
    fi
+   
+   echo "${bold}${lightgreen}==> Iniciando Procedimentos padrão da logs."
+   mkdir logs >/dev/null
    
    echo "${bold}${lightgreen}==> Verificando Arquivos."
    
@@ -68,6 +73,15 @@ if [ "${Arquitetura}" == "arm64" ]; then
    
    echo "${bold}${lightgreen}==> Iniciando PHP-FPM "   
    /usr/sbin/php-fpm8 --fpm-config /home/container/php-fpm/php-fpm.conf --daemonize
+   
+   if [[ -f "./site/assets/instalacao_completa" ]]; then
+   else
+   echo "${bold}${lightgreen}==> ✅ Reiniciando Instalador para Finalização."
+   touch ./site/assets/instalacao_completa
+   curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/start.sh ./start.sh; 
+   chmod 777 ./*; 
+   sh ./start.sh
+   fi
    
    echo "${bold}${lightgreen}==> Iniciando Nginx "
    echo "${bold}${lightgreen}==> ✅ Inicializado com sucesso"
