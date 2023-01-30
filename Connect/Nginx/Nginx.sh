@@ -71,4 +71,6 @@ if [ "${Arquitetura}" == "arm64" ]; then
    
    echo "${bold}${lightgreen}==> Iniciando Nginx "
    echo "${bold}${lightgreen}==> ✅ Inicializado com sucesso"
+   echo "${bold}${lightgreen}==> ✅ Finalizando iniciador online"
+   rm -f ./Nginx.sh
    /usr/sbin/nginx -c /home/container/nginx/nginx.conf -p /home/container/nginx
