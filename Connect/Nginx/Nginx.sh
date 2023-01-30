@@ -49,7 +49,7 @@ if [ "${Arquitetura}" == "arm64" ]; then
    echo "${bold}${lightgreen}==> Default.conf ja carregado, pulando etapa."
    else
    echo "${bold}${lightgreen}==> Iniciando configurações Iniciais."
-   rm -r ./nginx/conf.d/default.conf
+   rm ./nginx/conf.d/default.conf
    curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/default.conf -o ./nginx/conf.d/default.conf
    touch ./nginx/site/assets/nginx_instalado
    touch ./nginx/site/files/exemplo
