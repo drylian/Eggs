@@ -1,5 +1,5 @@
 #!/bin/ash
-echo "iniciando Nginx"
+echo "Removendo Nginx.sh antigo"
 rm -f Nginx.sh
 echo "Baixando iniciador"
 wget https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/Nginx.sh
