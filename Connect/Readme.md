@@ -1,6 +1,7 @@
 ## Oque é o Connect?
 ```
-- Eu criei esse sistema como um iniciador na nuvem, Sendo assim não é possível um Cliente deletar ou tentar modificar o sistema.Garantindo uma melhor segurança.
+- Eu criei esse sistema como um iniciador na nuvem, Sendo assim não é possível um 
+- Cliente deletar ou tentar modificar o sistema.Garantindo uma melhor segurança.
 ```
 
 ## SA-MP Connect
