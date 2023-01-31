@@ -16,7 +16,7 @@ if [ "${Arquitetura}" == "arm64" ]; then
    fi
    echo "${bold}${lightgreen}="
    echo "${bold}${lightgreen}=============================================================================="
-   echo "${bold}${lightgreen}==> Versão 1.4                                                             <=="
+   echo "${bold}${lightgreen}==> Versão 1.5                                                             <=="
    echo "${bold}${lightgreen}=============================================================================="
    # inicio codigo
    echo "${bold}${lightgreen}==> Iniciando Sistema."
@@ -57,10 +57,11 @@ if [ "${Arquitetura}" == "arm64" ]; then
       echo "${bold}${lightgreen}==> Default.conf ja carregado, pulando etapa."
    else
       echo "${bold}${lightgreen}==> Iniciando configurações Iniciais."
+      mkdir ./site/files
       rm ./nginx/conf.d/default.conf
       curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/default.conf -o ./nginx/conf.d/default.conf
       echo "${bold}${lightgreen}==> Criando Exemplo."
-      curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/introdução.md -o ./site/files/introdução.md
+      curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/introducao.md -o ./site/files/introducao.md
       touch ./site/assets/nginx_instalado
    fi
    echo "${bold}${lightgreen}==> Verificação Completa."
