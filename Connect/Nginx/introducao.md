@@ -8,3 +8,16 @@
 * [Mohamnag](https://github.com/mohamnag/nginx-file-browser) O criador do Nginx File Browser.
 * [Ashu11-A](https://github.com/Ashu11-A/) Ajudou na criação do docker Alpine e em algumas configurações do scripts.
 * [Drylian](https://github.com/drylian) Criador do egg e do script.
+
+### Leia-me
+A pasta Status é o diretório onde será verificado se as instalações forão concluidas, Não delete a pasta.
+Caso encontre algum problema em algum dos arquivos instalados.
+Pode deletar eles aqui que o script irá reinstalar(Jamais delete a pasta Arquivos).
+
+Nginx_instalador | Verificação do Nginx, Caso seja deletado, O Script vai Rebaixar o Nginx.
+
+Explorer_instalador | Verificação do Explorer, Caso seja deletado, O Script vai Rebaixar o Explorer.
+
+Pasta_instalador | Verificação do Pasta da Logs, Caso seja deletado, O Script vai Rebaixar o Logs.
+
+Default.conf_instalado | Verificação da default no Nginx/conf.d, Caso seja deletado, O Script vai Rebaixar o default.conf.
