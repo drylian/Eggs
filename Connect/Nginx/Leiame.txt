@@ -1,0 +1,11 @@
+A pasta Status é o diretório onde será verificado se as instalações forão concluidas, Não delete a pasta.
+Caso encontre algum problema em algum dos arquivos instalados.
+Pode deletar eles aqui que o script irá reinstalar(Jamais delete a pasta Arquivos).
+
+Nginx_instalador | Verificação do Nginx, Caso seja deletado, O Script vai Rebaixar o Nginx.
+
+Explorer_instalador | Verificação do Explorer, Caso seja deletado, O Script vai Rebaixar o Explorer.
+
+Pasta_instalador | Verificação do Pasta da Logs, Caso seja deletado, O Script vai Rebaixar o Logs.
+
+Default.conf_instalado | Verificação da default no Nginx/conf.d, Caso seja deletado, O Script vai Rebaixar o default.conf.
