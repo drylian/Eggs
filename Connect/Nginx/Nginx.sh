@@ -38,8 +38,12 @@ if [ "${Arquitetura}" == "arm64" ]; then
    mkdir ./tempp
    mv ./logs/* ./tempp
    rm -df ./logs
+   mkdir ./logs >/dev/null
+   mv ./tempp/* ./logs
+   rm -df ./tempp
    else
    echo "${bold}${lightgreen}==> Criando Logs iniciais."
+   mkdir ./logs >/dev/null
    fi
    
    echo "${bold}${lightgreen}==> Iniciando Procedimentos padrão da logs."
@@ -71,10 +75,10 @@ if [ "${Arquitetura}" == "arm64" ]; then
    echo "${bold}${lightgreen}==> Removendo Arquivos Temporarios "
    echo "${bold}${lightgreen}==> Versão do script: 1.0 "
    
-   echo "${bold}${lightgreen}==> Iniciando PHP-FPM "   
+   echo "${bold}${lightgreen}==> Verificando PHP-FPM "   
    /usr/sbin/php-fpm8 --fpm-config /home/container/php-fpm/php-fpm.conf --daemonize
-   
    if [[ -f "./site/assets/instalacao_completa" ]]; then
+   echo "${bold}${lightgreen}==> Instalaçao do Iniciador foi verificada, pulando etapa. "
    else
    echo "${bold}${lightgreen}==> ✅ Reiniciando Instalador para Finalização."
    touch ./site/assets/instalacao_completa
