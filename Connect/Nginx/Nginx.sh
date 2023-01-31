@@ -16,7 +16,8 @@ if [ "${Arquitetura}" == "arm64" ]; then
    fi
    echo "${bold}${lightgreen}="
    echo "${bold}${lightgreen}=============================================================================="
-   
+   echo "${bold}${lightgreen}==> Versão 1.4                                                             <=="
+   echo "${bold}${lightgreen}=============================================================================="
    # inicio codigo
    echo "${bold}${lightgreen}==> Iniciando Sistema."
    echo "${bold}${lightgreen}==> Iniciando Verificando Arquivos."
@@ -27,23 +28,23 @@ if [ "${Arquitetura}" == "arm64" ]; then
    else
       echo "${bold}${lightgreen}==> Nginx Explorer ${bold}${vermelho}não foi detectado ${bold}${lightgreen}, Iniciando download"
       mkdir ./site
-       git clone https://github.com/drylian/nginx-explorer ./site
-       touch ./site/assets/explorer_instalado
+      git clone https://github.com/drylian/nginx-explorer ./site
+      touch ./site/assets/explorer_instalado
    fi
    
    echo "${bold}${lightgreen}==> Verificando Arquivos."
    
    if [ ! -d "./logs/" ]; then
-   echo "${bold}${lightgreen}==> Executando procedimento padrão das Logs."
-   mkdir ./tempp
-   mv ./logs/* ./tempp
-   rm -df ./logs
-   mkdir ./logs >/dev/null
-   mv ./tempp/* ./logs
-   rm -df ./tempp
+      echo "${bold}${lightgreen}==> Executando procedimento padrão das Logs."
+      mkdir ./tempp
+      mv ./logs/* ./tempp
+      rm -r ./logs
+      mkdir ./logs >/dev/null
+      mv ./tempp/* ./logs
+      rm -r ./tempp
    else
-   echo "${bold}${lightgreen}==> Criando Logs iniciais."
-   mkdir ./logs >/dev/null
+      echo "${bold}${lightgreen}==> Criando Logs iniciais."
+      mkdir ./logs >/dev/null
    fi
    
    echo "${bold}${lightgreen}==> Iniciando Procedimentos padrão da logs."
@@ -53,13 +54,13 @@ if [ "${Arquitetura}" == "arm64" ]; then
    
    # download default.conf
    if [[ -f "./site/assets/nginx_instalado" ]]; then
-   echo "${bold}${lightgreen}==> Default.conf ja carregado, pulando etapa."
+      echo "${bold}${lightgreen}==> Default.conf ja carregado, pulando etapa."
    else
-   echo "${bold}${lightgreen}==> Iniciando configurações Iniciais."
-   rm ./nginx/conf.d/default.conf
-   curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/default.conf -o ./nginx/conf.d/default.conf
-   touch ./site/assets/nginx_instalado
-   touch ./site/files/exemplo
+      echo "${bold}${lightgreen}==> Iniciando configurações Iniciais."
+      rm ./nginx/conf.d/default.conf
+      curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/default.conf -o ./nginx/conf.d/default.conf
+      touch ./site/assets/nginx_instalado
+      touch ./site/files/exemplo
    fi
    
    echo "${bold}${lightgreen}==> Verificação Completa."
@@ -70,21 +71,18 @@ if [ "${Arquitetura}" == "arm64" ]; then
   
    echo "${bold}${lightgreen}==> Removendo Arquivos Temporarios "
    rm -rf /home/container/tmp/*
-   rm -f ./start.sh
-   
-   echo "${bold}${lightgreen}==> Removendo Arquivos Temporarios "
    echo "${bold}${lightgreen}==> Versão do script: 1.0 "
    
    echo "${bold}${lightgreen}==> Verificando PHP-FPM "   
    /usr/sbin/php-fpm8 --fpm-config /home/container/php-fpm/php-fpm.conf --daemonize
    if [[ -f "./site/assets/instalacao_completa" ]]; then
-   echo "${bold}${lightgreen}==> Instalaçao do Iniciador foi verificada, pulando etapa. "
+      echo "${bold}${lightgreen}==> Instalaçao do Iniciador foi verificada, pulando etapa. "
    else
-   echo "${bold}${lightgreen}==> ✅ Reiniciando Instalador para Finalização."
-   touch ./site/assets/instalacao_completa
-   curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/start.sh ./start.sh; 
-   chmod 777 ./*; 
-   sh ./start.sh
+      echo "${bold}${lightgreen}==> ✅ Reiniciando Instalador para verificar instalação."
+      touch ./site/assets/instalacao_completa
+      curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/start.sh ./start.sh; 
+      chmod 777 ./*; 
+      sh ./start.sh
    fi
    
    echo "${bold}${lightgreen}==> Iniciando Nginx "
