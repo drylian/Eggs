@@ -34,7 +34,7 @@ if [ "${Arquitetura}" == "arm64" ]; then
    
    echo "${bold}${lightgreen}==> Verificando Arquivos."
    
-   if [ ! -d "./logs/" ]; then
+   if [ ! -d "./logs" ]; then
       echo "${bold}${lightgreen}==> Executando procedimento padrão das Logs."
       mkdir ./tempp
       mv ./logs/* ./tempp
@@ -59,10 +59,10 @@ if [ "${Arquitetura}" == "arm64" ]; then
       echo "${bold}${lightgreen}==> Iniciando configurações Iniciais."
       rm ./nginx/conf.d/default.conf
       curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/default.conf -o ./nginx/conf.d/default.conf
+      echo "${bold}${lightgreen}==> Criando Exemplo."
+      curl https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Nginx/introdução.md -o ./site/files/introdução.md
       touch ./site/assets/nginx_instalado
-      touch ./site/files/exemplo
    fi
-   
    echo "${bold}${lightgreen}==> Verificação Completa."
    echo "${bold}${lightgreen}==> Setando permissções padrões."
    chmod 777 ./*
