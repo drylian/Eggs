@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash❌❎✖️☑️✅
 
 Arquitetura=$([ "$(uname -m)" == "x86_64" ] && echo "amd64" || echo "arm64")
 # Cores do Sistema
