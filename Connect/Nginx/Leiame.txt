@@ -1,6 +1,10 @@
-A pasta Status é o diretório onde será verificado se as instalações forão concluidas, Não delete a pasta.
+A pasta Status é o diretório onde será verificado se as instalações forão concluidas, 
+Não delete esta pasta a menos que voce tenha tido algum problema ao iniciar o servidor
+neste tipo de caso, pode deletar todas as pastas (Menos a Arquivos).
 Caso encontre algum problema em algum dos arquivos instalados.
-Pode deletar eles aqui que o script irá reinstalar(Jamais delete a pasta Arquivos).
+Ao deletar Os arquivos dentro desta pasta o script irá reinstalar(Jamais delete a pasta Arquivos).
+Recomendado que se for usar isto, delete A pasta que representa ela tambem.
+Assim o sistema irá funcionar sem erros.
 
 Nginx_instalador | Verificação do Nginx, Caso seja deletado, O Script vai Rebaixar o Nginx.
 
