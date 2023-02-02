@@ -1,7 +1,13 @@
 # Obrigado por Usar o Nginx | Explorador de Arquivos 
 
-* Este Egg foi criado usando um docker Alpine com Bash Permitindo ser bem mais leve que outros sistemas.
-* Só é possivel Usar Baixar conteúdo do site, para colocar arquivos no site entre em /site/files/ , pode criar pastas entre outros.
+* Este Egg foi criado usando um docker Alpine com entrypoint funcionando como bash Permitindo ser bem mais leve que outros sistemas.
+* Só é possivel Usar Baixar conteúdo do site, para colocar arquivos no site entre em /Arquivos/ , pode criar pastas entre outros.
+
+### Informações Basicas.
+
+* A pasta /Arquivos pertence a onde vai ser armazenado o seus arquivos .
+* A pasta /Arquivos/Publica é uma pasta sem restrições, qualquer um pode acessar ela mesmo com a conexão local ativada
+ 
 
 ### Creditos para quem tornou isso possivel. 
 
