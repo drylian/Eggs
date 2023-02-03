@@ -1,0 +1,92 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-02-02T20:08:22-04:00",
+    "name": "Nginx file Explorer",
+    "author": "danielolxlol@gmail.com",
+    "description": "Egg: Nginx Explorador de Arquivos\r\nDescri\u00e7\u00e3o: O Nginx Explorador de Arquivos \u00e9 Baseado no Nginx Webfile, que resumidamente \u00e9 uma conex\u00e3o de armazenamento usando o nginx, permite voc\u00ea colocar desde arquivos como jogos, imagens, fotos , tudo pela linkado a internet, pode ser usado para upar imagens para por em sites ou usar como local de download.Caso use isto como local de armazenamento de arquivos, procure deixar o script rodando localmente.\r\nVers\u00e3o do egg:1.5\r\nCriado por Drylian",
+    "features": null,
+    "docker_images": {
+        "Alpine AMD\/ARM  ": " drylian\/nginx:latest"
+    },
+    "file_denylist": [],
+    "startup": "Criado por Drylian 2023",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Inicializado com sucesso\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": null,
+            "container": "alpine:3.17",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Script no Entrypoint | Desativar \/ Ativar",
+            "description": "Isto ativa o Script de Inicia\u00e7\u00e3o existente dentro do Entrypoint, ele executa tudo que \u00e9 necess\u00e1rio para o sistema funcionar, N\u00c3O DESATIVE ISTO SE N\u00c3O TIVER CERTEZA DO QUE REALMENTE ESTA FAZENDO, FAZER ISSO AFETA TODO O SISTEMA E ALGUMAS VARIAVEIS N\u00c3O V\u00c3O FUNCIONAR AT\u00c9 ATIVA-LO NOVAMENTE.",
+            "env_variable": "SUPORTE_ATIVO",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:0,1",
+            "field_type": "text"
+        },
+        {
+            "name": "Script de  Atualiza\u00e7\u00f5es | Desativar \/ Ativar",
+            "description": "Caso esteja Marcado como ativado, o entrypoint ira verificar se o sistema esta atualizado, caso n\u00e3o esteja, ele ir\u00e1 baixar os arquivos e atualizar automaticamente.\r\nN\u00e3o se preocupe, esse Sistema de atualiza\u00e7\u00e3o n\u00e3o afeta de nem uma maneira os seus Arquivos(na pasta Arquivos).",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:0,1",
+            "field_type": "text"
+        },
+        {
+            "name": "Script de Repara\u00e7\u00e3o do Entrypoint  | Desativar \/ Ativar",
+            "description": "Caso esteja Marcado como ativado, Ent\u00e3o quando o  entrypoint quebrar ou der erro em algum momento, o sistema ir\u00e1 se reinstalar automaticamente.",
+            "env_variable": "REPARAR_SISTEMA",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:0,1",
+            "field_type": "text"
+        },
+        {
+            "name": "HTML | Local \/ Nuvem",
+            "description": "Por padr\u00e3o e para fins do sistema funcionar corretamente, o HTML que o nginx ir\u00e1 executar, funciona na nuvem, par rodar ele localmente no container, desative isso.",
+            "env_variable": "HTML_LOCAL",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:0,1",
+            "field_type": "text"
+        },
+        {
+            "name": "Modo de Conex\u00e3o | Interno \/ Externo",
+            "description": "Altera entre Conex\u00e3o Localhost e Conex\u00e3o na internet, caso esteja ativo, qualquer pessoa poder\u00e1 ver seu visitar seu site de armazenamento, caso esteja localhost, apenas a maquina no qual ele ta instalado, poder\u00e1 ver e baixar as coisas colocadas na Arquivos.(Padr\u00e3o Ativado, Por\u00e9m \u00e9 recomendado Deixar Desativado.)",
+            "env_variable": "MODE_CONEXAO",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:0,1",
+            "field_type": "text"
+        },
+        {
+            "name": "Default.conf Personalizado  | Desativar \/ Ativar",
+            "description": "Ao Desativar isso, estar\u00e1 removendo o sistema de alto cat do script, dessa forma poder\u00e1 editar tranquilamente a default.conf",
+            "env_variable": "DEFAULT_CONF",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:0,1",
+            "field_type": "text"
+        }
+    ]
+}
