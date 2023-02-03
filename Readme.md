@@ -2,7 +2,7 @@
 
 Alguns deles trabalham no ARM e também no ARM do Oracle Free Tier
 
-| Serviço | Arquivo* | AMD64 | ARM64 | ARM Oracle | Descrição |
+| Serviço | Arquivo | AMD64 | ARM64 | ARM Oracle | Descrição |
 |--|--|--|--|--|--|
 | SA-MP | [egg-s-a--m-p--a-r-m--a-m-d.json](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-s-a--m-p--a-r-m--a-m-d.json) | ✅ | ✅ | ✅ |Emulado no ARM com Box86|
 | Nginx Explorer |[egg-nginx-file-explorer.json](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-nginx-file-explorer.json)| ✅ | ✅ | ✅ |Funcionando no Alpine|
