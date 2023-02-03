@@ -7,6 +7,7 @@
 
 * A pasta /Arquivos pertence a onde vai ser armazenado o seus arquivos .
 * A pasta /Arquivos/Publica é uma pasta sem restrições, qualquer um pode acessar ela mesmo com a conexão local ativada
+* A Log_nginx.txt é mandada para a pasta /Arquivos por questoẽs de segurança
  
 
 ### Creditos para quem tornou isso possivel. 
