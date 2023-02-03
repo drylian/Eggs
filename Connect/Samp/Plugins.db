@@ -1,0 +1,16 @@
+############## Respostas .dll #######################
+palavra_a_ser_procurada:resposta
+SKY.dll:SKY.so
+sscanf.dll:sscanf.so
+sampvoice.dll:sampvoice.so
+streamer.dll:streamer.so
+crashdetect.dll:crashdetect.so
+#####################################################
+############## Respostas sem .#######################
+palavra_a_ser_procurada:resposta
+SKY:SKY.so
+sscanf:sscanf.so
+sampvoice:sampvoice.so
+streamer:streamer.so
+crashdetect:crashdetect.so
+#####################################################
