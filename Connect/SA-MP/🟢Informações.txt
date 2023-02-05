@@ -1,7 +1,7 @@
       🟢Informações.🟢
 ############################
-🟢 Criador:Drylian
-🟢 Instalação: 1.6
-🟢 Entrypoint: 2.0
-🟢 Github:github.com/drylian
-🟢 Informações da Maquina.
+🟢Criador:Drylian
+🟢Instalação: 1.6
+🟢Entrypoint: 2.0
+🟢Github:github.com/drylian
+🟢Informações da Maquina.
