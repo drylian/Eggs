@@ -47,7 +47,7 @@ if [[ -f "./samp03svr" ]]; then
    # Projeto Beta SampVoice.so
    if grep -q "sv_port ${SAMP_VOICE}" "server.cfg"; then
       echo "${bold}${lightgreen}==>Configuração detectada, porém repadronizada.                            <=="
-      sed -i '/sv_port ${SAMP_VOICE}/d' server.cfg
+      sed -i '/sv_port*/d' server.cfg
       echo "sv_port ${SAMP_VOICE}" >> "server.cfg"
    else
       echo "${bold}${lightgreen}==>Configuração não detectada, porém vai ser adicionada.                   <=="
