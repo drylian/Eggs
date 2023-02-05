@@ -4,4 +4,4 @@
 🟢 Instalação: 1.6
 🟢 Entrypoint: 2.0
 🟢 Github:github.com/drylian
-🟢 Informações da instalação:
+🟢 Informações da Maquina.
