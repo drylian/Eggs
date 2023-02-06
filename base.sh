@@ -8,12 +8,13 @@
 #
 
 # Comandos Do painel Múdaveis
-StartType="2" # Define que tipo de comando vai ser executado 1=Direto 2=Nohub.
+StartType="0" # Define que tipo de comando vai ser executado 0=Direto 1=Nohub.
 Script_Type="2" # Define se este Script é Beta ou Alpha. 1=Alpha 2=Beta.
 StartAMD="./base" # Comando Start para amd.
 StartARM="./base" # Comando Start para arm.
 Stop_CMD="Parar Servidor" # Comando para parar o Servidor.
-Egg="Base" # Nome do egg que será executado.
+Permissoes_padroes="chmod 777 ./*" # Define as permissões do arquivos, por padrão recomendo chmod 777 ./*.
+Egg="Base                " # O Nome do egg que será executado, lembrando que o numero de caracteres maximos dentro "" é 20 oque não tiver de nome, use em espaços.
 Pasta_Base="📂Informações" # O Nome da pasta onde vai ser armazenada todas as informações do Script.
 Base_txt="🟢Informações.txt" # Nome do Arquivo Onde vai Ficar os Verificadores do egg.
 script_log="📔Script.log.txt" # Nome da Log que o Script vai Rodar.
@@ -28,31 +29,32 @@ C2=$(echo -en "\e[1m\u001b[32m") # Cor Verde Com Negrito.
 C3=$(echo -en "\e[1m\u001b[31m") # Cor Vermelho Com Negrito.
 C4=$(echo -en "\e[1m\u001b[34m") # Cor Azul Com Negrito.
 C5=$(echo -en "\e[1m\u001b[35m") # Cor Margeta Com Negrito.
-B0=""
+B0="\e[1m" # Negrito
 # Dependencias do Script
+# Criação da Pasta de Vefiricação
+if [[ ! -f "./${Pasta_Base}/${Base_txt}" ]]; then mkdir -p ./${Pasta_Base}; echo -e "🟢Informações Do Script\n#\n🟢Criado por Drylian\n🟢Github: https://github.com/drylian/Eggs\n🟢Versão Atual: PRÉ" > ./${Pasta_Base}/${Base_txt}; fi # Cria a pasta e o primeiro arquivo de versão.
+if [[ ! -d "${Pasta_Base}/Logs" ]]; then mkdir -p ./${Pasta_Base}/Logs; fi
 Arquitetura=$([ "$(uname -m)" == "x86_64" ] && echo "AMD64" || echo "ARM64") # Pega a Arquitetura da maquina
 StartUP_CMD=${StartARM} [ "${Arquitetura}" == "ARM64" ] || StartUP_CMD=${StartAMD} # isto é o que de fato vai executar como StartUP_CMD
 version=$(grep "🟢Versão Atual: " "$version_file" | cut -d' ' -f3) # Lendo a versão local
-version2="${version} "
+if [ "${version}" == "PRÉ" ]; then version2="${version}"; else version2="${version} "; fi #organiza o tamanho da versão
 if [ "${SUPORTE_ATIVO}" == "1" ]; then Suporte_egg="✅ ${C1}Definido  ${C0}"; else Suporte_egg="❌ ${C3}Indefinido${C0}"; fi # Verificação do Suporte
 if [ "${AUTO_UPDATE}" == "1" ]; then Updater_egg="✅ ${C1}Definido  ${C0}"; else Updater_egg="❌ ${C3}Indefinido${C0}"; fi # Verificação do Atualização.
-if [ "${StartType}" == "1" ]; then Type_egg="✅ ${C1}Direto    ${C0}"; else Type_egg="✅ ${C1}NoHub     ${C0}"; fi # Verificação do TypeStart
+if [ "${StartType}" == "0" ]; then Type_egg="✅ ${C1}Direto    ${C0}"; else Type_egg="✅ ${C1}NoHub     ${C0}"; fi # Verificação do TypeStart
 if [ "${Script_Type}" == "1" ]; then Scriptstat="${C1}Alpha${C0}"; else Scriptstat="${C1}Beta ${C0}"; fi # Beta sim e não
 if [ -z "${SUPORTE_ATIVO}" ]; then Suporte="❌ ${C3}Desativado${C0}"; else Suporte="✅ ${C1}Ativado   ${C0}"; fi # Verificação do Suporte egg
 if [ -z "${AUTO_UPDATE}" ]; then Updater="❌ ${C3}Desativado${C0}"; else  Updater="✅ ${C1}Ativado   ${C0}"; fi # Verificação do Atualização egg
-# Criação da Pasta de Vefiricação
-if [[ ! -f "./${Pasta_Base}/${Base_txt}" ]]; then mkdir -p ./${Pasta_Base}; echo -e "🟢Informações Do Script\n#\n🟢Criado por Drylian\n🟢Github: https://github.com/drylian/Eggs\n🟢Versão Atual: PRÉ" > ./${Pasta_Base}/${Base_txt}; fi # Cria a pasta e o primeiro arquivo de versão.
 # Carregar Versões
 version_latest=$(curl -s "$version_remote" | grep "🟢Versão Latest: " | cut -d' ' -f3) # Lendo a versão remota
 if [ "$version" != "$version_latest" ]; then version_update="> ${C2}${version_latest}${C0}"; else version_update="    "; fi # Verificando se há uma nova versão disponível.
 # Inicio Do Script
 if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
-    text="
+    logo="
     .+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-*.
     |                                          |                  ${C5}INICIANDO SCRIPT${C0}                   |
     |                   ${C5}:%*${C0}                    |+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-|
     |                  ${C4}:%@@*${C0}                   |                          |                          |
-    |                 ${C5}-@@@@@#${C0}                  | Egg:${C1} ${Egg} ${C0}               | Arquitetura:${C1} ${Arquitetura} ${C0}      |
+    |                 ${C5}-@@@@@#${C0}                  | ${C0}Egg:${C1} ${Egg}${C0}| Arquitetura:${C1} ${Arquitetura} ${C0}      |
     |                ${C4}=@@@@@@@%.${C0}                | Versão: ${C1}${version2}${C0} ${version_update}        | Script: ${C1}${Scriptstat}${C0}            |
     |               ${C5}+@@@@#%@@@%:${C0}               | StartType: ${Type_egg} |                          |
     |              ${C4}+@@@@= .#@@@%:${C0}              |                          |                          |
@@ -67,46 +69,102 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     |                                          |                          |                          |
     *-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*°-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.*
     " 
-    for ((i=0; i<${#text}; i++)); do
-      char="${text:$i:1}"
-    if [[ $char != " " ]]; then
-      echo -n "$char"
-      sleep 0.0001
-    else
-      echo -n "$char"
-    fi
-  done
-  if [ -z "$AUTO_UPDATE" ] || [ -z "$SUPORTE_ATIVO" ] || [ -z "${BETA_UPDATE}" ]; then
-  echo "${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-.
+    # Carrega o script acima.
+    for ((i=0; i<${#logo}; i++)); do
+        char="${logo:$i:1}"
+        echo -n "$char"
+        [[ $char != " " ]] && sleep 0.0001
+    done
+
+    if [ -z "$AUTO_UPDATE" ] || [ -z "$SUPORTE_ATIVO" ]; then
+    echo "
+    ${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-.
     ${C3}|   UMA OU MAIS VARIANTES DO EGG ESTÃO EM FALTA, BAIXE A VERSÃO MAIS RECENTE DO EGG NO GITHUB.   |
     ${C3}|                                 https://github.com/drylian/Eggs                                |
     ${C3}*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.* 
-  ${C0}"
-  fi
-  passos=("Buscando atualizações" "Atualização Encontrada" "Baixando Atualização" "Verificando Configurações" "Baixando Configurações" "Executando o script de Iniciador")
-  total_steps=77
-  for i in $(seq 1 $total_steps); do
-        bar=$(printf "%-${i}s" "=")
-        percent=$(printf "%3d" $((i * 100 / total_steps)))
-        step=""
-  if [ "$percent" -ge 0 ] && [ "$percent" -le 30 ]; then
-      step=${passos[0]}
+    ${C0}"
+    fi
+        # Atualizações
+    if [ "${AUTO_UPDATE}" == "1" ]; then
+        echo " 🔵 A ${C1}Atualizações Automatica${C0} está ${C2}Ativada${C0}, Buscando Atualizações..."
         if [ "$version" == "PRÉ" ]; then
-        sed -i '/🟢Versão Atual:*/d' ./${Pasta_Base}/${Base_txt}
-        echo "🟢Versão Atual: ${version_latest}" >> "./${Pasta_Base}/${Base_txt}"
+            echo " 🔵 ${C1}Versão Inicial${C0} detectada, Iniciando Downloads"
+            sed -i '/🟢Versão Atual:*/d' ./${Pasta_Base}/${Base_txt}
+            echo  "🟢Versão Atual: ${version_latest}" >> "./${Pasta_Base}/${Base_txt}"
         elif [ "$version" != "$version_latest" ]; then
-        step=${passos[1]}
-        # Coloque Aqui oque vai ser removido para Atualizar
+            echo " 🔵 Nova ${C1}Versão${C0} detectada, Iniciando Atualização."
+            # Oque vai Fazer se tiver atualização
+            
+            # Seta a versão mais atual
+            sed -i '/🟢Versão Atual:*/d' ./${Pasta_Base}/${Base_txt}
+            echo  "🟢Versão Atual: ${version_latest}" >> "./${Pasta_Base}/${Base_txt}"
+            echo ""
         fi
-  elif [ "$percent" -ge 30 ] && [ "$percent" -le 60 ]; then
-      step=${passos[1]}
-  elif [ "$percent" -ge 60 ] && [ "$percent" -le 80 ]; then
-      step=${passos[2]}
-  elif [ "$percent" -ge 80 ] && [ "$percent" -le 100 ]; then
-      step=${passos[3]}
-  fi  
-    echo -ne "$step [${bar// /=}] $percent%\r"
-    sleep 0.1
-  done
+    else
+        echo " 🟡 A ${C1}Atualizações Automatica${C0} está ${C3}Desativada${C0}, Pulando etapa..."
+    fi
+    # Aqui ficará o Script
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     echo ""
-fi
+    echo " 🔵 Setando ${C1}Permissões${C0} padrões."
+    eval "$Permissoes_padroes"
+    # O StartType do comando não necessita mudar
+    if [ "${StartType}" == "1" ]; then
+        nohup ${StartUP_CMD} > ${Egg}.log.txt 2> ${Egg}.erro.log.txt &
+        pid=$!
+        # Continua a exibir as últimas linhas do arquivo de log a cada segundo
+        while true; do
+            tail -n 10 -F ${Egg}.log.txt
+            tail -n 10 -F ${Egg}.erro.log.txt
+            sleep 1
+            # Verifica se o processo do aplicativo ainda está ativo
+            if ! kill -0 $pid 2> /dev/null; then
+                # Salva as logs na pasta "./${Pasta_Base}/logs/"
+                mv ${Egg}.log.txt ./${Pasta_Base}/logs/${Egg}.log.txt
+                mv ${Egg}.erro.log.txt ./${Pasta_Base}/logs/${Egg}.erro.log.txt
+                # Encerra o loop e o script
+                break
+            fi
+        done &
+        tail_pid=$!
+    else
+        eval ${StartUP_CMD}
+    fi
+    # Aguarda input do usuário
+        while read line; do
+            if [ "$line" = "${Stop_CMD}" ]; then
+                kill $pid
+                echo "🟢 ${C1}Comando de Desligamento${C0} Executado, Salvando Arquivos..."
+                mv ${Egg}.log.txt ./${Pasta_Base}/logs/${Egg}.log.txt
+                mv ${Egg}.erro.log.txt ./${Pasta_Base}/logs/${Egg}.erro.log.txt
+                sleep 5
+                break
+            else
+                echo "🔴 Script ${C3}Falhou${C0} ou Forçado pelo ${C3}Kill${C0}."
+            fi
+        done
+    kill $tail_pid
+fi # If final
