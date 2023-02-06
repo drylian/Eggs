@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-02-03T16:38:35-04:00",
+    "exported_at": "2023-02-06T09:21:03-04:00",
     "name": "Base | Drylian",
     "author": "danielolxlol@gmail.com",
     "description": "Arquivo Base para meus eggs",
@@ -18,7 +18,7 @@
         "files": "{}",
         "startup": "{}",
         "logs": "{}",
-        "stop": "Sistema Entrypoint.sh Parar"
+        "stop": "Parar Servidor"
     },
     "scripts": {
         "installation": {
