@@ -103,8 +103,9 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     else
         echo " 🟡 A ${C1}Atualizações Automatica${C0} está ${C3}Desativada${C0}, Pulando etapa..."
     fi
+    echo " 🔵 Iniciando Script de ${C1}Verificação e Instalação${C0} das dependecias..."
     # Aqui ficará o Script
-
+    
 
 
 
@@ -131,6 +132,8 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     echo ""
     echo " 🔵 Setando ${C1}Permissões${C0} padrões."
     eval "$Permissoes_padroes"
+    # Fim do Script
+    echo " 🔵 ${C1}Verificação e Instalação${C0} dependecias foi terminado, Iniciando Inicializador..."
     # O StartType do comando não necessita mudar
     if [ "${StartType}" == "1" ]; then
         nohup ${StartUP_CMD} > ${Egg}.log.txt 2> ${Egg}.erro.log.txt &

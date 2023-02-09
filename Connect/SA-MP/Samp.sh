@@ -1,0 +1,393 @@
+#!/bin/bash
+#        ====================================================
+#                 SA-MP Script Egg Criado por Drylian
+#        ====================================================
+# Icones 🔴 🟠 🟡 🟢 🔵 🟣 🟤 ⚫ ⚪ ✅ ❌ 📍 ✂️ 🗑️ 🟧 🟨 ⬜ 
+# Icones ☑️ ✖️ ❎ 💾 📓 📗 📘 📙 📝 📖 📚 📰 🗞️ 🏷️ 🟥 🟩 🟦 ⚙️ 
+# Icones 📒 📔 📕 📑 📂 📁 🗂️ 🗃️ 🗄️ 📊 📈 📉 📇 📌 🟪 🟫 ⬛    
+#
+
+# Comandos Do painel Múdaveis
+StartType="1" # Define que tipo de comando vai ser executado 0=Direto 1=Nohub.
+Script_Type="2" # Define se este Script é Beta ou Alpha. 1=Alpha 2=Beta.
+StartAMD="./samp03svr" # Comando Start para amd.
+StartARM="box86 ./samp03svr" # Comando Start para arm.
+Stop_CMD="Parar Servidor" # Comando para parar o Servidor.
+Permissoes_padroes="chmod 777 ./*" # Define as permissões do arquivos, por padrão recomendo chmod 777 ./*.
+Egg="SA-MP               " # O Nome do egg que será executado, lembrando que o numero de caracteres maximos dentro "" é 20 oque não tiver de nome, use em espaços.
+Pasta_Base="📂Informações" # O Nome da pasta onde vai ser armazenada todas as informações do Script.
+Base_txt="🟢Informações.txt" # Nome do Arquivo Onde vai Ficar os Verificadores do egg.
+script_log="📔Script.log.txt" # Nome da Log que o Script vai Rodar.
+debug_log="📔Debug.log.txt" # Nome da Log que vai rodar o Debug.
+Base_Url="https://github.com/drylian/Eggs" #Link do github onde pode achar o egg.
+version_file="./${Pasta_Base}/${Base_txt}" # Local onde a versão vai ser Armazenada.
+version_remote="https://raw.githubusercontent.com/drylian/Eggs/main/Connect/SA-MP/Vers%C3%A3o.txt" #Local onde a Versão Latest vai ser vista
+# Cores do Terminal
+C0=$(echo -en "\u001b[0m") # Padrão
+C1=$(echo -en "\e[1m\u001b[36m") # Cor Ciano Com negrito.
+C2=$(echo -en "\e[1m\u001b[32m") # Cor Verde Com Negrito.
+C3=$(echo -en "\e[1m\u001b[31m") # Cor Vermelho Com Negrito.
+C4=$(echo -en "\e[1m\u001b[34m") # Cor Azul Com Negrito.
+C5=$(echo -en "\e[1m\u001b[35m") # Cor Margeta Com Negrito.
+B0="\e[1m" # Negrito
+# Dependencias do Script
+# Criação da Pasta de Vefiricação
+if [[ ! -f "./${Pasta_Base}/${Base_txt}" ]]; then mkdir -p ./${Pasta_Base}; echo -e "🟢Informações Do Script\n#\n🟢Criado por Drylian\n🟢Github: https://github.com/drylian/Eggs\n🟢Versão Atual: PRÉ" > ./${Pasta_Base}/${Base_txt}; fi # Cria a pasta e o primeiro arquivo de versão.
+if [[ ! -d "${Pasta_Base}/Logs" ]]; then mkdir -p ./${Pasta_Base}/Logs; fi
+Arquitetura=$([ "$(uname -m)" == "x86_64" ] && echo "AMD64" || echo "ARM64") # Pega a Arquitetura da maquina
+StartUP_CMD=${StartARM} [ "${Arquitetura}" == "ARM64" ] || StartUP_CMD=${StartAMD} # isto é o que de fato vai executar como StartUP_CMD
+version=$(grep "🟢Versão Atual: " "$version_file" | cut -d' ' -f3) # Lendo a versão local
+if [ "${version}" == "PRÉ" ]; then version2="${version}"; else version2="${version} "; fi #organiza o tamanho da versão
+if [ "${SUPORTE_ATIVO}" == "1" ]; then Suporte_egg="✅ ${C1}Definido  ${C0}"; else Suporte_egg="❌ ${C3}Indefinido${C0}"; fi # Verificação do Suporte
+if [ "${AUTO_UPDATE}" == "1" ]; then Updater_egg="✅ ${C1}Definido  ${C0}"; else Updater_egg="❌ ${C3}Indefinido${C0}"; fi # Verificação do Atualização.
+if [ "${StartType}" == "0" ]; then Type_egg="✅ ${C1}Direto    ${C0}"; else Type_egg="✅ ${C1}NoHub     ${C0}"; fi # Verificação do TypeStart
+if [ "${Script_Type}" == "1" ]; then Scriptstat="${C1}Alpha${C0}"; else Scriptstat="${C1}Beta ${C0}"; fi # Beta sim e não
+if [ -z "${SUPORTE_ATIVO}" ]; then Suporte="❌ ${C3}Desativado${C0}"; else Suporte="✅ ${C1}Ativado   ${C0}"; fi # Verificação do Suporte egg
+if [ -z "${AUTO_UPDATE}" ]; then Updater="❌ ${C3}Desativado${C0}"; else  Updater="✅ ${C1}Ativado   ${C0}"; fi # Verificação do Atualização egg
+# Carregar Versões
+version_latest=$(curl -s "$version_remote" | grep "🟢Versão Latest: " | cut -d' ' -f3) # Lendo a versão remota
+if [ "$version" != "$version_latest" ]; then version_update="> ${C2}${version_latest}${C0}"; else version_update="    "; fi # Verificando se há uma nova versão disponível.
+# Inicio Do Script
+if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
+    logo="
+    .+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-*.
+    |                                          |                  ${C5}INICIANDO SCRIPT${C0}                   |
+    |                   ${C5}:%${C1}*${C0}                    |+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-|
+    |                  ${C5}:%${C1}@@*${C0}                   |                          |                          |
+    |                 ${C5}-@${C1}@@@@#${C0}                  | ${C0}Egg:${C1} ${Egg}${C0}| Arquitetura:${C1} ${Arquitetura} ${C0}      |
+    |                ${C5}=@${C1}@@@@@@%.${C0}                | Versão: ${C1}${version2}${C0} ${version_update}        | Script: ${C1}${Scriptstat}${C0}            |
+    |               ${C5}+@${C1}@@@#%@@@%:${C0}               | StartType: ${Type_egg} |                          |
+    |              ${C5}+@${C1}@@@= .#@@@%:${C0}              |                          |                          |
+    |             ${C5}*@${C1}@@@-    #@@@@-${C0}             |+*-+*-+*-+*-+*-+*-+*-+*-+*|+*-+*-+*-+*-+*-+*-+*-+*-+*|
+    |            ${C5}#@${C1}@@@:      *@@@@=${C0}            |     ${C5}VARIANTES DO EGG${C0}     |   ${C5}ATIVADOS/DESATIVADOS${C0}   |
+    |          ${C5}.%@${C1}@@%:        +@@@@+${C0}           |+*-+*-+*-+*-+*-+*-+*-+*-+*|+*-+*-+*-+*-+*-+*-+*-+*-+*|
+    |         ${C5}:%@${C1}@@%.          =@@@@*${C0}          |                          |                          |
+    |        ${C5}:%@${C1}@@#   ++++++++++@@@@@*${C0}         | Suporte: ${Suporte_egg}   | Suporte: ${Suporte}   |
+    |       ${C5}=@${C1}@@@#  .%@@@@@@@@@@@@@@@@%.${C0}       |                          |                          |
+    |      ${C5}-%${C1}%%%#. .+%##########%%%%%#%*.${C0}      | Update: ${Updater_egg}    | Update: ${Updater}    |
+    |    ${C5} -------  ------------------------${C0}    |                          |                          |
+    |                                          |                          |                          |
+    *-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*°-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.*
+    " 
+    # Carrega o script acima.
+    for ((i=0; i<${#logo}; i++)); do
+        char="${logo:$i:1}"
+        echo -n "$char"
+        [[ $char != " " ]] && sleep 0.0001
+    done
+
+    if [ -z "$AUTO_UPDATE" ] || [ -z "$SUPORTE_ATIVO" ]; then
+    echo "
+    ${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-.
+    ${C3}|   UMA OU MAIS VARIANTES DO EGG ESTÃO EM FALTA, BAIXE A VERSÃO MAIS RECENTE DO EGG NO GITHUB.   |
+    ${C3}|                                 https://github.com/drylian/Eggs                                |
+    ${C3}*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.* 
+    ${C0}"
+    fi
+        # Atualizações
+    if [ "${AUTO_UPDATE}" == "1" ]; then
+        echo " 🔵 A ${C1}Atualizações Automatica${C0} está ${C2}Ativada${C0}, Buscando Atualizações..."
+        if [ "$version" == "PRÉ" ]; then
+            echo " 🔵 ${C1}Versão Inicial${C0} detectada, Iniciando Downloads..."
+            sed -i '/🟢Versão Atual:*/d' ./${Pasta_Base}/${Base_txt}
+            echo  "🟢Versão Atual: ${version_latest}" >> "./${Pasta_Base}/${Base_txt}"
+        elif [ "$version" != "$version_latest" ]; then
+            echo " 🔵 Nova ${C1}Versão${C0} detectada, Iniciando Atualização..."
+            # Oque vai Fazer se tiver atualização
+            sed -i '/🟢SA-MP Instalado/d' ./${Pasta_Base}/${Base_txt}
+            sed -i '/🟢SA-MP Npc Instalado/d' ./${Pasta_Base}/${Base_txt}
+            sed -i '/🟢SA-MP Announce Instalado/d' ./${Pasta_Base}/${Base_txt}
+            if [ "${SAMP_VOIP}" == "1" ]; then -i '/🟢SA-MP Voip Instalado/d' ./${Pasta_Base}/${Base_txt}; fi
+            # Seta a versão mais atual
+            sed -i '/🟢Versão Atual:*/d' ./${Pasta_Base}/${Base_txt}
+            echo "🟢Versão Atual: ${version_latest}" >> "./${Pasta_Base}/${Base_txt}"
+            echo " 🔵 Nova ${C1}Versão${C0} Instalada, Iniciando Downloads..."
+        fi
+    else
+        echo " 🟡 A ${C1}Atualizações Automatica${C0} está ${C3}Desativada${C0}, Pulando etapa..."
+    fi
+
+    echo ""
+
+    # Aqui ficará o Script
+    echo " 🔵 Iniciando Script de ${C1}Verificação e Instalação${C0} das dependecias..."
+    # Dependencias do Samp
+    echo " 🔵 Validando se Existem as ${C1}Dependencias necessarias${C0} para a execução deste Script..."
+    sleep 0.5
+
+    echo ""
+
+    if [ -d "./gamemodes" ]; then
+        echo " 🔵 Pasta ${C1}/gamemodes${C0} foi detectada, Continuando Validação..."
+        if [ ! "$(ls ./gamemodes/ | grep '.amx')" ]; then
+            echo " 🔴 ${C3}Não existe nem um .amx na pasta /gamemodes, oque torna impossivel o Samp funcionar...${C0}"
+            if [ ! "$(ls ./gamemodes/ | grep '.pwn')" ]; then
+                echo " 🔴 ${C3}Não existe um .pwn na pasta /gamemodes, builde e instale pelo menos um AMX na pasta /gamemodes e inicie novamente.${C0}"
+                exit
+            else
+                echo " 🟡 Um PWN foi detectado, builde ele e inicie o script novamente."
+                exit
+            fi
+        else
+            echo " 🔵 ${C1}Gamemode${C0} foi detectada, Continuando Validação..."
+            if [[ -f "./server.cfg" ]]; then
+                echo " 🔵 ${C1}Server.cfg${C0} foi detectada, iniciando script..."
+            else
+                echo "${C3} 🔴 Server.cfg não foi detectada, configure a server.cfg e inicie o script novamente.${C0}"
+                exit
+            fi
+        fi
+    else
+        echo " ${C3} 🔴 Pasta /gamemodes não foi detectada${C0}, Verifique a Pasta gamemode e inicie o script novamente."
+        exit
+    fi
+
+    echo ""
+
+    # Samp Verificador
+    if grep -q "🟢SA-MP Instalado" "./${Pasta_Base}/${Base_txt}"; then
+        echo " 🔵 O ${C1}SA-MP${C0} foi detectado como Instalado, Verificando Arquivo..."
+        if [[ -f "./samp03svr" ]]; then
+            echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi verificado, Continuando iniciação..."
+        else
+            echo " 🟡 O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
+            echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+        fi
+    else
+        echo " 🔵 O ${C1}SA-MP${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
+        if [[ -f "./samp03svr" ]]; then
+            echo " 🟡 O Arquivo ${C1}SA-MP${C0} foi encontrado, porém não está nas normas do script, Deletando..."
+            rm -f ./samp03svr
+            echo " 🟢 O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
+            curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
+            echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+        else
+            echo " 🔵 O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
+            echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo "🟢SA-MP Instalado" >> "./${Pasta_Base}/${Base_txt}"
+        fi
+    fi
+
+    echo ""
+
+    # Samp-npc Verificador
+    if grep -q "🟢SA-MP Npc Instalado" "./${Pasta_Base}/${Base_txt}"; then
+        echo " 🔵 O ${C1}SA-MP Npc${C0} foi detectado como Instalado, Verificando Arquivo..."
+        if [[ -f "./samp-npc" ]]; then
+            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi verificado, Continuando iniciação..."
+        else
+            echo " 🟡 O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+        fi
+    else
+        echo " 🔵 O ${C1}SA-MP Npc${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
+        if [[ -f "./samp-npc" ]]; then
+            echo " 🟡 O Arquivo ${C1}SA-MP Npc${C0} foi encontrado, porém não está nas normas do script, Deletando..."
+            rm -f ./samp-npc
+            echo " 🟢 O Baixando Arquivo ${C1}SA-MP Npc${C0} verificado..."
+            curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+        else
+            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo "🟢SA-MP Npc Instalado" >> "./${Pasta_Base}/${Base_txt}"
+        fi
+    fi
+
+    echo ""
+
+    # Samp Announce Verificador
+    if grep -q "🟢SA-MP Announce Instalado" "./${Pasta_Base}/${Base_txt}"; then
+        echo " 🔵 O ${C1}SA-MP Announce${C0} foi detectado como Instalado, Verificando Arquivo..."
+        if [[ -f "./announce" ]]; then
+            echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi verificado, Continuando iniciação..."
+        else
+            echo " 🟡 O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+            echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+        fi
+    else
+        echo " 🔵 O ${C1}SA-MP Announce${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
+        if [[ -f "./announce" ]]; then
+            echo " 🟡 O Arquivo ${C1}SA-MP Announce${C0} foi encontrado, porém não está nas normas do script, Deletando..."
+            rm -f ./announce
+            echo " 🟢 O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
+            curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+            echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+        else
+            echo " 🟡 O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+            echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo "🟢SA-MP Announce Instalado" >> "./${Pasta_Base}/${Base_txt}"
+        fi
+    fi
+
+    # Samp Voice Verificador
+    if [ "${SAMP_VOIP}" == "1" ]; then
+        echo ""
+        echo " 🔵 O ${C1}SA-MP Voip${C0} Beta está ativado, Configurando..."
+        if grep -q "🟢SA-MP Voip Instalado" "./${Pasta_Base}/${Base_txt}"; then
+            echo " 🔵 O ${C1}SA-MP Voip${C0} foi detectado como Instalado, Verificando Arquivo..."
+            if [[ -f "./plugins/sampvoice.so" ]]; then
+                echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi verificado, Continuando iniciação..."
+            else
+                echo " 🟡 O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
+                curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
+                echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            fi
+        else
+            echo " 🔵 O ${C1}SA-MP Voip${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
+            if [[ -f "./plugins/sampvoice.so" ]]; then
+                echo " 🟡 O Arquivo ${C1}SA-MP Voip${C0} foi encontrado, porém não está nas normas do script, Deletando..."
+                rm -f ./plugins/sampvoice.so
+                echo " 🟢 O Baixando Arquivo ${C1}SA-MP Voip${C0} verificado..."
+                curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
+                echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            else
+                echo " 🟡 O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
+                curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
+                echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+                echo "🟢SA-MP Voip Instalado" >> "./${Pasta_Base}/${Base_txt}"
+            fi
+        fi
+    fi
+
+    echo ""
+
+    # Server.cfg Editor
+    if [[ -f "./server.cfg" ]]; then
+        echo " 🔵 Editando ${C1}Server.cfg${C0}. Procedimento padrão..."
+        echo " 🔵 Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, removendo ${C3}.ddl(Se tiver)${C0}..."
+        awk '/plugins/{gsub(/.dll/,"",$0);print} !/plugins/' server.cfg > server.cfg.etp.1.txt
+        echo " 🔵 Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, removendo ${C3}.so(Se tiver)${C0}..."
+        awk '/plugins/{gsub(/.so/,"",$0);print} !/plugins/' server.cfg.etp.1.txt > server.cfg.etp.2.txt
+        echo " 🔵 Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, Adicionando ${C2}.so${C0} na linha plugins..."
+        awk '/plugins/{for(i=2;i<=NF;i++) $i=$i".so"; print} !/plugins/' server.cfg.etp.2.txt > server.cfg.etp.3.txt
+        echo " 🔵 Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, Sobrescrevendo ${C1}Server.cfg${C0}..."
+        mv ./server.cfg ./${Pasta_Base}/Antiga-Server.Cfg
+        rm ./server.cfg.etp.1.txt
+        rm ./server.cfg.etp.2.txt
+        mv ./server.cfg.etp.3.txt ./server.cfg
+        echo " 🔵 ${C1}Server.cfg${C0} foi editada com ${C2}Sucesso${C0}, Carregando informações do Servidor..."
+        echo " 🔵 Uma Copia da Antiga ${C1}Server.cfg${C0} foi enviada para ${C2}/${Pasta_Base}/logs${C0} para caso precise dela."
+    else
+        echo " 🔴 ${C3}Server.cfg não encontrada, Arrume Isto para Continuar o script...${C0}"
+        exit
+    fi
+
+    echo ""
+                                
+    echo -e ".*******************************************************************.
+|                      ${C5}INFORMAÇÕES DO SERVIDOR${C0}                      |"
+    # Define as variáveis e da Server.cfg
+    Nome_Servidor="$(awk '/^hostname/{$1=""; print $0}' server.cfg)"
+    Nome_gamemode="$(awk '/^gamemode0/{$1=""; print $0}' server.cfg)"
+    SAMP_Porta="$(awk '/^port/{print $2}' server.cfg)"
+    Voip_Porta="$(awk '/^sv_port/{print $2}' server.cfg)"
+    Max_Jogadores="$(awk '/^maxplayers/{print $2}' server.cfg)"
+    Max_Npc="$(awk '/^maxnpc/{print $2}' server.cfg)"
+
+    # Define primeira coluna
+    nome_1="Nome do Servidor"
+    nome_2="Nome da Gamemode"
+    nome_3="Porta do Samp"
+    nome_4="Porta do Voip"
+    nome_5="Maximo de Jogadores"
+    nome_6="Maximo de Npcs"
+
+    # Armazena as variáveis em um array
+    nomes=(nome_1 nome_2 nome_3 nome_4 nome_5 nome_6)
+    variantes=(Nome_Servidor Nome_gamemode SAMP_Porta Voip_Porta Max_Jogadores Max_Npc)
+
+    # Define o tamanho máximo de caracteres para cada coluna
+    coluna1=20
+    coluna2=42
+
+    # Imprime o cabeçalho da tabela
+    printf "."
+    for i in $(seq 1 $coluna1); do
+        printf "*"
+    done
+        printf "*****"
+    for i in $(seq 1 $coluna2); do
+        printf "*"
+    done
+    printf ".\n"
+
+    # Loop sobre as variáveis
+    for i in "${!nomes[@]}"; do
+        # Obtém o nome do alias
+        nome=$(eval echo "\${${nomes[i]}}")
+        # Obtém o valor da variável usando o alias
+        valor=$(eval echo "\${${variantes[i]}}")
+        # Imprime a linha da tabela com o valor da variável formatado
+        printf "| %-*s |${C1} %-*s ${C0}|\n" $coluna1 "$nome" $coluna2 "$valor"
+    done
+
+    printf "*"
+        for i in $(seq 1 $coluna1); do
+        printf "*"
+    done
+    printf "*****"
+    for i in $(seq 1 $coluna2); do
+        printf "*"
+    done
+    printf "*\n"
+
+    echo ""
+
+    echo " 🔵 Setando ${C1}Permissões${C0} padrões."
+    eval "$Permissoes_padroes"
+
+    echo ""
+
+    # Fim do Script
+    echo " 🔵 ${C1}Verificação e Instalação${C0} dependecias foi terminado, Iniciando ${C1}Inicializador${C0}..."
+
+    echo ""
+    # O StartType do comando não necessita mudar
+    if [ "${StartType}" == "1" ]; then
+        nohup ${StartUP_CMD} > ${Egg}.log.txt 2> ${Egg}.erro.log.txt &
+        pid=$!
+        # Continua a exibir as últimas linhas do arquivo de log a cada segundo
+        while true; do
+            tail -n 10 -F ${Egg}.log.txt
+            tail -n 10 -F ${Egg}.erro.log.txt
+            sleep 1
+            # Verifica se o processo do aplicativo ainda está ativo
+            if ! kill -0 $pid 2> /dev/null; then
+                # Salva as logs na pasta "./${Pasta_Base}/logs/"
+                mv ${Egg}.log.txt ./${Pasta_Base}/logs/${Egg}.log.txt
+                mv ${Egg}.erro.log.txt ./${Pasta_Base}/logs/${Egg}.erro.log.txt
+                # Encerra o loop e o script
+                break
+            fi
+        done &
+        tail_pid=$!
+    else
+        eval ${StartUP_CMD}
+    fi
+
+    # Aguarda input do usuário
+        while read line; do
+            if [ "$line" = "${Stop_CMD}" ]; then
+                kill $pid
+                echo "🟢 ${C1}Comando de Desligamento${C0} Executado, Salvando Arquivos..."
+                mv ${Egg}.log.txt ./${Pasta_Base}/logs/${Egg}.log.txt
+                mv ${Egg}.erro.log.txt ./${Pasta_Base}/logs/${Egg}.erro.log.txt
+                sleep 5
+                break
+            else
+                echo "🔴 Script ${C3}Falhou${C0} ou Forçado pelo ${C3}Kill${C0}."
+            fi
+        done
+    kill $tail_pid
+fi # If final
+
+echo " 🔴 ${C3}Modo No-Code Detectado Iniciando Samp diretamente(Não recomendado), Iniciando...${C0}"
+
+eval ${StartUP_CMD}
