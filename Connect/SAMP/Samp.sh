@@ -81,13 +81,13 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     fi
         # Atualizações
     if [ "${AUTO_UPDATE}" == "1" ]; then
-        echo " 🔵 A ${C1}Atualizações Automatica${C0} está ${C2}Ativada${C0}, Buscando Atualizações..."
+        echo " 🔵   A ${C1}Atualizações Automatica${C0} está ${C2}Ativada${C0}, Buscando Atualizações..."
         if [ "$version" == "PRÉ" ]; then
             echo " 🔵 ${C1}Versão Inicial${C0} detectada, Iniciando Downloads..."
             sed -i '/🟢Versão Atual:*/d' ./📂Informações/🟢Informações.txt
             echo  "🟢Versão Atual: ${version_latest}" >> "./📂Informações/🟢Informações.txt"
         elif [ "$version" != "$version_latest" ]; then
-            echo " 🔵 Nova ${C1}Versão${C0} detectada, Iniciando Atualização..."
+            echo " 🔵   Nova ${C1}Versão${C0} detectada, Iniciando Atualização..."
             # Oque vai Fazer se tiver atualização
             sed -i '/SAMP Instalado/d' ./📂Informações/🟢Informações.txt
             sed -i '/SAMP Npc Instalado/d' ./📂Informações/🟢Informações.txt
@@ -96,44 +96,44 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             # Seta a versão mais atual
             sed -i '/🟢Versão Atual:*/d' ./📂Informações/🟢Informações.txt
             echo "🟢Versão Atual: ${version_latest}" >> "./📂Informações/🟢Informações.txt"
-            echo " 🔵 Nova ${C1}Versão${C0} Instalada, Iniciando Downloads..."
+            echo " 🔵   Nova ${C1}Versão${C0} Instalada, Iniciando Downloads..."
         fi
     else
-        echo " 🟡 A ${C1}Atualizações Automatica${C0} está ${C3}Desativada${C0}, Pulando etapa..."
+        echo " 🟡   A ${C1}Atualizações Automatica${C0} está ${C3}Desativada${C0}, Pulando etapa..."
     fi
 
     echo " "
 
     # Aqui ficará o Script
-    echo " 🔵 Iniciando Script de ${C1}Verificação e Instalação${C0} das dependecias..."
+    echo " 🔵   Iniciando Script de ${C1}Verificação e Instalação${C0} das dependecias..."
     # Dependencias do Samp
-    echo " 🔵 Validando se Existem as ${C1}Dependencias necessarias${C0} para a execução deste Script..."
+    echo " 🔵   Validando se Existem as ${C1}Dependencias necessarias${C0} para a execução deste Script..."
     sleep 0.5
 
     echo " "
 
     if [ -d "./gamemodes" ]; then
-        echo " 🔵 Pasta ${C1}/gamemodes${C0} foi detectada, Continuando Validação..."
+        echo " 🔵   Pasta ${C1}/gamemodes${C0} foi detectada, Continuando Validação..."
         if [ ! "$(ls ./gamemodes/ | grep '.amx')" ]; then
-            echo " 🔴 ${C3}Não existe nem um .amx na pasta /gamemodes, oque torna impossivel o Samp funcionar...${C0}"
+            echo " 🔴   ${C3}Não existe nem um .amx na pasta /gamemodes, oque torna impossivel o Samp funcionar...${C0}"
             if [ ! "$(ls ./gamemodes/ | grep '.pwn')" ]; then
-                echo " 🔴 ${C3}Não existe um .pwn na pasta /gamemodes, builde e instale pelo menos um AMX na pasta /gamemodes e inicie novamente.${C0}"
+                echo " 🔴   ${C3}Não existe um .pwn na pasta /gamemodes, builde e instale pelo menos um AMX na pasta /gamemodes e inicie novamente.${C0}"
                 exit
             else
-                echo " 🟡 Um PWN foi detectado, builde ele e inicie o script novamente."
+                echo " 🟡   Um PWN foi detectado, builde ele e inicie o script novamente."
                 exit
             fi
         else
-            echo " 🔵 ${C1}Gamemode${C0} foi detectada, Continuando Validação..."
+            echo " 🔵   ${C1}Gamemode${C0} foi detectada, Continuando Validação..."
             if [[ -f "./server.cfg" ]]; then
-                echo " 🔵 ${C1}Server.cfg${C0} foi detectada, iniciando script..."
+                echo " 🔵   ${C1}Server.cfg${C0} foi detectada, iniciando script..."
             else
-                echo "${C3} 🔴 Server.cfg não foi detectada, configure a server.cfg e inicie o script novamente.${C0}"
+                echo "${C3} 🔴   Server.cfg não foi detectada, configure a server.cfg e inicie o script novamente.${C0}"
                 exit
             fi
         fi
     else
-        echo " ${C3} 🔴 Pasta /gamemodes não foi detectada${C0}, Verifique a Pasta gamemodes e inicie o script novamente."
+        echo " ${C3} 🔴   Pasta /gamemodes não foi detectada${C0}, Verifique a Pasta gamemodes e inicie o script novamente."
         exit
     fi
 
@@ -146,26 +146,26 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     
     # Samp Verificador
     if grep -q "SAMP Instalado" "./📂Informações/🟢Informações.txt"; then
-        echo " 🔵 O ${C1}SA-MP${C0} foi detectado como Instalado, Verificando Arquivo..."
+        echo " 🔵   O ${C1}SA-MP${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./samp03svr" ]]; then
-            echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi verificado, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi verificado, Continuando iniciação..."
         else
-            echo " 🟡 O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            echo " 🟡   O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
-            echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
         fi
     else
-        echo " 🔵 O ${C1}SA-MP${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
+        echo " 🔵   O ${C1}SA-MP${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./samp03svr" ]]; then
-            echo " 🟡 O Arquivo ${C1}SA-MP${C0} foi encontrado, porém não está nas normas do script, Deletando..."
+            echo " 🟡   O Arquivo ${C1}SA-MP${C0} foi encontrado, porém não está nas normas do script, Deletando..."
             rm -f ./samp03svr
-            echo " 🟢 O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
+            echo " 🟢   O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
             curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
-            echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
         else
-            echo " 🔵 O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            echo " 🔵   O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
-            echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             echo "SAMP Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
     fi
@@ -173,26 +173,26 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     echo " "
     # Samp-npc Verificador
     if grep -q "SAMP Npc Instalado" "./📂Informações/🟢Informações.txt"; then
-        echo " 🔵 O ${C1}SA-MP Npc${C0} foi detectado como Instalado, Verificando Arquivo..."
+        echo " 🔵   O ${C1}SA-MP Npc${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./samp-npc" ]]; then
-            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi verificado, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi verificado, Continuando iniciação..."
         else
-            echo " 🟡 O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            echo " 🟡   O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
-            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
         fi
     else
-        echo " 🔵 O ${C1}SA-MP Npc${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
+        echo " 🔵   O ${C1}SA-MP Npc${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./samp-npc" ]]; then
             echo " 🟡 O Arquivo ${C1}SA-MP Npc${C0} foi encontrado, porém não está nas normas do script, Deletando..."
             rm -f ./samp-npc
-            echo " 🟢 O Baixando Arquivo ${C1}SA-MP Npc${C0} verificado..."
+            echo " 🟢   O Baixando Arquivo ${C1}SA-MP Npc${C0} verificado..."
             curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
-            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
         else
-            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
-            echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             echo "SAMP Npc Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
     fi
@@ -201,26 +201,26 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
 
     # Samp Announce Verificador
     if grep -q "SAMP Announce Instalado" "./📂Informações/🟢Informações.txt"; then
-        echo " 🔵 O ${C1}SA-MP Announce${C0} foi detectado como Instalado, Verificando Arquivo..."
+        echo " 🔵   O ${C1}SA-MP Announce${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./announce" ]]; then
-            echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi verificado, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi verificado, Continuando iniciação..."
         else
-            echo " 🟡 O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            echo " 🟡   O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
-            echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
         fi
     else
-        echo " 🔵 O ${C1}SA-MP Announce${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
+        echo " 🔵   O ${C1}SA-MP Announce${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./announce" ]]; then
-            echo " 🟡 O Arquivo ${C1}SA-MP Announce${C0} foi encontrado, porém não está nas normas do script, Deletando..."
+            echo " 🟡   O Arquivo ${C1}SA-MP Announce${C0} foi encontrado, porém não está nas normas do script, Deletando..."
             rm -f ./announce
-            echo " 🟢 O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
+            echo " 🟢   O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
             curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
-            echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
         else
-            echo " 🟡 O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
+            echo " 🟡   O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
-            echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             echo "SAMP Announce Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
     fi
@@ -228,28 +228,28 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     # Samp Voice Verificador
     if [ "${SAMP_VOIP}" == "1" ]; then
         echo " "
-        echo " 🔵 O ${C1}SA-MP Voip${C0} Beta está ativado, Configurando..."
+        echo " 🔵   O ${C1}SA-MP Voip${C0} Beta está ativado, Configurando..."
         if grep -q "SAMP Voip Instalado" "./📂Informações/🟢Informações.txt"; then
-            echo " 🔵 O ${C1}SA-MP Voip${C0} foi detectado como Instalado, Verificando Arquivo..."
+            echo " 🔵   O ${C1}SA-MP Voip${C0} foi detectado como Instalado, Verificando Arquivo..."
             if [[ -f "./plugins/sampvoice.so" ]]; then
-                echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi verificado, Continuando iniciação..."
+                echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi verificado, Continuando iniciação..."
             else
-                echo " 🟡 O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
+                echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
                 curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
-                echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+                echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             fi
         else
-            echo " 🔵 O ${C1}SA-MP Voip${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
+            echo " 🔵   O ${C1}SA-MP Voip${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
             if [[ -f "./plugins/sampvoice.so" ]]; then
-                echo " 🟡 O Arquivo ${C1}SA-MP Voip${C0} foi encontrado, porém não está nas normas do script, Deletando..."
+                echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} foi encontrado, porém não está nas normas do script, Deletando..."
                 rm -f ./plugins/sampvoice.so
-                echo " 🟢 O Baixando Arquivo ${C1}SA-MP Voip${C0} verificado..."
+                echo " 🟢   O Baixando Arquivo ${C1}SA-MP Voip${C0} verificado..."
                 curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
-                echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+                echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             else
-                echo " 🟡 O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
+                echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
                 curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
-                echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+                echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
                 echo "SAMP Voip Instalado" >> "./📂Informações/🟢Informações.txt"
             fi
         fi
@@ -259,22 +259,22 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
 
     # Server.cfg Editor
     if [[ -f "./server.cfg" ]]; then
-        echo " 🔵 Editando ${C1}Server.cfg${C0}. Procedimento padrão..."
-        echo " 🔵 Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, removendo ${C3}.ddl(Se tiver)${C0}..."
+        echo " 🔵   Editando ${C1}Server.cfg${C0}. Procedimento padrão..."
+        echo " 🔵   Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, removendo ${C3}.ddl(Se tiver)${C0}..."
         awk '/plugins/{gsub(/.dll/,"",$0);print} !/plugins/' server.cfg > server.cfg.etp.1.txt
-        echo " 🔵 Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, removendo ${C3}.so(Se tiver)${C0}..."
+        echo " 🔵   Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, removendo ${C3}.so(Se tiver)${C0}..."
         awk '/plugins/{gsub(/.so/,"",$0);print} !/plugins/' server.cfg.etp.1.txt > server.cfg.etp.2.txt
-        echo " 🔵 Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, Adicionando ${C2}.so${C0} na linha plugins..."
+        echo " 🔵   Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, Adicionando ${C2}.so${C0} na linha plugins..."
         awk '/plugins/{for(i=2;i<=NF;i++) $i=$i".so"; print} !/plugins/' server.cfg.etp.2.txt > server.cfg.etp.3.txt
-        echo " 🔵 Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, Sobrescrevendo ${C1}Server.cfg${C0}..."
+        echo " 🔵   Configurando ${C1}Linha Plugins${C0} da ${C1}Server.cfg${C0}, Sobrescrevendo ${C1}Server.cfg${C0}..."
         mv ./server.cfg ./${Pasta_Base}/Antiga-Server.Cfg
         rm ./server.cfg.etp.1.txt
         rm ./server.cfg.etp.2.txt
         mv ./server.cfg.etp.3.txt ./server.cfg
-        echo " 🔵 ${C1}Server.cfg${C0} foi editada com ${C2}Sucesso${C0}, Carregando informações do Servidor..."
-        echo " 🔵 Uma Copia da Antiga ${C1}Server.cfg${C0} foi enviada para ${C2}/${Pasta_Base}/logs${C0} para caso precise dela."
+        echo " 🔵   ${C1}Server.cfg${C0} foi editada com ${C2}Sucesso${C0}, Carregando informações do Servidor..."
+        echo " 🔵   Uma Copia da Antiga ${C1}Server.cfg${C0} foi enviada para ${C2}/${Pasta_Base}/logs${C0} para caso precise dela."
     else
-        echo " 🔴 ${C3}Server.cfg não encontrada, Arrume Isto para Continuar o script...${C0}"
+        echo " 🔴   ${C3}Server.cfg não encontrada, Arrume Isto para Continuar o script...${C0}"
         exit
     fi
 
@@ -339,29 +339,29 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
 
     echo " "
 
-    echo " 🔵 Setando ${C1}Permissões${C0} padrões."
+    echo " 🔵   Setando ${C1}Permissões${C0} padrões."
     eval "$Permissoes_padroes"
 
     echo " "
 
     # Fim do Script
-    echo " 🔵 ${C1}Verificação e Instalação${C0} dependecias foi terminado, Iniciando ${C1}Inicializador${C0}..."
+    echo " 🔵   ${C1}Verificação e Instalação${C0} dependecias foi terminado, Iniciando ${C1}Inicializador${C0}..."
 
     echo " "
     # O StartType do comando não necessita mudar
     if [ "${StartType}" == "1" ]; then
-        nohup ${StartUP_CMD} > ${Egg}.log.txt 2> ${Egg}.erro.log.txt &
+        nohup ${StartUP_CMD} > samp.log.txt 2> samp.erro.log.txt &
         pid=$!
         # Continua a exibir as últimas linhas do arquivo de log a cada segundo
         while true; do
-            tail -n 10 -F ${Egg}.log.txt
-            tail -n 10 -F ${Egg}.erro.log.txt
+            tail -n 10 -F server_log.txt
+            tail -n 10 -F samp.erro.log.txt
             sleep 1
             # Verifica se o processo do aplicativo ainda está ativo
             if ! kill -0 $pid 2> /dev/null; then
                 # Salva as logs na pasta "./${Pasta_Base}/logs/"
-                mv ${Egg}.log.txt ./${Pasta_Base}/logs/${Egg}.log.txt
-                mv ${Egg}.erro.log.txt ./${Pasta_Base}/logs/${Egg}.erro.log.txt
+                mv samp.log.txt ./📂Informações/logs/samp.log.txt
+                mv samp.erro.log.txt ./📂Informações/logs/samp.erro.log.txt
                 # Encerra o loop e o script
                 break
             fi
@@ -375,18 +375,22 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         while read line; do
             if [ "$line" = "${Stop_CMD}" ]; then
                 kill $pid
-                echo "🟢 ${C1}Comando de Desligamento${C0} Executado, Salvando Arquivos..."
-                mv ${Egg}.log.txt ./${Pasta_Base}/logs/${Egg}.log.txt
-                mv ${Egg}.erro.log.txt ./${Pasta_Base}/logs/${Egg}.erro.log.txt
+                echo "🟢   ${C1}Comando de Desligamento${C0} Executado, Salvando Arquivos..."
+                mv samp.log.txt ./📂Informações/logs/samp.log.txt
+                mv samp.erro.log.txt ./📂Informações/logs/samp.erro.log.txt
                 sleep 5
                 break
+            elif [ "$line" != "${Stop_CMD}" ]; then
+            echo "🔴   Este Script ${C3}não${C0} possue suporte a ${C3}Comandos${C0}."
             else
-                echo "🔴 Script ${C3}Falhou${C0} ou Forçado pelo ${C3}Kill${C0}."
+                echo "🔴   Script ${C3}Falhou${C0} ou Forçado pelo ${C3}Kill${C0}."
             fi
         done
     kill $tail_pid
-fi # If final
-
+else
 echo " 🔴 ${C3}Modo No-Code Detectado Iniciando Samp diretamente(Não recomendado), Iniciando...${C0}"
 
 eval ${StartUP_CMD}
+fi # If final
+
+
