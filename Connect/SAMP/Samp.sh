@@ -89,10 +89,10 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         elif [ "$version" != "$version_latest" ]; then
             echo " 🔵 Nova ${C1}Versão${C0} detectada, Iniciando Atualização..."
             # Oque vai Fazer se tiver atualização
-            sed -i '/🟢SA-MP Instalado/d' ./📂Informações/🟢Informações.txt
-            sed -i '/🟢SA-MP Npc Instalado/d' ./📂Informações/🟢Informações.txt
-            sed -i '/🟢SA-MP Announce Instalado/d' ./📂Informações/🟢Informações.txt
-            if [ "${SAMP_VOIP}" == "1" ]; then -i '/🟢SA-MP Voip Instalado/d' ./📂Informações/🟢Informações.txt; fi
+            sed -i '/SAMP Instalado/d' ./📂Informações/🟢Informações.txt
+            sed -i '/SAMP Npc Instalado/d' ./📂Informações/🟢Informações.txt
+            sed -i '/SAMP Announce Instalado/d' ./📂Informações/🟢Informações.txt
+            if [ "${SAMP_VOIP}" == "1" ]; then -i '/SAMP Voip Instalado/d' ./📂Informações/🟢Informações.txt; fi
             # Seta a versão mais atual
             sed -i '/🟢Versão Atual:*/d' ./📂Informações/🟢Informações.txt
             echo "🟢Versão Atual: ${version_latest}" >> "./📂Informações/🟢Informações.txt"
@@ -133,14 +133,19 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             fi
         fi
     else
-        echo " ${C3} 🔴 Pasta /gamemodes não foi detectada${C0}, Verifique a Pasta gamemode e inicie o script novamente."
+        echo " ${C3} 🔴 Pasta /gamemodes não foi detectada${C0}, Verifique a Pasta gamemodes e inicie o script novamente."
         exit
     fi
 
     echo " "
-
+    if grep -q "sv_port" "./server.cfg"; then
+        echo ""
+    else
+        echo "sv_port" >> "./server.cfg"
+    fi
+    
     # Samp Verificador
-    if grep -q "🟢SA-MP Instalado" "./📂Informações/🟢Informações.txt"; then
+    if grep -q "SAMP Instalado" "./📂Informações/🟢Informações.txt"; then
         echo " 🔵 O ${C1}SA-MP${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./samp03svr" ]]; then
             echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi verificado, Continuando iniciação..."
@@ -161,14 +166,13 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🔵 O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
             echo " 🔵 O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
-            echo "🟢SA-MP Instalado" >> "./📂Informações/🟢Informações.txt"
+            echo "SAMP Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
     fi
 
     echo " "
-
     # Samp-npc Verificador
-    if grep -q "🟢SA-MP Npc Instalado" "./📂Informações/🟢Informações.txt"; then
+    if grep -q "SAMP Npc Instalado" "./📂Informações/🟢Informações.txt"; then
         echo " 🔵 O ${C1}SA-MP Npc${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./samp-npc" ]]; then
             echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi verificado, Continuando iniciação..."
@@ -189,14 +193,14 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
             echo " 🔵 O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
-            echo "🟢SA-MP Npc Instalado" >> "./📂Informações/🟢Informações.txt"
+            echo "SAMP Npc Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
     fi
 
     echo " "
 
     # Samp Announce Verificador
-    if grep -q "🟢SA-MP Announce Instalado" "./📂Informações/🟢Informações.txt"; then
+    if grep -q "SAMP Announce Instalado" "./📂Informações/🟢Informações.txt"; then
         echo " 🔵 O ${C1}SA-MP Announce${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./announce" ]]; then
             echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi verificado, Continuando iniciação..."
@@ -217,7 +221,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🟡 O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
             echo " 🔵 O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
-            echo "🟢SA-MP Announce Instalado" >> "./📂Informações/🟢Informações.txt"
+            echo "SAMP Announce Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
     fi
 
@@ -225,7 +229,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     if [ "${SAMP_VOIP}" == "1" ]; then
         echo " "
         echo " 🔵 O ${C1}SA-MP Voip${C0} Beta está ativado, Configurando..."
-        if grep -q "🟢SA-MP Voip Instalado" "./📂Informações/🟢Informações.txt"; then
+        if grep -q "SAMP Voip Instalado" "./📂Informações/🟢Informações.txt"; then
             echo " 🔵 O ${C1}SA-MP Voip${C0} foi detectado como Instalado, Verificando Arquivo..."
             if [[ -f "./plugins/sampvoice.so" ]]; then
                 echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi verificado, Continuando iniciação..."
@@ -246,7 +250,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
                 echo " 🟡 O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
                 curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
                 echo " 🔵 O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
-                echo "🟢SA-MP Voip Instalado" >> "./📂Informações/🟢Informações.txt"
+                echo "SAMP Voip Instalado" >> "./📂Informações/🟢Informações.txt"
             fi
         fi
     fi
