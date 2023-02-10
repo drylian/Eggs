@@ -77,6 +77,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     ${C3}|                                 https://github.com/drylian/Eggs                                |
     ${C3}*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.* 
     ${C0}"
+    
     fi
         # Atualizações
     if [ "${AUTO_UPDATE}" == "1" ]; then
