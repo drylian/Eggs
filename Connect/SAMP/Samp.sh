@@ -392,5 +392,3 @@ echo " 🔴 ${C3}Modo No-Code Detectado Iniciando Samp diretamente(Não recomend
 
 eval ${StartUP_CMD}
 fi # If final
-
-
