@@ -81,22 +81,25 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     if [ "${AUTO_UPDATE}" == "1" ]; then
         echo " 🔵 A ${C1}Atualizações Automatica${C0} está ${C2}Ativada${C0}, Buscando Atualizações..."
         if [ "$version" == "PRÉ" ]; then
-            echo " 🔵 ${C1}Versão Inicial${C0} detectada, Iniciando Downloads"
+            echo " 🔵   ${C1}Versão Inicial${C0} detectada, Iniciando Downloads"
             sed -i '/🟢Versão Atual:*/d' ./${Pasta_Base}/${Base_txt}
             echo  "🟢Versão Atual: ${version_latest}" >> "./${Pasta_Base}/${Base_txt}"
         elif [ "$version" != "$version_latest" ]; then
-            echo " 🔵 Nova ${C1}Versão${C0} detectada, Iniciando Atualização."
+            echo " 🔵   Nova ${C1}Versão${C0} detectada, Iniciando Atualização."
             # Oque vai Fazer se tiver atualização
             
             # Seta a versão mais atual
             sed -i '/🟢Versão Atual:*/d' ./${Pasta_Base}/${Base_txt}
             echo  "🟢Versão Atual: ${version_latest}" >> "./${Pasta_Base}/${Base_txt}"
             echo ""
+            echo " 🔵   Sistema foi ${C1}Atualizado${C0} versão atual ${version}..."
+        elif [ "$version" == "$version_latest" ]; then
+            echo " 🔵   Sistema está ${C1}Atualizado${C0} versão atual ${version}..."
         fi
     else
-        echo " 🟡 A ${C1}Atualizações Automatica${C0} está ${C3}Desativada${C0}, Pulando etapa..."
+        echo " 🟡   A ${C1}Atualizações Automatica${C0} está ${C3}Desativada${C0}, Pulando etapa..."
     fi
-    echo " 🔵 Iniciando Script de ${C1}Verificação e Instalação${C0} das dependecias..."
+    echo " 🔵   Iniciando Script de ${C1}Verificação e Instalação${C0} das dependecias..."
     # Aqui ficará o Script
     
 
@@ -123,10 +126,10 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
 
 
     echo ""
-    echo " 🔵 Setando ${C1}Permissões${C0} padrões."
+    echo " 🔵   Setando ${C1}Permissões${C0} padrões."
     eval "$Permissoes_padroes"
     # Fim do Script
-    echo " 🔵 ${C1}Verificação e Instalação${C0} dependecias foi terminado, Iniciando Inicializador..."
+    echo " 🔵   ${C1}Verificação e Instalação${C0} dependecias foi terminado, Iniciando Inicializador..."
     # O StartType do comando não necessita mudar
     if [ "${StartType}" == "1" ]; then
         nohup ${StartUP_CMD} > ${Egg}.log.txt 2> ${Egg}.erro.log.txt &
@@ -139,7 +142,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             # Verifica se o processo do aplicativo ainda está ativo
             if ! kill -0 $pid 2> /dev/null; then
                 # Salva as logs na pasta "./${Pasta_Base}/Logs/"./Informacoes/Informacoes.txt
-                echo "🔴 ${C3}O ${Egg} foi finalizado sem aviso, provavelmente erro interno, desligando script${C0}..."
+                echo "🔴   ${C3}O ${Egg} foi finalizado sem aviso, provavelmente erro interno, desligando script${C0}..."
                 if [ ! -f "./${Pasta_Base}/Logs/${Egg}.log.txt" ]; then
                   	echo " " > "./${Pasta_Base}/Logs/${Egg}log.txt"
                 fi
@@ -164,7 +167,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         while read line; do
             if [ "$line" = "${Stop_CMD}" ]; then
                 kill $pid
-                echo "🟢 ${C1}Comando de Desligamento${C0} Executado, Salvando Arquivos..."
+                echo "🟢   ${C1}Comando de Desligamento${C0} Executado, Salvando Arquivos..."
                 if [ ! -f "./${Pasta_Base}/Logs/${Egg}.log.txt" ]; then
                   	echo " " > "./${Pasta_Base}/Logs/${Egg}log.txt"
                 fi

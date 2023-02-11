@@ -97,6 +97,8 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             sed -i '/🟢Versão Atual:*/d' ./📂Informações/🟢Informações.txt
             echo "🟢Versão Atual: ${version_latest}" >> "./📂Informações/🟢Informações.txt"
             echo " 🔵   Nova ${C1}Versão${C0} Instalada, Iniciando Downloads..."
+        elif [ "$version" == "$version_latest" ]; then
+            echo " 🔵   Sistema está ${C1}Atualizado${C0} versão atual ${version}..."
         fi
     else
         echo " 🟡   A ${C1}Atualizações Automatica${C0} está ${C3}Desativada${C0}, Pulando etapa..."
@@ -449,7 +451,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         done
     kill $tail_pid
 else
-echo " 🔴 ${C3}Modo No-Code Detectado Iniciando Samp diretamente(Não recomendado), Iniciando...${C0}"
+echo " 🔴   ${C3}Modo No-Code Detectado Iniciando Samp diretamente(Não recomendado), Iniciando...${C0}"
 
 eval ${StartUP_CMD}
 fi # If final
