@@ -21,7 +21,7 @@ script_log="Script.log.txt" # Nome da Log que o Script vai Rodar.
 debug_log="Debug.log.txt" # Nome da Log que vai rodar o Debug.
 Base_Url="https://github.com/drylian/Eggs" #Link do github onde pode achar o egg.
 version_file="./📂Informações/🟢Informações.txt" # Local onde a versão vai ser Armazenada.
-version_remote="https://raw.githubusercontent.com/drylian/Eggs/main/Connect/SA-MP/Vers%C3%A3o.txt" #Local onde a Versão Latest vai ser vista
+version_remote="https://raw.githubusercontent.com/drylian/Eggs/main/Connect/SAMP/Vers%C3%A3o.txt" #Local onde a Versão Latest vai ser vista
 # Cores do Terminal
 C0=$(echo -en "\u001b[0m") # Padrão
 C1=$(echo -en "\e[1m\u001b[36m") # Cor Ciano Com negrito.
@@ -89,9 +89,9 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         elif [ "$version" != "$version_latest" ]; then
             echo " 🔵   Nova ${C1}Versão${C0} detectada, Iniciando Atualização..."
             # Oque vai Fazer se tiver atualização
-            sed -i '/SAMP Instalado/d' ./📂Informações/🟢Informações.txt
-            sed -i '/SAMP Npc Instalado/d' ./📂Informações/🟢Informações.txt
-            sed -i '/SAMP Announce Instalado/d' ./📂Informações/🟢Informações.txt
+            sed -i '/🟢SAMP Instalado/d' ./📂Informações/🟢Informações.txt
+            sed -i '/🟢SAMP Npc Instalado/d' ./📂Informações/🟢Informações.txt
+            sed -i '/🟢SAMP Announce Instalado/d' ./📂Informações/🟢Informações.txt
             if [ "${SAMP_VOIP}" == "1" ]; then -i '/SAMP Voip Instalado/d' ./📂Informações/🟢Informações.txt; fi
             # Seta a versão mais atual
             sed -i '/🟢Versão Atual:*/d' ./📂Informações/🟢Informações.txt
@@ -138,14 +138,19 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     fi
 
     echo " "
-    if grep -q "sv_port" "./server.cfg"; then
+    if grep -q "sv_port ${VOIP_PORT}" "./server.cfg"; then
         echo ""
     else
-        echo "sv_port" >> "./server.cfg"
+        if grep -q "sv_port" "./server.cfg"; then
+            sed -i "/sv_port/c\sv_port ${VOIP_PORT}" "./server.cfg"
+        else
+            echo "" >> "./server.cfg"
+            echo "sv_port ${VOIP_PORT}" >> "./server.cfg"
+        fi
     fi
     
     # Samp Verificador
-    if grep -q "SAMP Instalado" "./📂Informações/🟢Informações.txt"; then
+    if grep -q "🟢SAMP Instalado" "./📂Informações/🟢Informações.txt"; then
         echo " 🔵   O ${C1}SA-MP${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./samp03svr" ]]; then
             echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi verificado, Continuando iniciação..."
@@ -162,17 +167,18 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🟢   O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
             curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
             echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo "🟢SAMP Instalado" >> "./📂Informações/🟢Informações.txt"
         else
             echo " 🔵   O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
             echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
-            echo "SAMP Instalado" >> "./📂Informações/🟢Informações.txt"
+            echo "🟢SAMP Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
     fi
 
     echo " "
     # Samp-npc Verificador
-    if grep -q "SAMP Npc Instalado" "./📂Informações/🟢Informações.txt"; then
+    if grep -q "🟢SAMP Npc Instalado" "./📂Informações/🟢Informações.txt"; then
         echo " 🔵   O ${C1}SA-MP Npc${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./samp-npc" ]]; then
             echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi verificado, Continuando iniciação..."
@@ -189,18 +195,19 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🟢   O Baixando Arquivo ${C1}SA-MP Npc${C0} verificado..."
             curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
             echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo "🟢SAMP Npc Instalado" >> "./📂Informações/🟢Informações.txt"
         else
             echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
             echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
-            echo "SAMP Npc Instalado" >> "./📂Informações/🟢Informações.txt"
+            echo "🟢SAMP Npc Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
     fi
 
     echo " "
 
     # Samp Announce Verificador
-    if grep -q "SAMP Announce Instalado" "./📂Informações/🟢Informações.txt"; then
+    if grep -q "🟢SAMP Announce Instalado" "./📂Informações/🟢Informações.txt"; then
         echo " 🔵   O ${C1}SA-MP Announce${C0} foi detectado como Instalado, Verificando Arquivo..."
         if [[ -f "./announce" ]]; then
             echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi verificado, Continuando iniciação..."
@@ -217,41 +224,48 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🟢   O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
             curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
             echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+            echo "🟢SAMP Announce Instalado" >> "./📂Informações/🟢Informações.txt"
         else
             echo " 🟡   O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
             curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
             echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
-            echo "SAMP Announce Instalado" >> "./📂Informações/🟢Informações.txt"
+            echo "🟢SAMP Announce Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
     fi
 
     # Samp Voice Verificador
     if [ "${SAMP_VOIP}" == "1" ]; then
         echo " "
-        echo " 🔵   O ${C1}SA-MP Voip${C0} Beta está ativado, Configurando..."
-        if grep -q "SAMP Voip Instalado" "./📂Informações/🟢Informações.txt"; then
-            echo " 🔵   O ${C1}SA-MP Voip${C0} foi detectado como Instalado, Verificando Arquivo..."
-            if [[ -f "./plugins/sampvoice.so" ]]; then
-                echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi verificado, Continuando iniciação..."
+        echo " 🔵   O ${C1}SA-MP Voip${C0} Beta está ativado, Verificando pasta..."
+        if [[ -d "plugins" ]]; then
+        echo " 🔵   A pasta ${C1}Plugins${C0} foi detectada, Configurando..."
+            if grep -q "🟢SAMP Voip Instalado" "./📂Informações/🟢Informações.txt"; then
+                echo " 🔵   O ${C1}SA-MP Voip${C0} foi detectado como Instalado, Verificando Arquivo..."
+                if [[ -f "./plugins/sampvoice.so" ]]; then
+                    echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi verificado, Continuando iniciação..."
+                else
+                    echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
+                    curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
+                    echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+                fi
             else
-                echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
-                curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
-                echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+                echo " 🔵   O ${C1}SA-MP Voip${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
+                if [[ -f "./plugins/sampvoice.so" ]]; then
+                    echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} foi encontrado, porém não está nas normas do script, Deletando..."
+                    rm -f ./plugins/sampvoice.so
+                    echo " 🟢   O Baixando Arquivo ${C1}SA-MP Voip${C0} verificado..."
+                    curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
+                    echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+                    echo "🟢SAMP Voip Instalado" >> "./📂Informações/🟢Informações.txt"
+                else
+                    echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
+                    curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
+                    echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
+                    echo "🟢SAMP Voip Instalado" >> "./📂Informações/🟢Informações.txt"
+                fi
             fi
         else
-            echo " 🔵   O ${C1}SA-MP Voip${C0} ${C3}não${C0} foi detectado como Instalado, Verificando Arquivo..."
-            if [[ -f "./plugins/sampvoice.so" ]]; then
-                echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} foi encontrado, porém não está nas normas do script, Deletando..."
-                rm -f ./plugins/sampvoice.so
-                echo " 🟢   O Baixando Arquivo ${C1}SA-MP Voip${C0} verificado..."
-                curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
-                echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
-            else
-                echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
-                curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
-                echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
-                echo "SAMP Voip Instalado" >> "./📂Informações/🟢Informações.txt"
-            fi
+            echo " 🟡   A Pasta ${C3}Plugins${C0} não foi encontrada, pulando etapa."
         fi
     fi
 
@@ -272,7 +286,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         rm ./server.cfg.etp.2.txt
         mv ./server.cfg.etp.3.txt ./server.cfg
         echo " 🔵   ${C1}Server.cfg${C0} foi editada com ${C2}Sucesso${C0}, Carregando informações do Servidor..."
-        echo " 🔵   Uma Copia da Antiga ${C1}Server.cfg${C0} foi enviada para ${C2}/${Pasta_Base}/logs${C0} para caso precise dela."
+        echo " 🔵   Uma Copia da Antiga ${C1}Server.cfg${C0} foi enviada para ${C2}/${Pasta_Base}/Logs${C0} para caso precise dela."
     else
         echo " 🔴   ${C3}Server.cfg não encontrada, Arrume Isto para Continuar o script...${C0}"
         exit
@@ -359,11 +373,35 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             sleep 1
             # Verifica se o processo do aplicativo ainda está ativo
             if ! kill -0 $pid 2> /dev/null; then
-                # Salva as logs na pasta "./${Pasta_Base}/logs/"
-                mv samp.log.txt ./📂Informações/logs/samp.log.txt
-                mv samp.erro.log.txt ./📂Informações/logs/samp.erro.log.txt
+                # Salva as logs na pasta "./${Pasta_Base}/Logs/"./Informacoes/Informacoes.txt
+                echo "🔴 ${C3}O ${Egg} foi finalizado sem aviso, provavelmente erro interno, desligando script${C0}..."
+                if [ ! -f "./📂Informações/Logs/Server.log.txt" ]; then
+  					echo " " > "./📂Informações/Logs/Server.log.txt"
+                fi
+                cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
+
+                if [ ! -f "./📂Informações/Logs/Samp.log.txt" ]; then
+                    echo " " > "./📂Informações/Logs/Samp.log.txt"
+                fi
+                cat samp.log.txt >> ./📂Informações/Logs/Samp.log.txt
+
+                if [ ! -f "./📂Informações/Logs/Samp.erro.log.txt" ]; then
+                  	echo " " > "./📂Informações/Logs/Samp.erro.log.txt"
+                fi
+                if [ ! -f "./📂Informações/Logs/Voip.log.txt" ]; then
+                  	echo " " > "./📂Informações/Logs/Voip.log.txt"
+                fi
+                cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
+                cat samp.log.txt >> ./📂Informações/Logs/Samp.log.txt
+                cat samp.erro.log.txt >> ./📂Informações/Logs/Samp.erro.log.txt
+                if [ -f "./svlog.txt" ]; then
+                  	cat svlog.txt >> ./📂Informações/Logs/Voip.log.txt
+                fi
                 # Encerra o loop e o script
                 break
+                echo " " > server_log.txt
+                rm samp.log.txt
+                rm samp.erro.log.txt
             fi
         done &
         tail_pid=$!
@@ -374,12 +412,35 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     # Aguarda input do usuário
         while read line; do
             if [ "$line" = "${Stop_CMD}" ]; then
+                # Salva as logs na pasta "./${Pasta_Base}/Logs/"./Informacoes/Informacoes.txt
+                if [ ! -f "./📂Informações/Logs/Server.log.txt" ]; then
+  					echo " " > "./📂Informações/Logs/Server.log.txt"
+                fi
+                cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
+
+                if [ ! -f "./📂Informações/Logs/Samp.log.txt" ]; then
+                    echo " " > "./📂Informações/Logs/Samp.log.txt"
+                fi
+                cat samp.log.txt >> ./📂Informações/Logs/Samp.log.txt
+
+                if [ ! -f "./📂Informações/Logs/Samp.erro.log.txt" ]; then
+                  	echo " " > "./📂Informações/Logs/Samp.erro.log.txt"
+                fi
+                if [ ! -f "./📂Informações/Logs/Voip.log.txt" ]; then
+                  	echo " " > "./📂Informações/Logs/Voip.log.txt"
+                fi
+                cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
+                cat samp.log.txt >> ./📂Informações/Logs/Samp.log.txt
+                cat samp.erro.log.txt >> ./📂Informações/Logs/Samp.erro.log.txt
+                if [ -f "./svlog.txt" ]; then
+                  	cat svlog.txt >> ./📂Informações/Logs/Voip.log.txt
+                fi
                 kill $pid
-                echo "🟢   ${C1}Comando de Desligamento${C0} Executado, Salvando Arquivos..."
-                mv samp.log.txt ./📂Informações/logs/samp.log.txt
-                mv samp.erro.log.txt ./📂Informações/logs/samp.erro.log.txt
-                sleep 5
+                sleep 2
                 break
+                echo " " > server_log.txt
+                rm samp.log.txt
+                rm samp.erro.log.txt
             elif [ "$line" != "${Stop_CMD}" ]; then
             echo "🔴   Este Script ${C3}não${C0} possue suporte a ${C3}Comandos${C0}."
             else

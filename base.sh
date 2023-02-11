@@ -49,7 +49,7 @@ version_latest=$(curl -s "$version_remote" | grep "🟢Versão Latest: " | cut -
 if [ "$version" != "$version_latest" ]; then version_update="> ${C2}${version_latest}${C0}"; else version_update="    "; fi # Verificando se há uma nova versão disponível.
 # Inicio Do Script
 if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
-    logo="
+    echo "
     .+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-*.
     |                                          |                  ${C5}INICIANDO SCRIPT${C0}                   |
     |                   ${C5}:%*${C0}                    |+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-|
@@ -68,14 +68,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     |    ${C4} -------  ------------------------${C0}    |                          |                          |
     |                                          |                          |                          |
     *-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*°-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.*
-    " 
-    # Carrega o script acima.
-    for ((i=0; i<${#logo}; i++)); do
-        char="${logo:$i:1}"
-        echo -n "$char"
-        [[ $char != " " ]] && sleep 0.0001
-    done
-
+    "  
     if [ -z "$AUTO_UPDATE" ] || [ -z "$SUPORTE_ATIVO" ]; then
     echo "
     ${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-.
@@ -145,10 +138,21 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             sleep 1
             # Verifica se o processo do aplicativo ainda está ativo
             if ! kill -0 $pid 2> /dev/null; then
-                # Salva as logs na pasta "./${Pasta_Base}/logs/"
-                mv ${Egg}.log.txt ./${Pasta_Base}/logs/${Egg}.log.txt
-                mv ${Egg}.erro.log.txt ./${Pasta_Base}/logs/${Egg}.erro.log.txt
-                # Encerra o loop e o script
+                # Salva as logs na pasta "./${Pasta_Base}/Logs/"./Informacoes/Informacoes.txt
+                echo "🔴 ${C3}O ${Egg} foi finalizado sem aviso, provavelmente erro interno, desligando script${C0}..."
+                if [ ! -f "./${Pasta_Base}/Logs/${Egg}.log.txt" ]; then
+                  	echo " " > "./${Pasta_Base}/Logs/${Egg}log.txt"
+                fi
+                
+                if [ ! -f "./${Pasta_Base}/Logs/${Egg}.log.txt" ]; then
+                  	echo " " > "./${Pasta_Base}/Logs/${Egg}.log.txt"
+                fi
+
+                cat ${Egg}.log.txt >> ./${Pasta_Base}/Logs/${Egg}.log.txt
+                cat ${Egg}.erro.log.txt >> ./${Pasta_Base}/Logs/${Egg}.erro.log.txt
+
+                rm ${Egg}.log.txt
+                rm ${Egg}.erro.log.txt
                 break
             fi
         done &
@@ -161,12 +165,25 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             if [ "$line" = "${Stop_CMD}" ]; then
                 kill $pid
                 echo "🟢 ${C1}Comando de Desligamento${C0} Executado, Salvando Arquivos..."
-                mv ${Egg}.log.txt ./${Pasta_Base}/logs/${Egg}.log.txt
-                mv ${Egg}.erro.log.txt ./${Pasta_Base}/logs/${Egg}.erro.log.txt
+                if [ ! -f "./${Pasta_Base}/Logs/${Egg}.log.txt" ]; then
+                  	echo " " > "./${Pasta_Base}/Logs/${Egg}log.txt"
+                fi
+
+                if [ ! -f "./${Pasta_Base}/Logs/${Egg}.log.txt" ]; then
+                  	echo " " > "./${Pasta_Base}/Logs/${Egg}.log.txt"
+                fi
+
+                cat ${Egg}.log.txt >> ./${Pasta_Base}/Logs/${Egg}.log.txt
+                cat ${Egg}.erro.log.txt >> ./${Pasta_Base}/Logs/${Egg}.erro.log.txt
+
+                rm ${Egg}.log.txt
+                rm ${Egg}.erro.log.txt
                 sleep 5
                 break
+            elif [ "$line" != "${Stop_CMD}" ]; then
+                echo "🔴   Este Script ${C3}não${C0} possue suporte a ${C3}Comandos${C0}."
             else
-                echo "🔴 Script ${C3}Falhou${C0} ou Forçado pelo ${C3}Kill${C0}."
+                echo "🔴   Script ${C3}Falhou${C0} ou Forçado pelo ${C3}Kill${C0}."
             fi
         done
     kill $tail_pid
