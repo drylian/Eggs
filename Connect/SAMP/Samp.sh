@@ -135,7 +135,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             fi
         fi
     else
-        echo " ${C3} 🔴   Pasta /gamemodes não foi detectada${C0}, Verifique a Pasta gamemodes e inicie o script novamente."
+        echo "${C3} 🔴   Pasta /gamemodes não foi detectada${C0}, Verifique a Pasta gamemodes e inicie o script novamente."
         exit
     fi
 
@@ -362,7 +362,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
 
     # Fim do Script
     echo " 🔵   ${C1}Verificação e Instalação${C0} dependecias foi terminado, Iniciando ${C1}Inicializador${C0}..."
-
+    echo "Servidor Samp foi Iniciado com Sucesso."
     echo " "
     # O StartType do comando não necessita mudar
     if [ "${StartType}" == "1" ]; then
