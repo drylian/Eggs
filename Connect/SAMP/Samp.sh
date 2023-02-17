@@ -378,32 +378,30 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
                 # Salva as logs na pasta "./${Pasta_Base}/Logs/"./Informacoes/Informacoes.txt
                 echo "🔴 ${C3}O ${Egg} foi finalizado sem aviso, provavelmente erro interno, desligando script${C0}..."
                 if [ ! -f "./📂Informações/Logs/Server.log.txt" ]; then
-  					echo " " > "./📂Informações/Logs/Server.log.txt"
+                    echo " " > "./📂Informações/Logs/Server.log.txt"
                 fi
-                cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
 
                 if [ ! -f "./📂Informações/Logs/Samp.log.txt" ]; then
                     echo " " > "./📂Informações/Logs/Samp.log.txt"
                 fi
-                cat samp.log.txt >> ./📂Informações/Logs/Samp.log.txt
 
                 if [ ! -f "./📂Informações/Logs/Samp.erro.log.txt" ]; then
-                  	echo " " > "./📂Informações/Logs/Samp.erro.log.txt"
+                    echo " " > "./📂Informações/Logs/Samp.erro.log.txt"
                 fi
+
                 if [ ! -f "./📂Informações/Logs/Voip.log.txt" ]; then
-                  	echo " " > "./📂Informações/Logs/Voip.log.txt"
+                    echo " " > "./📂Informações/Logs/Voip.log.txt"
                 fi
+
                 cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
                 cat samp.log.txt >> ./📂Informações/Logs/Samp.log.txt
                 cat samp.erro.log.txt >> ./📂Informações/Logs/Samp.erro.log.txt
                 if [ -f "./svlog.txt" ]; then
-                  	cat svlog.txt >> ./📂Informações/Logs/Voip.log.txt
+                    cat svlog.txt >> ./📂Informações/Logs/Voip.log.txt
                 fi
-                # Encerra o loop e o script
-                break
-                echo " " > server_log.txt
-                rm samp.log.txt
-                rm samp.erro.log.txt
+                rm ./server_log.txt
+                rm ./samp.log.txt
+                rm ./samp.erro.log.txt
             fi
         done &
         tail_pid=$!
@@ -415,34 +413,34 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         while read line; do
             if [ "$line" = "${Stop_CMD}" ]; then
                 # Salva as logs na pasta "./${Pasta_Base}/Logs/"./Informacoes/Informacoes.txt
+                kill $pid
                 if [ ! -f "./📂Informações/Logs/Server.log.txt" ]; then
-  					echo " " > "./📂Informações/Logs/Server.log.txt"
+                    echo " " > "./📂Informações/Logs/Server.log.txt"
                 fi
-                cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
 
                 if [ ! -f "./📂Informações/Logs/Samp.log.txt" ]; then
                     echo " " > "./📂Informações/Logs/Samp.log.txt"
                 fi
-                cat samp.log.txt >> ./📂Informações/Logs/Samp.log.txt
 
                 if [ ! -f "./📂Informações/Logs/Samp.erro.log.txt" ]; then
-                  	echo " " > "./📂Informações/Logs/Samp.erro.log.txt"
+                    echo " " > "./📂Informações/Logs/Samp.erro.log.txt"
                 fi
+
                 if [ ! -f "./📂Informações/Logs/Voip.log.txt" ]; then
-                  	echo " " > "./📂Informações/Logs/Voip.log.txt"
+                    echo " " > "./📂Informações/Logs/Voip.log.txt"
                 fi
+
                 cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
                 cat samp.log.txt >> ./📂Informações/Logs/Samp.log.txt
                 cat samp.erro.log.txt >> ./📂Informações/Logs/Samp.erro.log.txt
                 if [ -f "./svlog.txt" ]; then
-                  	cat svlog.txt >> ./📂Informações/Logs/Voip.log.txt
+                    cat svlog.txt >> ./📂Informações/Logs/Voip.log.txt
                 fi
-                kill $pid
+                rm ./server_log.txt
+                rm ./samp.log.txt
+                rm ./samp.erro.log.txt
                 sleep 2
                 break
-                echo " " > server_log.txt
-                rm samp.log.txt
-                rm samp.erro.log.txt
             elif [ "$line" != "${Stop_CMD}" ]; then
             echo "🔴   Este Script ${C3}não${C0} possue suporte a ${C3}Comandos${C0}."
             else
@@ -451,7 +449,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         done
     kill $tail_pid
 else
-echo " 🔴   ${C3}Modo No-Code Detectado Iniciando Samp diretamente(Não recomendado), Iniciando...${C0}"
+    echo " 🔴   ${C3}Modo No-Code Detectado Iniciando Samp diretamente(Não recomendado), Iniciando...${C0}"
 
-eval ${StartUP_CMD}
+    eval ${StartUP_CMD}
 fi # If final
