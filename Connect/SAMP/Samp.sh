@@ -11,7 +11,7 @@
 StartType="1" # Define que tipo de comando vai ser executado 0=Direto 1=Nohub.
 Script_Type="2" # Define se este Script é Beta ou Alpha. 1=Alpha 2=Beta.
 StartAMD="./samp03svr" # Comando Start para amd.
-StartARM="box86 ./samp03svr" # Comando Start para arm.
+StartARM="sh -c box86 ./samp03svr" # Comando Start para arm.
 Stop_CMD="Parar Servidor" # Comando para parar o Servidor.
 Permissoes_padroes="chmod 777 ./*" # Define as permissões do arquivos, por padrão recomendo chmod 777 ./*.
 Egg="SAMP                " # O Nome do egg que será executado, lembrando que o numero de caracteres maximos dentro "" é 20 oque não tiver de nome, use em espaços.
