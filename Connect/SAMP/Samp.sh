@@ -8,10 +8,10 @@
 #
 
 # Comandos Do painel Múdaveis
-StartType="1" # Define que tipo de comando vai ser executado 0=Direto 1=Nohub.
+StartType="${INICIADOR}" # Define que tipo de comando vai ser executado 0=Direto 1=Nohub.
 Script_Type="2" # Define se este Script é Beta ou Alpha. 1=Alpha 2=Beta.
-StartAMD="./samp03svr" # Comando Start para amd.
-StartARM="sh -c box86 ./samp03svr" # Comando Start para arm.
+StartAMD="samp03svr" # Comando Start para amd.
+StartARM="sh -c box86 samp03svr" # Comando Start para arm.
 Stop_CMD="Parar Servidor" # Comando para parar o Servidor.
 Permissoes_padroes="chmod 777 ./*" # Define as permissões do arquivos, por padrão recomendo chmod 777 ./*.
 Egg="SAMP                " # O Nome do egg que será executado, lembrando que o numero de caracteres maximos dentro "" é 20 oque não tiver de nome, use em espaços.
@@ -367,6 +367,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     echo "Servidor Samp foi Iniciado com Sucesso."
     # O StartType do comando não necessita mudar
     if [ "${StartType}" == "1" ]; then
+        echo " 🔵   Executando em modo ${C1}Nohup(Script 2.0)${C0}..."
         nohup ${StartUP_CMD} > samp.log.txt 2> samp.erro.log.txt &
         pid=$!
         # Continua a exibir as últimas linhas do arquivo de log a cada segundo
@@ -409,7 +410,16 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         done &
         tail_pid=$!
     else
-        eval ${StartUP_CMD}
+        # Comando de Iniciação do Servidor-----------------------------------------------------------------------------
+        echo " 🔵   Executando em modo ${C1}Direto(Script 1.0)${C0}..."
+        echo " 🔵   Salvando antiga Log ${C1}Direto(Script 1.0)${C0}..."
+        cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
+        tail -n 10 -F server_log.txt
+        echo " " > server_log.txt
+        echo " 🔵   Iniciando ${C1}Iniciador direto${C0}."
+        $(if [ "${Arquitetura}" == "arm64" ]; then echo -n "box86 samp03svr"; else echo -n "samp03svr"; fi)          #-
+        exit
+        # Comando de Iniciação do Servidor-----------------------------------------------------------------------------
     fi
 
     # Aguarda input do usuário
