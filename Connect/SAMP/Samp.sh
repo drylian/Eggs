@@ -35,7 +35,7 @@ B0="\e[1m" # Negrito
 if [[ ! -f "./📂Informações/🟢Informações.txt" ]]; then mkdir -p ./${Pasta_Base}; echo -e "🟢Informações Do Script\n#\n🟢Criado por Drylian\n🟢Github: https://github.com/drylian/Eggs\n🟢Versão Atual: PRÉ" > ./📂Informações/🟢Informações.txt; fi # Cria a pasta e o primeiro arquivo de versão.
 if [[ ! -d "${Pasta_Base}/Logs" ]]; then mkdir -p ./${Pasta_Base}/Logs; fi
 Arquitetura=$([ "$(uname -m)" == "x86_64" ] && echo "AMD64" || echo "ARM64") # Pega a Arquitetura da maquina
-StartUP_CMD="${StartARM}" [ "${Arquitetura}" == "ARM64" ] || StartUP_CMD="${StartAMD}" # isto é o que de fato vai executar como StartUP_CMD
+if [ "${Arquitetura}" == "ARM64" ]; then StartUP_CMD="${StartARM}"; else StartUP_CMD="${StartAMD}"; fi # isto é o que de fato vai executar como StartUP_CMD
 version=$(grep "🟢Versão Atual: " "$version_file" | cut -d' ' -f3) # Lendo a versão local
 if [ "${version}" == "PRÉ" ]; then version2="${version}"; else version2="${version} "; fi #organiza o tamanho da versão
 if [ "${SUPORTE_ATIVO}" == "1" ]; then Suporte_egg="✅ ${C1}Definido   ${C0}"; else Suporte_egg="❌ ${C3}Indefinido ${C0}"; fi # Verificação do Suporte
