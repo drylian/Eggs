@@ -8,7 +8,7 @@
 #
 
 # Comandos Do painel Múdaveis
-StartType="${INICIADOR}" # Define que tipo de comando vai ser executado 0=Direto 1=Nohub.
+if [ -z "$INICIADOR" ]; then StartType="1"; else StartType="${INICIADOR}"; fi # Define que tipo de comando vai ser executado 0=Direto 1=Nohub.
 Script_Type="2" # Define se este Script é Beta ou Alpha. 1=Alpha 2=Beta.
 StartAMD="./samp03svr" # Comando Start para amd.
 StartARM="sh -c box86 ./samp03svr" # Comando Start para arm.
@@ -70,7 +70,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     *-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*°-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.*
     " 
 
-    if [ -z "$AUTO_UPDATE" ] || [ -z "$SUPORTE_ATIVO" ]; then
+    if [ -z "$AUTO_UPDATE" ] || [ -z "$SUPORTE_ATIVO" ] || [ -z "$INICIADOR" ]; then
     echo "
     ${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-.
     ${C3}|   UMA OU MAIS VARIANTES DO EGG ESTÃO EM FALTA, BAIXE A VERSÃO MAIS RECENTE DO EGG NO GITHUB.   |
