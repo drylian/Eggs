@@ -113,7 +113,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     sleep 0.5
 
     echo " "
-
+    
     if [ -d "./gamemodes" ]; then
         echo " 🔵   Pasta ${C1}/gamemodes${C0} foi detectada, Continuando Validação..."
         if [ ! "$(ls ./gamemodes/ | grep '.amx')" ]; then
@@ -139,11 +139,17 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
                     echo " 🔵   ${C1}${Gm_namemode}.amx${C0} foi detectada, Iniciando Script..."
                 else
                     echo " 🔴   ${C3}Não existe a --> ${Gm_namemode}.amx <-- na pasta /gamemodes como especificado na server.cfg, verificando a existencias de PWM${C0}"
-                    if [ ! "$(ls ./gamemodes/ | grep '.pwn')" ]; then
-                        echo " 🔴   ${C3}Não existe um .pwn na pasta /gamemodes, builde e instale pelo menos um AMX na pasta /gamemodes e inicie novamente.${C0}"
-                        exit
+                    if [[ -f "./gamemodes/${Gm_namemode}.pwn" ]]; then
+                        echo " 🔴   ${C3}Não existe um --> ${Gm_namemode}.pwn <-- na pasta /gamemodes, verificando outros pwns...${C0}"
+                        if [ ! "$(ls ./gamemodes/ | grep '.pwn')" ]; then
+                            echo " 🔴   ${C3}Não existe um .pwn na pasta /gamemodes, builde e instale pelo menos um AMX na pasta /gamemodes e inicie novamente.${C0}"
+                            exit
+                        else
+                            echo " 🟡   PWN foi detectado, builde ele,e escreva o nome dele na Server.cfg e depois inicie o script novamente."
+                            exit
+                        fi
                     else
-                        echo " 🟡   Um PWN foi detectado, builde ele e inicie o script novamente."
+                        echo " 🟡   Um ${Gm_namemode}.pwn foi detectado, builde ele e inicie o script novamente."
                         exit
                     fi
                 fi
@@ -159,7 +165,15 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         echo " ${C3} 🔴   Pasta /gamemodes não foi detectada${C0}, Verifique a Pasta gamemodes e inicie o script novamente."
         exit
     fi
-
+	
+    # Adicionando Debug no Script
+	if grep -q "crash-detect.so" server.cfg; then
+        echo "crash-detect.so already present in plugins"
+    else
+        sed -i '/plugins/ s/$/ crash-detect.so/' server.cfg
+        echo "crash-detect.so added to plugins"
+    fi
+		
     echo " "
     if grep -q "sv_port ${VOIP_PORT}" "./server.cfg"; then
         echo ""
@@ -391,6 +405,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         echo " 🔵   Executando em modo ${C1}Nohup(Script 2.0)${C0}..."
         nohup ${StartUP_CMD} > samp.log.txt 2> samp.erro.log.txt &
         pid=$!
+        chmod +w samp.log.txt samp.erro.log.txt
         # Continua a exibir as últimas linhas do arquivo de log a cada segundo
         while true; do
             tail -n 10 -F server_log.txt
@@ -398,7 +413,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             tail -n 10 -F samp.log.txt
             sleep 1
             # Verifica se o processo do aplicativo ainda está ativo
-            if ! kill -0 $pid 2> /dev/null; then
+            if [ -z "$pid" ] || ! kill -0 $pid 2>/dev/null; then
                 # Salva as logs na pasta "./${Pasta_Base}/Logs/"./Informacoes/Informacoes.txt
                 echo "🔴 ${C3}O ${Egg} foi finalizado sem aviso, provavelmente erro interno, desligando script${C0}..."
                 if [ ! -f "./📂Informações/Logs/Server.log.txt" ]; then
@@ -485,6 +500,5 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     kill $tail_pid
 else
 echo " 🔴   ${C3}Modo No-Code Detectado Iniciando Samp diretamente(Não recomendado), Iniciando...${C0}"
-
 eval ${StartUP_CMD}
 fi # If final
