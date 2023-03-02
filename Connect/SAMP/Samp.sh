@@ -128,6 +128,27 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         else
             echo " 🔵   ${C1}Gamemode${C0} foi detectada, Continuando Validação..."
             if [[ -f "./server.cfg" ]]; then
+                echo " 🔵   ${C1}Server.cfg${C0} foi detectada, Verificando Gamemode..."
+                # Extrai o valor da configuração "gamemode0" do arquivo server.cfg
+                Gm_namemode="$(awk '/^gamemode0/{$1=""; print $0}' server.cfg)"
+
+                # Remove qualquer espaço em branco no início ou no final da string
+                Gm_namemode=$(echo "${Gm_namemode}" | awk '{$1=$1;print}')
+
+                if [[ -f "./gamemodes/${Gm_namemode}.amx" ]]; then 
+                    echo " 🔵   ${C1}${Gm_namemode}.amx${C0} foi detectada, Iniciando Script..."
+                else
+                    echo " 🔴   ${C3}Não existe a --> ${Gm_namemode}.amx <-- na pasta /gamemodes como especificado na server.cfg, verificando a existencias de PWM${C0}"
+                    if [ ! "$(ls ./gamemodes/ | grep '.pwn')" ]; then
+                        echo " 🔴   ${C3}Não existe um .pwn na pasta /gamemodes, builde e instale pelo menos um AMX na pasta /gamemodes e inicie novamente.${C0}"
+                        exit
+                    else
+                        echo " 🟡   Um PWN foi detectado, builde ele e inicie o script novamente."
+                        exit
+                    fi
+                fi
+            fi
+            if [[ -f "./server.cfg" ]]; then
                 echo " 🔵   ${C1}Server.cfg${C0} foi detectada, iniciando script..."
             else
                 echo "${C3} 🔴   Server.cfg não foi detectada, configure a server.cfg e inicie o script novamente.${C0}"
