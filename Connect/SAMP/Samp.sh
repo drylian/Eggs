@@ -130,7 +130,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             if [[ -f "./server.cfg" ]]; then
                 echo " 🔵   ${C1}Server.cfg${C0} foi detectada, Verificando Gamemode..."
                 # Extrai o valor da configuração "gamemode0" do arquivo server.cfg
-                Gm_namemode="$(awk '/^gamemode0/{$1=""; print $0}' server.cfg)"
+                Gm_namemode="$(awk -F ' ' '/^gamemode0/{print $2}' server.cfg)"
 
                 # Remove qualquer espaço em branco no início ou no final da string
                 Gm_namemode=$(echo "${Gm_namemode}" | awk '{$1=$1;print}')
