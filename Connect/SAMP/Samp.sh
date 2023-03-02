@@ -374,6 +374,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         while true; do
             tail -n 10 -F server_log.txt
             tail -n 10 -F samp.erro.log.txt
+            tail -n 10 -F samp.log.txt
             sleep 1
             # Verifica se o processo do aplicativo ainda está ativo
             if ! kill -0 $pid 2> /dev/null; then
