@@ -1,0 +1,104 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-03-05T03:39:11-03:00",
+    "name": "Open-MP",
+    "author": "danielolxlol@gmail.com",
+    "description": "O objetivo do Open-MP \u00e9 criar um sistema de servidor multiplayer mais atualizado, seguro e escal\u00e1vel para o GTA: San Andreas. O projeto \u00e9 de c\u00f3digo aberto, o que significa que qualquer pessoa pode contribuir para seu desenvolvimento ou usar o c\u00f3digo em seus pr\u00f3prios projetos.\r\n\r\nCriado por Drylian.\r\nVers\u00e3o: 1.0 (Sample)\r\nLingua:Portugues Brasileiro.\r\nGithub: https:\/\/github.com\/drylian\/\r\n\r\nDocker ARM64 por Ashu \r\nGithub: https:\/\/github.com\/Ashu11-A\/",
+    "features": null,
+    "docker_images": {
+        "Arquitetura AMD64": "drylian\/gta-mp:latest",
+        "AMD64 +LIBS": "drylian\/gta-libs:latest",
+        "Arquitetura ARM64": "ashu11a\/samp-pterodactyl"
+    },
+    "file_denylist": [],
+    "startup": "$(if [ \"${Arquitetura}\" == \"arm64\" ]; then echo -n \"box86 .\/omp-server\"; else echo -n \".\/omp-server\"; fi)",
+    "config": {
+        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Note\": \"Note: To change some values go to startup, and change it!\",\r\n            \"Notas\": \"Notas: Para alterar alguns valores va para startup, e altere la!\",\r\n            \"port\": \"port {{server.build.default.port}}\",\r\n            \"maxplayers\": \"maxplayers {{server.build.env.MAX_PLAYERS}}\",\r\n            \"hostname\": \"hostname {{server.build.env.HOST_NAME}}\",\r\n            \"announce\": \"announce {{server.build.env.ANNONCE}}\",\r\n            \"weburl\": \"weburl {{server.build.env.WEB_URL}}\",\r\n            \"maxnpc\": \"maxnpc {{server.build.env.MAX_NPC}}\",\r\n            \"query\": \"query {{server.build.env.QUERY}}\",\r\n            \"rcon_password\": \"rcon_password {{server.build.env.PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Executing Server Config...\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"open-mp.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl unzip ca-certificates coreutils\r\napt install -y p7zip-full wget jq file tar\r\n\r\n\r\nGITHUB_PACKAGE=openmultiplayer\/open.mp\r\n\r\n# obter informa\u00e7\u00f5es de lan\u00e7amento e links de download\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/$GITHUB_PACKAGE\/releases\" | jq -c '.[]' | head -1)\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/$GITHUB_PACKAGE\/releases\" | jq '.[]')\r\nif [ -z \"$VERSION\" ] || [ \"$VERSION\" == \"latest\" ]; then\r\n    echo -e \"Setando Vers\u00e3o mais Recente...\"\r\n    DOWNLOAD_LINK=$(echo $LATEST_JSON | jq .assets | jq -r .[].browser_download_url | grep -i open.mp-linux-x86.tar.gz)\r\nelse\r\n    VERSION_CHECK=$(echo $RELEASES | jq -r --arg VERSION \"$VERSION\" '. | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"$VERSION\" == \"$VERSION_CHECK\" ]; then\r\n        if [[ \"$VERSION\" == v0* ]]; then\r\n            DOWNLOAD_LINK=$(echo $RELEASES | jq -r --arg VERSION \"$VERSION\" '. | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i linux | grep -i tar.gz)\r\n        else\r\n            DOWNLOAD_LINK=$(echo $RELEASES | jq -r --arg VERSION \"$VERSION\" '. | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i open.mp-linux-x86.tar.gz)\r\n        fi\r\n    else\r\n        echo -e \"Setando Vers\u00e3o mais Recente...\"\r\n        DOWNLOAD_LINK=$(echo $LATEST_JSON | jq .assets | jq -r .[].browser_download_url | grep -i open.mp-linux-x86.tar.gz)\r\n    fi\r\nfi\r\n\r\nZIPFILE=$(basename $DOWNLOAD_LINK)\r\n\r\n# Cria pasta do container\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Baixa o Open-MP\r\nwget $DOWNLOAD_LINK\r\ntar -xzf $ZIPFILE\r\n\r\n# Copia arquivos do Omp para o container\r\ncp -r \/mnt\/server\/Server\/* \/mnt\/server\r\n\r\n\r\n# Baixar uma Gamemode padr\u00e3o para executar na Primeira instala\u00e7\u00e3o\r\nwget https:\/\/github.com\/drylian\/Eggs\/raw\/main\/Connect\/Open-MP\/SampGmBase.zip\r\nunzip \/mnt\/server\/SampGmBase.zip\r\n\r\n# Remove arquivos Temporarios\r\nrm -rf \/mnt\/server\/SampGmBase.zip\r\nrm -rf $ZIPFILE\r\nrm -rf \/mnt\/server\/Server\r\n\r\n# Seta Permiss\u00e3o no Omp-server\r\nchmod 777 omp-server\r\n\r\n# Configura\u00e7\u00e3o Basica do Server.cfg\r\nsed -i '3d' \/mnt\/server\/server.cfg\r\necho \"rcon_password MeMudePorFavor\" >> \/mnt\/server\/server.cfg\r\necho \"Note To change some values go to startup, and change it!\" >> \/mnt\/server\/server.cfg\r\necho \"Notas Para alterar alguns valores va para startup, e altere la!\" >> \/mnt\/server\/server.cfg\r\necho \"output 1\" >> \/mnt\/server\/server.cfg\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server",
+            "container": "ubuntu:20.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Nome Do Servidor",
+            "description": "Define um Nome para o Servidor, o nome ser\u00e1 visto pelos jogadores.",
+            "env_variable": "HOST_NAME",
+            "default_value": "Servidor Open-MP",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40",
+            "field_type": "text"
+        },
+        {
+            "name": "Maximo de Jogadores",
+            "description": "A quantidade m\u00e1xima de jogadores que seu servidor pode conter. Ao alterar esse n\u00famero, voc\u00ea pode alterar quantos jogadores podem entrar no servidor.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "50",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
+        },
+        {
+            "name": "Maximo de Npcs",
+            "description": "A quantidade m\u00e1xima de Npcs que seu servidor pode conter. Ao alterar esse n\u00famero, voc\u00ea altera quantos slots de jogador podem ser usados \u200b\u200bpelos Npcs.",
+            "env_variable": "MAX_NPC",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
+        },
+        {
+            "name": "Link do Site",
+            "description": "Isto define o Link que ir\u00e1 aparecer nas informa\u00e7\u00f5es do Servidor, usu\u00e1rios do SA-MP poder\u00e3o visualizar.",
+            "env_variable": "WEB_URL",
+            "default_value": "open.mp",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40",
+            "field_type": "text"
+        },
+        {
+            "name": "Vers\u00e3o do OPEN-MP",
+            "description": "Alterna a vers\u00e3o Instalada do Open-MP(Recomendado Latest).\r\nExemplo:(v1-RC1)",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Query do Servidor | Desativar \/ Ativar",
+            "description": "Caso isso seja desativado o servidor n\u00e3o mostrar\u00e1 estar online, por\u00e9m funcionar\u00e1 normalmente, apenas ocultar\u00e1 o funcionamento(Recomendado deixar ativado).",
+            "env_variable": "QUERY",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:0,1",
+            "field_type": "text"
+        },
+        {
+            "name": "Rcon do Servidor",
+            "description": "Define o Rcon do servidor, isto ir\u00e1 setar permiss\u00e3o maxima para a pessoa que usar ele(em Gamemodes n\u00e3o protegidas).N\u00c3O COMPARTILHE COM QUEM VOC\u00ca N\u00c3O TENHA TOTAL CONFIAN\u00c7A!",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "MeMudePorFavor",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
