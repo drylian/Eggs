@@ -451,9 +451,6 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
         echo " 🔵   Executando em modo ${C1}Direto(Script 1.0)${C0}..."
         echo " 🔵   Salvando antiga Log ${C1}Direto(Script 1.0)${C0}..."
         cat server_log.txt >> ./📂Informações/Logs/Server.log.txt
-        tail -n 10 -F server_log.txt
-        echo " " > server_log.txt
-        echo " 🔵   Iniciando ${C1}Iniciador direto${C0}."
         $(if [ "${Arquitetura}" == "arm64" ]; then echo -n "box86 ./samp03svr"; else echo -n ./"samp03svr"; fi)          #-
         exit
         # Comando de Iniciação do Servidor-----------------------------------------------------------------------------
