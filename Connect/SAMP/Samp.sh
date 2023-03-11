@@ -5,7 +5,7 @@
 # Icones 🔴 🟠 🟡 🟢 🔵 🟣 🟤 ⚫ ⚪ ✅ ❌ 📍 ✂️ 🗑️ 🟧 🟨 ⬜ 
 # Icones ☑️ ✖️ ❎ 💾 📓 📗 📘 📙 📝 📖 📚 📰 🗞️ 🏷️ 🟥 🟩 🟦 ⚙️ 
 # Icones 📒 📔 📕 📑 📂 📁 🗂️ 🗃️ 🗄️ 📊 📈 📉 📇 📌 🟪 🟫 ⬛    
-#
+# if [ "${StartType}" == "0" ]; then "^^C"; else "Parar Servidor"; fi
 
 # Comandos Do painel Múdaveis
 if [ -z "$INICIADOR" ]; then StartType="1"; else StartType="${INICIADOR}"; fi # Define que tipo de comando vai ser executado 0=Direto 1=Nohub.
@@ -486,10 +486,10 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
                 fi
                 kill $pid
                 sleep 2
-                break
                 echo " " > server_log.txt
                 rm samp.log.txt
                 rm samp.erro.log.txt
+                break
             elif [ "$line" != "${Stop_CMD}" ]; then
             echo "🔴   Este Script ${C3}não${C0} possue suporte a ${C3}Comandos${C0}."
             else
