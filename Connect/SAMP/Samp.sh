@@ -12,7 +12,8 @@ if [ -z "$INICIADOR" ]; then StartType="1"; else StartType="${INICIADOR}"; fi # 
 Script_Type="2" # Define se este Script é Beta ou Alpha. 1=Alpha 2=Beta.
 StartAMD="./samp03svr" # Comando Start para amd.
 StartARM="sh -c box86 ./samp03svr" # Comando Start para arm.
-Stop_CMD="Parar Servidor" # Comando para parar o Servidor.
+Stop_NOHUB="Parar Servidor" # Comando para parar o Servidor do NoHub.
+Stop_DIRETO="^^C" # Comando para parar o Start direto.
 Permissoes_padroes="chmod 777 ./*" # Define as permissões do arquivos, por padrão recomendo chmod 777 ./*.
 Egg="SAMP                " # O Nome do egg que será executado, lembrando que o numero de caracteres maximos dentro "" é 20 oque não tiver de nome, use em espaços.
 Pasta_Base="📂Informações" # O Nome da pasta onde vai ser armazenada todas as informações do Script.
@@ -41,6 +42,7 @@ if [ "${version}" == "PRÉ" ]; then version2="${version}"; else version2="${vers
 if [ "${SUPORTE_ATIVO}" == "1" ]; then Suporte_egg="✅ ${C1}Definido   ${C0}"; else Suporte_egg="❌ ${C3}Indefinido ${C0}"; fi # Verificação do Suporte
 if [ "${AUTO_UPDATE}" == "1" ]; then Updater_egg="✅ ${C1}Definido   ${C0}"; else Updater_egg="❌ ${C3}Indefinido ${C0}"; fi # Verificação do Atualização.
 if [ "${StartType}" == "0" ]; then Type_egg="✅ ${C1}Direto     ${C0}"; else Type_egg="✅ ${C1}NoHub      ${C0}"; fi # Verificação do TypeStart
+if [ "${StartType}" == "0" ]; then STOP_CMD="${STOP_DIRETO}"; else STOP="${STOP_NOHUB}"; fi # Define o comando de desligar o servidor.
 if [ "${Script_Type}" == "1" ]; then Scriptstat="${C1}Alpha${C0}"; else Scriptstat="${C1}Beta ${C0}"; fi # Beta sim e não
 if [ -z "${SUPORTE_ATIVO}" ]; then Suporte="❌ ${C3}Desativado ${C0}"; else Suporte="✅ ${C1}Ativado    ${C0}"; fi # Verificação do Suporte egg
 if [ -z "${AUTO_UPDATE}" ]; then Updater="❌ ${C3}Desativado ${C0}"; else  Updater="✅ ${C1}Ativado    ${C0}"; fi # Verificação do Atualização egg
