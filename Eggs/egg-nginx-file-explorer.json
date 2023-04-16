@@ -10,7 +10,7 @@
     "description": "Egg: Nginx Explorador de Arquivos\r\nDescri\u00e7\u00e3o: O Nginx Explorador de Arquivos \u00e9 Baseado no Nginx Webfile, que resumidamente \u00e9 uma conex\u00e3o de armazenamento usando o nginx, permite voc\u00ea colocar desde arquivos como jogos, imagens, fotos , tudo pela linkado a internet, pode ser usado para upar imagens para por em sites ou usar como local de download.Caso use isto como local de armazenamento de arquivos, procure deixar o script rodando localmente.\r\nVers\u00e3o do egg:1.5\r\nCriado por Drylian",
     "features": null,
     "docker_images": {
-        "Alpine AMD\/ARM  ": " drylian\/nginx:latest",
+        "Alpine AMD\/ARM  ": " drylian\/nginx:latest"
     },
     "file_denylist": [],
     "startup": "Criado por Drylian 2023",
