@@ -9,7 +9,7 @@ Alguns deles trabalham no ARM e também no ARM do Oracle Free Tier
 
 | Egg | Arquivo | AMD64 | ARM64 | ARM Oracle | Descrição |
 |--|--|--|--|--|--|
-| Open-MP | [Egg do Open-MP](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-open--m-p.json) | ✅ | ✅ | ✅ |Emulado no ARM com Box86|
+| Open-MP | [Egg do Open-MP](https://github.com/drylian/Eggs/releases/download/1.0.0/egg-base--drylian.json) | ✅ | ✅ | ✅ |Emulado no ARM com Box86|
 
 
 |        Eggs Connect         |
