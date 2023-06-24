@@ -12,7 +12,7 @@ if [ -z "$INICIADOR" ]; then StartType="1"; else StartType="${INICIADOR}"; fi # 
 Script_Type="2" # Define se este Script é Beta ou Alpha. 1=Alpha 2=Beta.
 StartAMD="./samp03svr" # Comando Start para amd.
 StartARM="sh -c box86 ./samp03svr" # Comando Start para arm.
-STOP_CMD="Parar Servidor" # Comando para parar o Servidor do NoHub.
+Stop_CMD="Parar Servidor" # Comando para parar o Servidor do NoHub.
 Permissoes_padroes="chmod 777 ./*" # Define as permissões do arquivos, por padrão recomendo chmod 777 ./*.
 Egg="SAMP                " # O Nome do egg que será executado, lembrando que o numero de caracteres maximos dentro "" é 20 oque não tiver de nome, use em espaços.
 Pasta_Base="📂Informações" # O Nome da pasta onde vai ser armazenada todas as informações do Script.
@@ -458,7 +458,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
 
     # Aguarda input do usuário
         while read line; do
-            if [ "$line" = "$Stop_CMD" ]; then
+            if [ "$line" = "${Stop_CMD}" ]; then
                 # Salva as logs na pasta "./${Pasta_Base}/Logs/"./Informacoes/Informacoes.txt
                 if [ ! -f "./📂Informações/Logs/Server.log.txt" ]; then
   					echo " " > "./📂Informações/Logs/Server.log.txt"
@@ -488,7 +488,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
                 rm samp.log.txt
                 rm samp.erro.log.txt
                 break
-            elif [ "$line" != "$Stop_CMD" ]; then
+            elif [ "$line" != "${Stop_CMD}" ]; then
             echo "🔴   Este Script ${C3}não${C0} possue suporte a ${C3}Comandos${C0}."
             else
                 echo "🔴   Script ${C3}Falhou${C0} ou Forçado pelo ${C3}Kill${C0}."
