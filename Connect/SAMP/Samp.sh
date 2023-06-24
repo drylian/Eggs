@@ -458,7 +458,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
 
     # Aguarda input do usuário
         while read line; do
-            if [ "$line" = "${Stop_CMD}" ]; then
+            if [ "$line" = "$Stop_CMD" ]; then
                 # Salva as logs na pasta "./${Pasta_Base}/Logs/"./Informacoes/Informacoes.txt
                 if [ ! -f "./📂Informações/Logs/Server.log.txt" ]; then
   					echo " " > "./📂Informações/Logs/Server.log.txt"
@@ -488,7 +488,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
                 rm samp.log.txt
                 rm samp.erro.log.txt
                 break
-            elif [ "$line" != "${Stop_CMD}" ]; then
+            elif [ "$line" != "$Stop_CMD" ]; then
             echo "🔴   Este Script ${C3}não${C0} possue suporte a ${C3}Comandos${C0}."
             else
                 echo "🔴   Script ${C3}Falhou${C0} ou Forçado pelo ${C3}Kill${C0}."
