@@ -38,6 +38,6 @@ echo "🟢 Removendo Arquivos Temporarios "
 rm -rf /home/container/tmp/*
 # Fim Limpar Tmp-------------------------------------------------
 echo "🟢 Starting Nginx..."
-nohup /usr/sbin/nginx -c /home/container/nginx/nginx.conf -p /home/container/ >/dev/null 2>&1 &
+/usr/sbin/nginx -c /home/container/nginx/nginx.conf -p /home/container/
 host_ip=$(ip route | awk 'NR==1 {print $3}')
 echo "Nginx iniciado em : ${host_ip}:${SERVER_PORT}"
