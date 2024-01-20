@@ -1,20 +1,16 @@
-if [ "${EXTERNAL_RESOURCES}" ]; then
-    echo "🟡   Resource Externa está habilitado, verificando conexão com o resource externo."
+#!/bin/bash
 
-    resource_url=$(echo "${EXTERNAL_RESOURCES}" | sed 's/^https\?:\/\///')
+# Definindo permissões recursivas
+chmod -R 777 ./*
 
-    # Executa o comando ping e verifica o status
-    if ping -c 1 "${resource_url}" &>/dev/null; then
-        echo "✅   Conexão com o recurso externo bem-sucedida. instalando resources"
-        find mods -type f -exec sed -i "s|<httpdownloadurl>\\(.*\\)</httpdownloadurl>|<httpdownloadurl>${EXTERNAL_RESOURCES}</httpdownloadurl>|g" {} +
-    else
-        echo "🔴   Falha na conexão com o recurso externo, verifique o servidor do mta external ou remova ele das configurações para iniciar o servidor."
-        exit 0
-    fi
+if [[ -f "./mta-accelerator" ]]; then
+    echo "Acelerador encontrado, iniciando."
 else
-    echo "🟡   Resource Externa está desabilitada, configurando para resource interna."
-
-    find mods -type f -exec sed -i 's|<httpdownloadurl>\(.*\)</httpdownloadurl>|<httpdownloadurl></httpdownloadurl>|g' {} +
+    echo "Acelerador não encontrado, baixando."
+    # Baixando o httpserver se não estiver presente
+    curl -L -o /home/container/mta-accelerator "https://github.com/drylian/Eggs/releases/download/1.0.0/mta-accelerator"
 fi
+chmod 777 mta-accelerator
 
-./mta-server64 --maxplayers ${MAX_PLAYERS} --port ${SERVER_PORT} --httpport ${SERVER_WEBPORT} -n
+nohup ./mta-accelerator --trace-warnings true --express ${EXPRESS_PORT} > meu_accelerator.log &
+./mta-server64 --maxplayers ${MAX_PLAYERS} --port ${SERVER_PORT} --httpport ${HTTP_PORT} -n
