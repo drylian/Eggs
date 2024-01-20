@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const yargs = require('yargs');
 const fs = require('fs');
 const HttpServer = require("./HttpAccelerator");
-const inject = require("./utils");
+const { inject, download } = require("./utils");
 const local = require('../package.json');
 
 dotenv.config();
@@ -25,13 +25,8 @@ if (process.env.HTTPCLIENTNOCLIENTCACHE) NOClient = Boolean(process.env.HTTPCLIE
 // preset ip
 async function UpdateAcc() {
     try {
-        const response = await fetch('https://github.com/drylian/Eggs/raw/main/Connect/MTA/Accelerator-Application/build/mta-accelerator');
-        const data = await response.text();
-
-        // Escreva os dados no arquivo
-        fs.writeFileSync('./mta-accelerator-update', data);
-
-        console.log('Arquivo atualizado com sucesso.');
+        await download("https://github.com/drylian/Eggs/raw/main/Connect/MTA/Accelerator-Application/build/mta-accelerator", "mta-accelerator-update")
+        console.log('Atualização baixada com sucesso, reinicie para istalar ela.');
     } catch (error) {
         console.error('Erro ao atualizar o arquivo:', error);
     }
