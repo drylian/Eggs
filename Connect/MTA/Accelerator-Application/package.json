@@ -1,7 +1,7 @@
 {
   "name": "mta-accelerator",
   "main": "http/starter.js",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Simples Http downloader(acelerador de download) para substituir o nginx no mta",
   "bin": "http/starter.js",
   "pkg": {
@@ -9,7 +9,8 @@
       "latest-linux-x64"
     ],
     "scripts": [
-      "dist/**/*.js"
+      "http/**/*.js",
+      "package.json"
     ],
     "assets": [
       "package.json"

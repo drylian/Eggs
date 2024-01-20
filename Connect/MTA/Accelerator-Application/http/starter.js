@@ -6,6 +6,7 @@ const yargs = require('yargs');
 const fs = require('fs');
 const HttpServer = require("./HttpAccelerator");
 const inject = require("./utils");
+const local = require('../package.json');
 
 dotenv.config();
 
@@ -25,24 +26,14 @@ if (process.env.HTTPCLIENTNOCLIENTCACHE) NOClient = Boolean(process.env.HTTPCLIE
 async function UpdateAcc() {
     try {
         const response = await fetch('https://github.com/drylian/Eggs/raw/main/Connect/MTA/Accelerator-Application/build/mta-accelerator');
+        const data = await response.text();
 
-        const fileBlob = await response.blob();
+        // Escreva os dados no arquivo
+        fs.writeFileSync('./mta-accelerator-update', data);
 
-        // Criar um link temporário
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(fileBlob);
-
-        // Definir o nome do arquivo (pode ser personalizado)
-        link.download = 'mta-accelerator-update';
-
-        // Adicionar o link ao DOM e simular o clique para iniciar o download
-        document.body.appendChild(link);
-        link.click();
-
-        // Remover o link do DOM após o download
-        document.body.removeChild(link);
-    } catch (e) {
-        // ignores
+        console.log('Arquivo atualizado com sucesso.');
+    } catch (error) {
+        console.error('Erro ao atualizar o arquivo:', error);
     }
 }
 
@@ -52,9 +43,7 @@ async function Version() {
         const response = await fetch('https://raw.githubusercontent.com/drylian/Eggs/main/Connect/MTA/Accelerator-Application/package.json');
         const server = await response.json();
 
-        const data = fs.readFileSync("./package.json", "utf-8");
-
-        const local = JSON.parse(data);
+        // const local = process.env.npm_package_version;
         if (local.version === server.version) {
             console.log(`O acelerador está atualizado. v.${local.version}`);
         } else {
