@@ -46,7 +46,6 @@ async function UpdateAcc() {
     }
 }
 
-downloadAccelerator();
 async function Version() {
     try {
         //verifica se a versão do acelerador é a atual
