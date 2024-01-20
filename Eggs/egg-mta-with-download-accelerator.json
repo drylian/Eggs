@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-01-20T16:10:27-03:00",
+    "name": "Mta With Download Accelerator",
+    "author": "danielolxlol@gmail.com",
+    "description": "O que mais voc\u00ea poderia querer? Multi Theft Auto fornece a melhor experi\u00eancia online Grand Theft Auto que existe. Continue lendo para saber mais, diferente do mta convencional esse possue um que seria o fast-dl , ou acelerador de downloads(muito conhecido)",
+    "features": null,
+    "docker_images": {
+        "MTA Server ": " ghcr.io\/drylian\/mta:server"
+    },
+    "file_denylist": [],
+    "startup": "bash <(curl -s https:\/\/raw.githubusercontent.com\/drylian\/Eggs\/main\/Connect\/MTA\/server.sh)",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server started and is ready to accept connections\"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\ncd \/tmp\r\ncurl -sSL -o multitheftauto_linux_x64.tar.gz https:\/\/linux.multitheftauto.com\/dl\/multitheftauto_linux_x64.tar.gz\r\ncurl -sSL -o mta-baseconfig.tar.gz https:\/\/linux.multitheftauto.com\/dl\/baseconfig.tar.gz\r\ncurl -sSL -o mtasa-resources-latest.zip https:\/\/mirror.multitheftauto.com\/mtasa\/resources\/mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xvf multitheftauto_linux_x64.tar.gz\r\ncp -rf multitheftauto_linux_x64\/* \/mnt\/server\r\n\r\nif [ ! -f \/mnt\/server\/x64\/libmysqlclient.so.16 ]; then\r\n    curl -L http:\/\/nightly.mtasa.com\/files\/libmysqlclient.so.16 -o \/mnt\/server\/x64\/libmysqlclient.so.16\r\nfi\r\n\r\nmkdir -p \/mnt\/server\/mods\/deathmatch\/resources\r\nunzip -o -d \/mnt\/server\/mods\/deathmatch\/resources mtasa-resources-latest.zip\r\n\r\ntar -xvf mta-baseconfig.tar.gz\r\ncp -rf baseconfig\/* \/mnt\/server\/mods\/deathmatch\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:ubuntu",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "M\u00e1ximo de jogadores",
+            "description": "N\u00famero m\u00e1ximo de jogadores no servidor.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "HTTP Mta",
+            "description": "porta http para o mta, n\u00e9cessario para comunica\u00e7\u00e3o entre o client e o servidor.",
+            "env_variable": "HTTP_PORT",
+            "default_value": "20005",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:5",
+            "field_type": "text"
+        },
+        {
+            "name": "Acelerador Porta",
+            "description": "Defina uma porta para caso queira usar o acelerador de download, caso n\u00e3o queria, deixe vazio",
+            "env_variable": "EXPRESS_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "nullable|string|max:5",
+            "field_type": "text"
+        }
+    ]
+}
