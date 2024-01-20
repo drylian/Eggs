@@ -19,7 +19,7 @@ const argv = yargs
 if (argv.express) process.env.EXPRESS_PORT = argv.express.toString(); // Configura porta
 // env presets
 if (!process.env.LOGS_LEVEL) process.env.LOGS_LEVEL = 2
-if (!process.env.NOCLIENT) process.env.HTTPCLIENTNOCLIENTCACHE = true
+if (!process.env.HTTPCLIENTNOCLIENTCACHE) process.env.HTTPCLIENTNOCLIENTCACHE = true
 // preset ip
 async function getIP() {
     if (process.env.EXPRESS_PORT) {

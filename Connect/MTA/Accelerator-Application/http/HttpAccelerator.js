@@ -37,7 +37,7 @@ module.exports = class HttpServer {
           if (fs.existsSync(clientFiles)) {
             await this.sendFile(res, clientFiles);
             return;
-          } else if (process.env.NOCLIENT === true && fs.existsSync(noClient)) {
+          } else if (process.env.HTTPCLIENTNOCLIENTCACHE && fs.existsSync(noClient)) {
             await this.sendFile(res, noClient);
             return;
           }
