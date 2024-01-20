@@ -12,5 +12,5 @@ else
 fi
 chmod 777 mta-accelerator
 
-nohup ./mta-accelerator --trace-warnings true --express ${EXPRESS_PORT} > meu_accelerator.log &
+nohup ./mta-accelerator --trace-warnings true --express ${EXPRESS_PORT} > accelerator.log 2> accelerator_error.log &
 ./mta-server64 --maxplayers ${MAX_PLAYERS} --port ${SERVER_PORT} --httpport ${HTTP_PORT} -n
