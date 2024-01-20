@@ -3,6 +3,12 @@
 # Definindo permissões recursivas
 chmod -R 777 ./*
 
+if [[ -f "./mta-accelerator-update" ]]; then
+    echo "setando acelerador atualizando."
+    rm -r ./mta-accelerator
+    mv ./mta-accelerator-update ./mta-accelerator
+fi
+
 if [[ -f "./mta-accelerator" ]]; then
     echo "Acelerador encontrado, iniciando."
 else

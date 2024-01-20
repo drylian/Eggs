@@ -6,8 +6,9 @@ const path = require("path");
 const morgan = require('morgan');
 
 module.exports = class HttpServer {
-  constructor() {
+  constructor(NOClient) {
     this.app = express();
+    this.client = NOClient
     this.app.disable('x-powered-by');
     if (process.env.LOGS_LEVEL >= 3) {
       this.app.use(morgan('dev'));
@@ -37,7 +38,7 @@ module.exports = class HttpServer {
           if (fs.existsSync(clientFiles)) {
             await this.sendFile(res, clientFiles);
             return;
-          } else if (process.env.HTTPCLIENTNOCLIENTCACHE && fs.existsSync(noClient)) {
+          } else if (this.client && fs.existsSync(noClient)) {
             await this.sendFile(res, noClient);
             return;
           }

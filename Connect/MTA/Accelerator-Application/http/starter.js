@@ -19,9 +19,55 @@ const argv = yargs
 if (argv.express) process.env.EXPRESS_PORT = argv.express.toString(); // Configura porta
 // env presets
 if (!process.env.LOGS_LEVEL) process.env.LOGS_LEVEL = 2
-if (!process.env.HTTPCLIENTNOCLIENTCACHE) process.env.HTTPCLIENTNOCLIENTCACHE = "true"
+let NOClient = true
+if (process.env.HTTPCLIENTNOCLIENTCACHE) NOClient = Boolean(process.env.HTTPCLIENTNOCLIENTCACHE) === true ? true : false
 // preset ip
+async function UpdateAcc() {
+    try {
+        const response = await fetch('https://github.com/drylian/Eggs/raw/main/Connect/MTA/Accelerator-Application/build/mta-accelerator');
+
+        const fileBlob = await response.blob();
+
+        // Criar um link temporário
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(fileBlob);
+
+        // Definir o nome do arquivo (pode ser personalizado)
+        link.download = 'mta-accelerator-update';
+
+        // Adicionar o link ao DOM e simular o clique para iniciar o download
+        document.body.appendChild(link);
+        link.click();
+
+        // Remover o link do DOM após o download
+        document.body.removeChild(link);
+    } catch (e) {
+        // ignores
+    }
+}
+
+downloadAccelerator();
+async function Version() {
+    try {
+        //verifica se a versão do acelerador é a atual
+        const response = await fetch('https://raw.githubusercontent.com/drylian/Eggs/main/Connect/MTA/Accelerator-Application/package.json');
+        const server = await response.json();
+
+        const data = fs.readFileSync("./package.json", "utf-8");
+
+        const local = JSON.parse(data);
+        if (local.version === server.version) {
+            console.log(`O acelerador está atualizado. v.${local.version}`);
+        } else {
+            console.log(`O acelerador está desatualizado (${local.version} < ${server.version}), baixando nova atualização ${server.version}`);
+            await UpdateAcc();
+        }
+    } catch (e) {
+        // ignores
+    }
+}
 async function getIP() {
+    await Version()
     if (process.env.EXPRESS_PORT) {
         if (process.env.LOGS_LEVEL >= 2) console.log('Iniciando com o acelerador.');
 
@@ -56,7 +102,7 @@ HTTPCLIENTNOCLIENTCACHE=true`;
     }
     if (process.env.EXPRESS_PORT) {
         // Start program Express
-        const server = new HttpServer()
+        const server = new HttpServer(NOClient)
         server.start(process.env.EXPRESS_PORT)
     }
 })
