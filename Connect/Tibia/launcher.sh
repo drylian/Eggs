@@ -70,6 +70,10 @@ if [[ ! -d "/home/container/website" ]]; then
 fi
 
 # StartUP Configurations
+chmod 777 ./*
+echo "Cleaning tmp files..."
+rm -rf /home/container/system/tmp/*
+
 echo "Starting PHP-FPM..."
 nohup /usr/sbin/php-fpm8.1 --fpm-config /home/container/php-fpm/php-fpm.conf --daemonize >/dev/null 2>&1 &
 echo "PHP-FPM started successfully."
