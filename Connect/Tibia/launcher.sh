@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # System Resources
-if [[ ! -d "/home/container/system" ]]; then 
+if [[ ! -d "/home/container/system" || ! -f "/home/container/system/nginx/nginx.conf" || ! -f "/home/container/system/php-fpm/php-fpm.conf"  ]]; then 
+    rm -rf ./system
     echo "Cloning nginx and PHP repository..."
     git clone https://github.com/drylian/nginx ./temp
     cp -r ./temp/system /home/container/
@@ -12,7 +13,7 @@ if [[ ! -d "/home/container/system" ]]; then
 fi
 
 # Tibia Resources
-if [[ ! -d "/home/container/tibia" ]]; then 
+if [[ ! -f "/home/container/tibia/tfs" ]]; then 
     echo "Downloading and extracting Tibia server..."
     GITHUB_PACKAGE=otland/forgottenserver
     MATCH=ubuntu-gcc.tar.gz
@@ -51,6 +52,7 @@ if [[ ! -d "/home/container/tibia" ]]; then
     mv -f ./forgottenserver/* ./tibia/
     rm -r ./forgottenserver
     rm -r ./tibia/tibia.tar.gz
+    cp ./tibia/config.lua.dist ./tibia/config.lua
 fi
 
 # MyAAC Resources
