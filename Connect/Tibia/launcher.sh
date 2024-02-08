@@ -68,18 +68,19 @@ if [[ ! -d "/home/container/website" ]]; then
     rm -r ./website/myaac-*
     rm -r ./myaac.zip
 fi
+C3=$(echo -en "\e[1m\u001b[31m") # Cor Vermelho Com Negrito.
 
 # StartUP Configurations
-echo "Setting permission..."
-chmod 777 ./*
-
 echo "
     ${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-.
     ${C3}|   É NECESSARIO CONFIGURAR UM BANCO DE DADOS NO CONFIG.LUA EM '/tibia' E COLOCAR O SCHEMA.SQL.  |
     ${C3}|                MIGRAR O SCHEMA.SQL PARA PODER CONFIGURAR O SITE E O TFS INICIAR                |
     ${C3}*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.* 
-    ${C0}"
+    ${C0}
+    "
 
+echo "Setting permission..."
+chmod 777 ./*
 echo "Cleaning tmp files..."
 rm -rf /home/container/system/tmp/*
 
