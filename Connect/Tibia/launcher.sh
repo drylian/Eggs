@@ -68,7 +68,7 @@ if [[ ! -d "/home/container/website" ]]; then
     rm -r ./website/myaac-*
     rm -r ./myaac.zip
 fi
-C3=$(echo -en "\e[1m\u001b[31m") # Cor Vermelho Com Negrito.
+C3=$(echo -en "\e[1m\u001b[32m") # Cor Verde Com Negrito.
 
 # StartUP Configurations
 echo "
