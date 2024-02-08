@@ -70,16 +70,29 @@ if [[ ! -d "/home/container/website" ]]; then
 fi
 
 # StartUP Configurations
+echo "Setting permission..."
 chmod 777 ./*
+
+echo "
+    ${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-.
+    ${C3}|   É NECESSARIO CONFIGURAR UM BANCO DE DADOS NO CONFIG.LUA EM '/tibia' E COLOCAR O SCHEMA.SQL.  |
+    ${C3}|                MIGRAR O SCHEMA.SQL PARA PODER CONFIGURAR O SITE E O TFS INICIAR                |
+    ${C3}*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.* 
+    ${C0}"
+
 echo "Cleaning tmp files..."
 rm -rf /home/container/system/tmp/*
 
+echo "Running ip auto detect..."
+ipAddress=$(curl -s https://ifconfig.me/ip)
+ipAddress=$(echo $ipAddress | tr -d '[:space:]')
+
 echo "Starting PHP-FPM..."
-nohup /usr/sbin/php-fpm8.1 --fpm-config /home/container/php-fpm/php-fpm.conf --daemonize >/dev/null 2>&1 &
+nohup /usr/sbin/php-fpm8.1 --fpm-config /home/container/system/php-fpm/php-fpm.conf --daemonize >/dev/null 2>&1 &
 echo "PHP-FPM started successfully."
 
-echo "Starting Nginx..."
-nohup /usr/sbin/nginx -c /home/container/nginx/nginx.conf -p /home/container/ >/dev/null 2>&1 &
+echo "Starting Nginx... running in http://${ipAddress}:${NGINX_PORT}"
+nohup /usr/sbin/nginx -c /home/container/system/nginx/nginx.conf -p /home/container/ >/dev/null 2>&1 &
 echo "Nginx started successfully."
 
 cd ./tibia
