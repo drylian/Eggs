@@ -11,13 +11,20 @@ const local = require('../package.json');
 dotenv.config();
 
 const argv = yargs
-    .option('port', {
-        alias: 'p',
+    .option('express', {
+        alias: 'e',
         describe: 'Porta usada no acelerador',
+        type: 'number',
+    })
+    .option('servername', {
+        alias: 's',
+        describe: 'Nome do servidor MTA',
         type: 'number',
     })
     .argv
 if (argv.express) process.env.EXPRESS_PORT = argv.express.toString(); // Configura porta
+if (argv.servername) process.env.SERVER_NAME = argv.servername.toString(); // Configura server
+
 // env presets
 if (!process.env.LOGS_LEVEL) process.env.LOGS_LEVEL = 2
 let NOClient = true
@@ -51,6 +58,10 @@ async function Version() {
 }
 async function getIP() {
     await Version()
+    if (process.env.SERVER_NAME) {
+        await inject(/<servername>(.*?)<\/servername>/g, `<servername>${process.env.SERVER_NAME ?? "Default MTA Server"}</servername>`)
+    }
+
     if (process.env.EXPRESS_PORT) {
         if (process.env.LOGS_LEVEL >= 2) console.log('Iniciando com o acelerador.');
 

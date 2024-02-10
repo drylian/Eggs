@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-20T16:10:27-03:00",
+    "exported_at": "2024-02-09T23:09:53-03:00",
     "name": "Mta With Download Accelerator",
     "author": "danielolxlol@gmail.com",
     "description": "O que mais voc\u00ea poderia querer? Multi Theft Auto fornece a melhor experi\u00eancia online Grand Theft Auto que existe. Continue lendo para saber mais, diferente do mta convencional esse possue um que seria o fast-dl , ou acelerador de downloads(muito conhecido)",
@@ -28,6 +28,16 @@
         }
     },
     "variables": [
+        {
+            "name": "Nome do Servidor",
+            "description": "Define o Nome do servidor, deixe vazio para o nome padr\u00e3o",
+            "env_variable": "SERVER_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
         {
             "name": "M\u00e1ximo de jogadores",
             "description": "N\u00famero m\u00e1ximo de jogadores no servidor.",

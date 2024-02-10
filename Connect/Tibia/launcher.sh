@@ -1,14 +1,22 @@
 #!/bin/bash
 C3=$(echo -en "\e[1m\u001b[32m") # Cor Verde Com Negrito.
 C2=$(echo -en "\e[1m\u001b[31m") # Cor Vermelho Com Negrito.
-
+Nginx_Argument="
+    location ~ /system {
+	deny all;
+		return 404;
+	}
+"
+Instalation_setup=false
 # System Resources
 if [[ ! -d "/home/container/system" || ! -f "/home/container/system/nginx/nginx.conf" || ! -f "/home/container/system/php-fpm/php-fpm.conf"  ]]; then 
     rm -rf ./system
+    Instalation_setup=true
     echo "${C3}Cloning nginx and PHP repository..."
     git clone https://github.com/drylian/nginx ./temp
     cp -r ./temp/system /home/container/
     rm -rf ./temp
+    sed -i "/# Extra-ARGS/r /dev/stdin" /home/container/system/nginx/conf.d/default.conf <<< "$Nginx_Argument"
     echo "${C3}Creating necessary directories..."
     mkdir /home/container/system/tmp
     mkdir /home/container/system/logs
@@ -16,6 +24,7 @@ fi
 
 # Tibia Resources
 if [[ ! -f "/home/container/tibia/tfs" ]]; then 
+    Instalation_setup=true
     echo "${C3}Downloading and extracting Tibia server..."
     GITHUB_PACKAGE=otland/forgottenserver
     MATCH=ubuntu-gcc.tar.gz
@@ -59,6 +68,7 @@ fi
 
 # MyAAC Resources
 if [[ ! -d "/home/container/website" ]]; then 
+    Instalation_setup=true
     echo "${C3}Downloading and extracting MyAAC..."
     MYAAC_JSON=$(curl --silent "https://api.github.com/repos/slawkens/myaac/releases/latest")
     MYAAC_DOWNLOAD_LINK=$(echo "${MYAAC_JSON}" | jq -r '.assets | .[].browser_download_url' | grep -i '\.zip')
@@ -69,13 +79,21 @@ if [[ ! -d "/home/container/website" ]]; then
     mv ./website/myaac-*/* ./website/
     rm -r ./website/myaac-*
     rm -r ./myaac.zip
+    rm -r ./website/nginx-sample.conf
 fi
 
+# instalation Checker
+if [ "$Instalation_setup" = "true" ]; then
+    # Seu código aqui
+    echo "${C3}Instalation mode is enabled, restarting program for return in normal mode..."
+    exit 0
+fi
 # StartUP Configurations
 echo "
     ${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-*-+.
     ${C3}|   É NECESSARIO CONFIGURAR UM BANCO DE DADOS NO CONFIG.LUA EM '/tibia' E COLOCAR O SCHEMA.SQL.  |
     ${C3}|                MIGRAR O SCHEMA.SQL PARA PODER CONFIGURAR O SITE E O TFS INICIAR                |
+    ${C3}|          Tibia client downloads in https://otserverlist.me/tibia-clients-download.php          |
     ${C3}*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.* 
     "
 

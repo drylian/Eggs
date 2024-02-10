@@ -18,7 +18,7 @@ else
 fi
 chmod 777 mta-accelerator
 
-nohup ./mta-accelerator --trace-warnings true --express ${EXPRESS_PORT} >accelerator.log 2>accelerator_error.log &
+nohup ./mta-accelerator --trace-warnings true --express ${EXPRESS_PORT} --servername ${SERVER_NAME} >accelerator.log 2>accelerator_error.log &
 
 echo "Acelerador foi iniciado com sucesso, veja as logs em (accelerator.log e accelerator_error.log)."
 
