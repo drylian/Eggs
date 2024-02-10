@@ -18,6 +18,9 @@ else
 fi
 chmod 777 mta-accelerator
 
+if [ -z "${SERVER_NAME}" ]; then
+    SERVER_NAME="Default MTA Server"
+fi
 # Update Server Name
 find mods -type f -exec sed -i "s|<servername>\\(.*\\)</servername>|<servername>${SERVER_NAME}</servername>|g" {} +
 
