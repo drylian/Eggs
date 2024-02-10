@@ -51,7 +51,6 @@ async function Version() {
 }
 async function getIP() {
     await Version()
-    await inject(/<servername>(.*?)<\/servername>/g, `<servername>http://${process.env.EXPRESS_HOST}:${process.env.EXPRESS_PORT}</servername>`)
 
     if (process.env.EXPRESS_PORT) {
         if (process.env.LOGS_LEVEL >= 2) console.log('Iniciando com o acelerador.');
