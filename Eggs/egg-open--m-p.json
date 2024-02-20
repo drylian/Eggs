@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-03-05T03:39:11-03:00",
+    "exported_at": "2024-02-20T20:21:50-03:00",
     "name": "Open-MP",
     "author": "danielolxlol@gmail.com",
     "description": "O objetivo do Open-MP \u00e9 criar um sistema de servidor multiplayer mais atualizado, seguro e escal\u00e1vel para o GTA: San Andreas. O projeto \u00e9 de c\u00f3digo aberto, o que significa que qualquer pessoa pode contribuir para seu desenvolvimento ou usar o c\u00f3digo em seus pr\u00f3prios projetos.\r\n\r\nCriado por Drylian.\r\nVers\u00e3o: 1.0 (Sample)\r\nLingua:Portugues Brasileiro.\r\nGithub: https:\/\/github.com\/drylian\/\r\n\r\nDocker ARM64 por Ashu \r\nGithub: https:\/\/github.com\/Ashu11-A\/",
@@ -15,7 +15,7 @@
         "Arquitetura ARM64": "ashu11a\/samp-pterodactyl"
     },
     "file_denylist": [],
-    "startup": "$(if [ \"${Arquitetura}\" == \"arm64\" ]; then echo -n \"box86 .\/omp-server\"; else echo -n \".\/omp-server\"; fi)",
+    "startup": "if [ \"${Arquitetura}\" == \"arm64\" ]; then chmod -R 777 .\/*; box86 .\/omp-server; else chmod -R 777 .\/* ; .\/omp-server; fi",
     "config": {
         "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Note\": \"Note: To change some values go to startup, and change it!\",\r\n            \"Notas\": \"Notas: Para alterar alguns valores va para startup, e altere la!\",\r\n            \"port\": \"port {{server.build.default.port}}\",\r\n            \"maxplayers\": \"maxplayers {{server.build.env.MAX_PLAYERS}}\",\r\n            \"hostname\": \"hostname {{server.build.env.HOST_NAME}}\",\r\n            \"announce\": \"announce {{server.build.env.ANNONCE}}\",\r\n            \"weburl\": \"weburl {{server.build.env.WEB_URL}}\",\r\n            \"maxnpc\": \"maxnpc {{server.build.env.MAX_NPC}}\",\r\n            \"query\": \"query {{server.build.env.QUERY}}\",\r\n            \"rcon_password\": \"rcon_password {{server.build.env.PASSWORD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Executing Server Config...\",\r\n    \"userInteraction\": []\r\n}",
