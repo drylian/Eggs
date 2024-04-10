@@ -1,6 +1,5 @@
 const http = require('http');
 const args = process.argv.join(" ");
-console.log(args);
 const port = args.slice(args.indexOf(" -port ") + 7).split(" ")[0];
 
 const server = http.createServer((req, res) => {
