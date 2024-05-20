@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+      "allowJs": true,
+      "target": "ESNext",
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "jsx": "react-jsx",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": false,
+      "resolveJsonModule": true,
+      "allowSyntheticDefaultImports": true,
+      "skipLibCheck": true,
+      "outDir": "./dist",
+      "baseUrl": "./",
+      "strict": true,
+      "types": [
+        "node"
+      ],
+  },
+  "include": [
+      "app/**/*"
+  ],
+  "exclude": [
+      "node_modules",
+      "temp"
+  ]
+}

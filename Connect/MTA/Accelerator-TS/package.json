@@ -1,0 +1,37 @@
+{
+  "name": "mta-accelerator",
+  "version": "1.1.0",
+  "description": "Rework of Mta Accelerator.",
+  "main": "./dist/app/init-point.js",
+  "scripts": {
+    "build": "node app/builder.js",
+    "test": "tsc && node ."
+  },
+  "author": "Drylian",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.11.27",
+    "@types/react-dom": "^18.3.0",
+    "esbuild": "^0.21.2",
+    "esbuild-node-externals": "^1.13.1",
+    "pkg": "^5.8.1",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@fastify/compress": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.27.0",
+    "loggings": "^1.1.0",
+    "react-dom": "^18.3.1"
+  },
+  "bin": "dist/application.js",
+  "pkg": {
+    "scripts": [
+      "./dist/node_modules"
+    ],
+    "targets": [
+      "node18-linux-x64"
+    ],
+    "outputPath": "build"
+  }
+}
