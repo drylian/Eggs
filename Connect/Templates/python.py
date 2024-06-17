@@ -41,12 +41,12 @@ while True:
                         '<meta charset="UTF-8">'\
                         '<meta name="viewport" content="width=device-width, initial-scale=1.0">'\
                         '<title>Aplicação Python</title>'\
-                        '<link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/1005181663027929210/1227724484253978676/cus1jiv0pqvrv93523ref26h09.png?ex=66297287&is=6616fd87&hm=812313cd34a1d5945429a7417d184083927fd876b89495927d0061cb34fd0733&" type="image/png" style="border-radius: 50px;">'\
+                        '<link rel="shortcut icon" href="https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Templates/imgs/python.png" type="image/png" style="border-radius: 50px;">'\
                         '<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">'\
                     '</head>'\
                     '<body class="bg-gray-100">'\
                         '<div class="flex justify-center items-center flex-col mx-auto px-4 py-8">'\
-                        '<img class="w-36 h-36" src="https://cdn.discordapp.com/attachments/1005181663027929210/1227724484253978676/cus1jiv0pqvrv93523ref26h09.png?ex=66297287&is=6616fd87&hm=812313cd34a1d5945429a7417d184083927fd876b89495927d0061cb34fd0733&"/>'\
+                        '<img class="w-36 h-36" src="https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Templates/imgs/python.png"/>'\
                         '<h1 class="text-4xl font-bold text-center mb-4">Bem vindo a sua aplicação Python!</h1>'\
                         '<p class="text-lg text-gray-700 text-center">Isso é apenas um exemplo do potencial do python, é possivel explorar muito mais do que isso.</p>'\
                         '</div>'\

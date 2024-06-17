@@ -4,7 +4,7 @@ const port = args.slice(args.indexOf(" -port ") + 7).split(" ")[0];
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  const logo = "https://cdn.discordapp.com/attachments/1219231279111868509/1227711128684068954/pngegg_1.png?ex=66296616&is=6616f116&hm=554de848ae4ac7181256eda0899b78f97609977212c58666869f06ce575cd640&"
+  const logo = "https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Templates/imgs/nodejs.png"
   const content = `
   <!DOCTYPE html>
   <html lang="en">
