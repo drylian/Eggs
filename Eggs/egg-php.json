@@ -1,0 +1,34 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-06-18T12:49:11-03:00",
+    "name": "PHP",
+    "author": "danielolxlol@gmail.com",
+    "description": "Egg para Hospedagens de Websites usando PHP",
+    "features": null,
+    "docker_images": {
+        "PHP 7": " ghcr.io\/drylian\/php:7.4",
+        "PHP 8.0": " ghcr.io\/drylian\/php:8.0",
+        "PHP 8.1": " ghcr.io\/drylian\/php:8.1",
+        "PHP 8.2": " ghcr.io\/drylian\/php:8.2"
+    },
+    "file_denylist": [],
+    "startup": "bash <(curl -s https:\/\/raw.githubusercontent.com\/drylian\/Eggs\/main\/Connect\/PHP\/starter.sh)",
+    "config": {
+        "files": "{\r\n    \"nginx\/conf.d\/default.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    listen \": \"    listen {{server.build.default.port}};\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Iniciado com sucesso\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\ncd \/mnt\/server\r\napk --update add git\r\n\r\n# cloning repo with nginx and php files\r\ngit clone https:\/\/github.com\/Sigma-Production\/ptero-eggs .\/temp\r\n\r\ncp -r .\/temp\/nginx \/mnt\/server\/\r\ncp -r .\/temp\/php-fpm \/mnt\/server\/\r\nrm -rf .\/temp\r\nmkdir \/mnt\/server\/tmp\r\nmkdir \/mnt\/server\/logs\r\nmkdir \/mnt\/server\/webroot\r\ncd \/mnt\/server\r\n\r\nwget -O .\/index.php https:\/\/raw.githubusercontent.com\/drylian\/Eggs\/main\/Connect\/Templates\/index.php",
+            "container": "alpine:latest",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": []
+}
