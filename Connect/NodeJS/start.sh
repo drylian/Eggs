@@ -5,7 +5,7 @@ if [[ -f "./package.json" ]]; then
 fi
 
 if [ "$NODE_MODE" == "Node JS" ]; then
-    echo "Iniciando node com js node ${MAIN_FILE} -- ${NODE_ARGS}"
+    echo "Iniciando node com js node ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}"
     node ${MAIN_FILE} -- ${NODE_ARGS}
 elif [ "${NODE_MODE}" == "Node TS" ]; then
     echo "Iniciando node com ts, verificando se é possivel usar o ts-node"
@@ -15,7 +15,7 @@ elif [ "${NODE_MODE}" == "Node TS" ]; then
     fi
     echo "Baixando ts-node por padrão"
     npm i ts-node
-    echo "Iniciando typescript com ts-node ${MAIN_FILE} -- ${NODE_ARGS}"
+    echo "Iniciando typescript com ts-node ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}"
     npx ts-node ${MAIN_FILE} -- ${NODE_ARGS}
 else
     echo "Iniciando usando scripts da package"
@@ -24,5 +24,5 @@ else
         exit
     fi
     echo "Iniciando usando o script ${MAIN_FILE}"
-    npm run ${MAIN_FILE} -- ${NODE_ARGS}
+    npm run ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}
 fi
