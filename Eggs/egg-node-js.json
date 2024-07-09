@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-07-09T08:11:57-03:00",
+    "exported_at": "2024-07-09T10:37:04-03:00",
     "name": "Node JS",
     "author": "danielolxlol@gmail.com",
     "description": "Node JS, egg para sources de bots e sites",
@@ -19,7 +19,7 @@
     "startup": "bash <(curl -s https:\/\/raw.githubusercontent.com\/drylian\/Eggs\/main\/Connect\/NodeJS\/start.sh)",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": [\r\n        \"Iniciando node js\"\r\n    ]\r\n}",
+        "startup": "{\r\n    \"done\": [\r\n        \"Servidor Iniciado com Sucesso\"\r\n    ]\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
@@ -33,7 +33,7 @@
     "variables": [
         {
             "name": "Commando Principal",
-            "description": "Isso muda de acordo com o Tipo de Modo Iniciado\r\n\"Node JS\": esse deve ser o arquivo principal do JS, exemplo:index.js\r\n\"Node TS\": esse deve ser o arquivo principal do TS, exemplo:index.ts\r\n\"Npm run: esse deve ser um scripts da package.json, exemplo:start\r\n\r\n\r\nIsso pode ser tanto \"index.js\", quanto \"index.js\" se o TS\/JS\/NPM Switch estiver com Node TS tambem pode ser argumento \"start\"",
+            "description": "Isso muda de acordo com o Tipo de Modo Iniciado .\r\n\"Node JS\": esse deve ser o arquivo principal do JS, exemplo:index.js.\r\n\"Node TS\": esse deve ser o arquivo principal do TS, exemplo:index.ts.\r\n\"Npm run\": esse deve ser um scripts da package.json, exemplo:\"start\".",
             "env_variable": "MAIN_FILE",
             "default_value": "index.js",
             "user_viewable": true,
