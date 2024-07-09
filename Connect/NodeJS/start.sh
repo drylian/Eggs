@@ -6,7 +6,7 @@ fi
 
 if [ "$NODE_MODE" == "Node JS" ]; then
     echo "Iniciando node com js node ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}"
-    node ${MAIN_FILE} -- ${NODE_ARGS}
+    node ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}
 elif [ "${NODE_MODE}" == "Node TS" ]; then
     echo "Iniciando node com ts, verificando se é possivel usar o ts-node"
     if ! [[ -f "./package.json" ]]; then
