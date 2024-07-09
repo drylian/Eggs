@@ -6,6 +6,7 @@ fi
 
 if [ "$NODE_MODE" == "Node JS" ]; then
     echo "Iniciando node com js node ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}"
+    echo "Servidor Iniciado com Sucesso"
     node ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}
 elif [ "${NODE_MODE}" == "Node TS" ]; then
     echo "Iniciando node com ts, verificando se é possivel usar o ts-node"
@@ -16,6 +17,7 @@ elif [ "${NODE_MODE}" == "Node TS" ]; then
     echo "Baixando ts-node por padrão"
     npm i ts-node
     echo "Iniciando typescript com ts-node ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}"
+    echo "Servidor Iniciado com Sucesso"
     npx ts-node ${MAIN_FILE} -- ${NODE_ARGS}
 else
     echo "Iniciando usando scripts da package"
@@ -24,5 +26,6 @@ else
         exit
     fi
     echo "Iniciando usando o script ${MAIN_FILE}"
+    echo "Servidor Iniciado com Sucesso"
     npm run ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}
 fi
