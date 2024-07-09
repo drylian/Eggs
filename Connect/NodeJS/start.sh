@@ -2,7 +2,7 @@ echo "Iniciando node js"
 if [[ -f "./package.json" ]]; then
     echo "Package Encontrada iniciando npm install automatico"
     npm install
-fi;
+fi
 
 if [ "${NODE_MODE}" == "Node JS" ]; then
     echo "Iniciando node com js"
