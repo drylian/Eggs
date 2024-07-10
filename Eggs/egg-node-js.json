@@ -58,7 +58,7 @@
             "default_value": "Node JS",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:Node JS,Node TS,Npm Script(npm run {{MAIN_FILE}}),Npm Install",
+            "rules": "required|string|in:Node JS,Node TS,Npm Script,Npm Install",
             "field_type": "text"
         }
     ]
