@@ -18,7 +18,7 @@ elif [ "${NODE_MODE}" == "Node TS" ]; then
     npm i ts-node
     echo "Iniciando typescript com ts-node ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}"
     echo "Servidor Iniciado com Sucesso"
-    npx ts-node ${MAIN_FILE} -- ${NODE_ARGS}
+    npx ts-node ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}
 elif [ "${NODE_MODE}" == "Npm Install" ]; then
     echo "Iniciando npm install programado"
     npm install ${MAIN_FILE}
