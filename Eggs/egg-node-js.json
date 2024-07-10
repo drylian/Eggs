@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-07-09T10:37:04-03:00",
+    "exported_at": "2024-07-10T13:51:21-03:00",
     "name": "Node JS",
     "author": "danielolxlol@gmail.com",
     "description": "Node JS, egg para sources de bots e sites",
@@ -32,7 +32,7 @@
     },
     "variables": [
         {
-            "name": "Commando Principal",
+            "name": "Comando Principal",
             "description": "Isso muda de acordo com o Tipo de Modo Iniciado .\r\n\"Node JS\": esse deve ser o arquivo principal do JS, exemplo:index.js.\r\n\"Node TS\": esse deve ser o arquivo principal do TS, exemplo:index.ts.\r\n\"Npm run\": esse deve ser um scripts da package.json, exemplo:\"start\".",
             "env_variable": "MAIN_FILE",
             "default_value": "index.js",
@@ -53,12 +53,12 @@
         },
         {
             "name": "Modo de Inicia\u00e7\u00e3o",
-            "description": "\"Node JS\": Inicia usando node + o Arquivo principal, ex:node index.js\r\n\"Node TS\": Inicia usando o ts-node + o Arquivo principal, ex:npx ts-node index.ts\r\n\"Npm run\": Inicia usando um script da package.json",
+            "description": "\"Node JS\": Inicia usando node + o Arquivo principal, ex:node index.js\r\n\"Node TS\": Inicia usando o ts-node + o Arquivo principal, ex:npx ts-node index.ts\r\n\"Npm run\": Inicia usando um script da package.json\r\n\"Npm install + {MAIN_FILE}",
             "env_variable": "NODE_MODE",
             "default_value": "Node JS",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:Node JS,Node TS,Npm Script(npm run {{MAIN_FILE}})",
+            "rules": "required|string|in:Node JS,Node TS,Npm Script(npm run {{MAIN_FILE}}),Npm Install",
             "field_type": "text"
         }
     ]
