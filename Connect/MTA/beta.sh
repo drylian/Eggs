@@ -36,4 +36,4 @@ nohup ./accelerator --accelerator ${EXPRESS_PORT} >accelerator.log 2>accelerator
 
 echo -e "${GREEN}Accelerator has been started successfully. Check the logs in (accelerator.log and accelerator_error.log).${NC}"
 
-./server64 --maxplayers ${MAX_PLAYERS} --port ${SERVER_PORT} --httpport ${HTTP_PORT} -n
+./mta-server64 --maxplayers ${MAX_PLAYERS} --port ${SERVER_PORT} --httpport ${HTTP_PORT} -n
