@@ -24,7 +24,19 @@ else
     echo "❌  O diretório php-fpm não existe, copiando..."
     cp -r ./temp/php-fpm ./
 fi
-ls /usr/sbin 
+
+# Verifica se composer.json existe na raiz ou em webroot/composer.json
+if [[ -f "./composer.json" ]]; then
+    echo "✅  O arquivo composer.json existe na raiz, instalando dependências..."
+    composer install
+elif [[ -f "./webroot/composer.json" ]]; then
+    echo "✅  O arquivo webroot/composer.json existe, instalando dependências..."
+    cd webroot
+    composer install
+    cd ..
+else
+    echo "❌  composer.json não encontrado, iniciando sem..."
+fi
 
 # Limpa arquivos temporários
 echo "✅  Limpando arquivos temporários..."

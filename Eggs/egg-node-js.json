@@ -1,0 +1,65 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-07-10T13:51:21-03:00",
+    "name": "Node JS",
+    "author": "danielolxlol@gmail.com",
+    "description": "Node JS, egg para sources de bots e sites",
+    "features": null,
+    "docker_images": {
+        "Nodejs 18": "ghcr.io\/parkervcp\/yolks:nodejs_18",
+        "Nodejs 19": "ghcr.io\/parkervcp\/yolks:nodejs_19",
+        "Nodejs 20": "ghcr.io\/parkervcp\/yolks:nodejs_20",
+        "Nodejs 21": "ghcr.io\/parkervcp\/yolks:nodejs_21"
+    },
+    "file_denylist": [],
+    "startup": "bash <(curl -s https:\/\/raw.githubusercontent.com\/drylian\/Eggs\/main\/Connect\/NodeJS\/start.sh)",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": [\r\n        \"Servidor Iniciado com Sucesso\"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# NodeJS App Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python3 python3-dev python3-pip libtool\r\n\r\necho -e \"updating npm. please wait...\"\r\nnpm install npm@latest --location=global\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"assuming user knows what they are doing have a good day.\"\r\n    exit 0\r\nfi\r\n\r\n## add git ending if it's not on the address\r\nif [[ ${GIT_ADDRESS} != *.git ]]; then\r\n    GIT_ADDRESS=${GIT_ADDRESS}.git\r\nfi\r\n\r\nif [ -z \"${USERNAME}\" ] && [ -z \"${ACCESS_TOKEN}\" ]; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    GIT_ADDRESS=\"https:\/\/${USERNAME}:${ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d\/ -f3-)\"\r\nfi\r\n\r\n## pull git js repo\r\nif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    echo -e \"\/mnt\/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git\/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    else\r\n        echo -e \"cloning ${BRANCH}'\"\r\n        git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .\r\n    fi\r\n\r\nfi\r\n\r\necho \"Installing nodejs packages\"\r\nif [[ ! -z ${NODE_PACKAGES} ]]; then\r\n    \/usr\/local\/bin\/npm install ${NODE_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/package.json ]; then\r\n    \/usr\/local\/bin\/npm install --production\r\nfi\r\n\r\ncurl -o .\/index.js https:\/\/raw.githubusercontent.com\/drylian\/Eggs\/main\/Connect\/Templates\/Nodejs.js\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "node:18-bookworm-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Comando Principal",
+            "description": "Isso muda de acordo com o Tipo de Modo Iniciado .\r\n\"Node JS\": esse deve ser o arquivo principal do JS, exemplo:index.js.\r\n\"Node TS\": esse deve ser o arquivo principal do TS, exemplo:index.ts.\r\n\"Npm run\": esse deve ser um scripts da package.json, exemplo:\"start\".",
+            "env_variable": "MAIN_FILE",
+            "default_value": "index.js",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:16",
+            "field_type": "text"
+        },
+        {
+            "name": "Argumentos adicionais",
+            "description": "Argumentos extras, se for necessario.",
+            "env_variable": "NODE_ARGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Modo de Inicia\u00e7\u00e3o",
+            "description": "\"Node JS\": Inicia usando node + o Arquivo principal, ex:node index.js\r\n\"Node TS\": Inicia usando o ts-node + o Arquivo principal, ex:npx ts-node index.ts\r\n\"Npm run\": Inicia usando um script da package.json\r\n\"Npm install + {MAIN_FILE}",
+            "env_variable": "NODE_MODE",
+            "default_value": "Node JS",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:Node JS,Node TS,Npm Script,Npm Install",
+            "field_type": "text"
+        }
+    ]
+}
