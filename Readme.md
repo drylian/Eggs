@@ -20,6 +20,8 @@ Alguns deles trabalham no ARM e também no ARM do Oracle Free Tier
 | SA-MP | [Egg do Samp](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-s-a--m-p--a-r-m--a-m-d.json) | ✅ | ✅ | ✅ |Emulado no ARM com Box86|
 | MTA | [Com acelerador](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-mta-with-download-accelerator.json) | ✅ | ❌ | ❌ | Acelerador é x64 |
 | Nginx Explorer |[Egg do Nginx](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-nginx-file-explorer.json)| ✅ | ✅ | ✅ |Funcionando no Alpine|
+| Node JS | [Node JS](https://github.com/drylian/Eggs/blob/main/Eggs/egg-node-js.json) | ✅ | ✅ | ✅ | MultiStarts|
+| PHP | [PHP](https://github.com/drylian/Eggs/blob/main/Eggs/egg-php.json) | ✅ | ✅ | ✅ | Multi Versões|
 
 |      Eggs Connect BETA      |
 |-----------------------------|
