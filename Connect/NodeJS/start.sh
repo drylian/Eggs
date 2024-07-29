@@ -31,5 +31,5 @@ else
     fi
     echo "Iniciando usando o script ${MAIN_FILE}"
     echo "Servidor Iniciado com Sucesso"
-    npm run ${MAIN_FILE} -- -port ${SERVER_PORT} ${NODE_ARGS}
+    npm run ${MAIN_FILE} ${SERVER_PORT} ${NODE_ARGS}
 fi
