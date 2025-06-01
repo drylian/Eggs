@@ -27,7 +27,7 @@ fi
 
 start_smbd() {
   echo "🔁 Iniciando smbd..."
-  smbd --foreground --no-process-group --debug-stdout --configfile="$CONFIG_FILE" &
+  smbd --interactive --foreground --no-process-group --debug-stdout --configfile="$CONFIG_FILE" &
   SMB_PID=$!
   echo "$SMB_PID" > "$PID_FILE"
   sleep 1
