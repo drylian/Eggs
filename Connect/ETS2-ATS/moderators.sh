@@ -1,9 +1,14 @@
 #!/bin/bash
 
+# Euro Truck Simulator 2
 ETS_PATH=".local/share/Euro Truck Simulator 2/server_config.sii"
-ETS="1948160" # Euro Truck Simulator 2
+ETS_EXEC="./bin/linux_x64/eurotrucks2_server"
+ETS="1948160"
+
+# American Truck Simulator
 ATS_PATH=".local/share/American Truck Simulator/server_config.sii"
-ATS="2239530" # American Truck Simulator
+ATS_EXEC="./bin/linux_x64/amtrucks_server"
+ATS="2239530"
 
 OUTFILE=$([ "$SRCDS_APPID" == "$ATS" ] && echo "$ATS_PATH" || echo "$ETS_PATH")
 
@@ -31,4 +36,4 @@ awk -v new_lines="$new_moderator_lines" '
     { print }
 ' "$OUTFILE" > "${OUTFILE}.tmp" && mv "${OUTFILE}.tmp" "$OUTFILE"
 
-echo "Running with $moderator_count moderators."
+echo "[+] Added $moderator_count moderators."
