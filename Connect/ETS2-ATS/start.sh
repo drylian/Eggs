@@ -31,6 +31,11 @@ if [ ! -f "$OUTFILE" ]; then
 fi
 
 if [ -n "$MODERATORS" ]; then
+    # Remove as linhas existentes de moderadores com uma regex mais robusta
+    # Isso garante que tanto a contagem quanto a lista indexada sejam removidas
+    sed -i -e '/^\s*moderator_list:.*$/d' \
+           -e '/^\s*moderator_list\[[0-9]\+\]:.*$/d' "$OUTFILE"
+    
     IFS=',' read -r -a moderator_array <<< "$MODERATORS"
     moderator_count=${#moderator_array[@]}
 
@@ -40,13 +45,9 @@ if [ -n "$MODERATORS" ]; then
             new_moderator_lines+="\\n moderator_list[$i]: ${moderator_array[$i]}"
         done
 
+        # Insere a nova lista de moderadores antes da chave de fechamento '}'
         awk -v new_lines="$new_moderator_lines" '
-            /moderator_list/ { next }
-            /}/ && in_server_config {
-                print new_lines;
-                in_server_config=0;
-            }
-            /server_config :/ { in_server_config=1 }
+            /}/ { print new_lines; print; next }
             { print }
         ' "$OUTFILE" > "${OUTFILE}.tmp" && mv "${OUTFILE}.tmp" "$OUTFILE"
 
@@ -57,7 +58,6 @@ if [ -n "$MODERATORS" ]; then
 else
     echo "[!] Variável MODERATORS não definida. Pulando a atualização de moderadores."
 fi
-
 
 echo "[+] Iniciando o servidor do jogo..."
 exec "$EXEC_FILE" "$@"
