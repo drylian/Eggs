@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Euro Truck Simulator 2
-ETS_PATH=".local/share/Euro Truck Simulator 2/server_config.sii"
+ETS_PATH="${HOME}/.local/share/Euro Truck Simulator 2/server_config.sii"
 ETS_EXEC="./bin/linux_x64/eurotrucks2_server"
 ETS_APPID="1948160"
 
 # American Truck Simulator
-ATS_PATH=".local/share/American Truck Simulator/server_config.sii"
+ATS_PATH="${HOME}/.local/share/American Truck Simulator/server_config.sii"
 ATS_EXEC="./bin/linux_x64/amtrucks_server"
 ATS_APPID="2239530"
 
-# --- CONFIGURAÇÃO DO JOGO ---
+# --- Lógica de seleção do jogo ---
 if [ "$SRCDS_APPID" == "$ATS_APPID" ]; then
     OUTFILE="$ATS_PATH"
     EXEC_FILE="$ATS_EXEC"
@@ -20,9 +20,10 @@ elif [ "$SRCDS_APPID" == "$ETS_APPID" ]; then
     EXEC_FILE="$ETS_EXEC"
     echo "[+] Configurando para Euro Truck Simulator 2 (ETS2)..."
 else
+    # Se nenhuma variável for definida, assume ETS2 como padrão
     OUTFILE="$ETS_PATH"
     EXEC_FILE="$ETS_EXEC"
-    echo "[!] Falha na detecção do APPID. Usando Euro Truck Simulator 2 (ETS2) como padrão."
+    echo "[!] SRCDS_APPID não definido. Usando como padrão Euro Truck Simulator 2 (ETS2)..."
 fi
 
 if [ ! -f "$OUTFILE" ]; then
@@ -30,58 +31,60 @@ if [ ! -f "$OUTFILE" ]; then
     exit 1
 fi
 
-# --- ATUALIZAÇÃO DA LISTA DE MODERADORES ---
+# --- Lógica de atualização dos moderadores ---
 if [ -n "$MODERATORS" ]; then
+    # Converte a string de moderadores (separada por vírgulas) em um array
     IFS=',' read -r -a moderator_array <<< "$MODERATORS"
     moderator_count=${#moderator_array[@]}
 
-    # Cria as novas linhas de moderadores com a indentação correta (1 espaço)
-    if [ "$moderator_count" -gt 0 ]; then
-        new_moderator_lines=" moderator_list: $moderator_count"
-        for i in "${!moderator_array[@]}"; do
-            new_moderator_lines+="\\n moderator_list[$i]: ${moderator_array[$i]}"
-        done
-    else
-        # Se a lista de moderadores estiver vazia, apenas remove o bloco
-        new_moderator_lines=""
-    fi
+    # Cria um arquivo temporário para a saída do awk
+    TMP_FILE=$(mktemp)
 
-    # Remove apenas as linhas relacionadas a moderadores, preservando a estrutura
-    sed -i '/^[[:space:]]*moderator_list:/d; /^[[:space:]]*moderator_list\[[0-9]\+\]:/d' "$OUTFILE"
-
-    # Se houver novos moderadores, insere as linhas antes da chave de fechamento do bloco server_config
-    if [ -n "$new_moderator_lines" ]; then
-        awk -v new_lines="$new_moderator_lines" '
-            # Encontra a linha com apenas "}" (fechamento do bloco server_config)
-            /^[[:space:]]*}[[:space:]]*$/ && !block_found {
-                # Adiciona uma quebra de linha antes de inserir os moderadores
-                if (prev_line != "") {
-                    print prev_line
-                }
-                print new_lines
-                prev_line = $0
-                block_found = 1
+    # awk para remover linhas antigas e inserir as novas
+    # -v count="$moderator_count" -> passa a contagem de moderadores para o awk
+    # -v mods="$MODERATORS" -> passa a lista de IDs para o awk
+    awk -v count="$moderator_count" -v mods="$MODERATORS" '
+        # Esta regra se aplica a todas as linhas entre "server_config :" e "}"
+        /^[[:space:]]*server_config :/,/^[[:space:]]*}/ {
+            # Se a linha atual for uma entrada de moderador antiga, pule-a (não a imprima)
+            if (/^[[:space:]]*moderator_list/) {
                 next
             }
-            {
-                if (prev_line != "") {
-                    print prev_line
-                    prev_line = ""
+            # Se a linha for o "}" de fechamento E ainda não processamos os moderadores
+            if (/^[[:space:]]*}/ && !processed) {
+                # Se houver moderadores para adicionar
+                if (count > 0) {
+                    print " moderator_list: " count
+                    # O awk cria arrays começando do índice 1, então ajustamos para i-1
+                    split(mods, id_array, ",")
+                    for (i in id_array) {
+                        print " moderator_list[" (i-1) "]: " id_array[i]
+                    }
+                } else {
+                    # Se não houver moderadores, apenas zere a contagem
+                    print " moderator_list: 0"
                 }
-                print
+                processed = 1 # Marca como processado para não repetir
             }
-            END {
-                if (prev_line != "") {
-                    print prev_line
-                }
-            }
-        ' "$OUTFILE" > "${OUTFILE}.tmp" && mv "${OUTFILE}.tmp" "$OUTFILE"
+        }
+        # Imprime a linha atual (se não foi pulada pelo "next")
+        { print }
+    ' "$OUTFILE" > "$TMP_FILE"
+
+    # Substitui o arquivo original pelo temporário se o awk funcionou
+    if [ $? -eq 0 ]; then
+        mv "$TMP_FILE" "$OUTFILE"
+        echo "[+] Lista de moderadores atualizada com sucesso para $moderator_count moderador(es)."
+    else
+        echo "[ERRO] Falha ao atualizar o arquivo de configuração com awk."
+        rm -f "$TMP_FILE"
+        exit 1
     fi
-    
-    echo "[+] Arquivo de configuração atualizado. Adicionados $moderator_count moderadores."
+
 else
     echo "[!] Variável MODERATORS não definida. Pulando a atualização de moderadores."
 fi
 
+# --- Inicia o servidor ---
 echo "[+] Iniciando o servidor do jogo..."
 exec "$EXEC_FILE" "$@"
