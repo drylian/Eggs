@@ -41,9 +41,11 @@ if [ -n "$MODERATORS" ]; then
     TMP_FILE=$(mktemp)
 
     # awk para remover linhas antigas e inserir as novas
-    # -v count="$moderator_count" -> passa a contagem de moderadores para o awk
-    # -v mods="$MODERATORS" -> passa a lista de IDs para o awk
     awk -v count="$moderator_count" -v mods="$MODERATORS" '
+        BEGIN {
+            # Divide a string de moderadores em um array
+            split(mods, id_array, ",")
+        }
         # Esta regra se aplica a todas as linhas entre "server_config :" e "}"
         /^[[:space:]]*server_config :/,/^[[:space:]]*}/ {
             # Se a linha atual for uma entrada de moderador antiga, pule-a (não a imprima)
@@ -55,10 +57,9 @@ if [ -n "$MODERATORS" ]; then
                 # Se houver moderadores para adicionar
                 if (count > 0) {
                     print " moderator_list: " count
-                    # O awk cria arrays começando do índice 1, então ajustamos para i-1
-                    split(mods, id_array, ",")
-                    for (i in id_array) {
-                        print " moderator_list[" (i-1) "]: " id_array[i]
+                    # Imprime os moderadores em ordem crescente (0, 1, 2, ...)
+                    for (i = 0; i < count; i++) {
+                        print " moderator_list[" i "]: " id_array[i+1]
                     }
                 } else {
                     # Se não houver moderadores, apenas zere a contagem
