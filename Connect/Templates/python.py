@@ -1,23 +1,8 @@
 import socket
 import sys
+import os
 
-def get_port(args):
-    """
-    Extrai a porta do script Python.
-
-    Args:
-        args: Argumentos da linha de comando (sys.argv).
-
-    Returns:
-        A porta como um número inteiro.
-    """
-    for i in range(len(args)):
-        if args[i] == "-port":
-            return int(args[i+1])
-    return None
-
-args = sys.argv
-porta = get_port(args)
+porta = int(os.environ.get('SERVER_PORT'))
 if porta is None:
     print("Porta não especificada. Utilize o argumento -port seguido do número da porta.")
     sys.exit(1)
