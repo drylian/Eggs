@@ -1,6 +1,5 @@
 const http = require('http');
-const args = process.argv.join(" ");
-const port = args.slice(args.indexOf(" -port ") + 7).split(" ")[0];
+const port = process.env.SERVER_PORT;
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
