@@ -10,8 +10,8 @@
     "description": "SA-MP \u00e9 um mod de jogo multiplayer online massivamente gratuito para a vers\u00e3o para PC e Mobile da Rockstar Games Grand Theft Auto: San Andreas (tm).\r\nCriado por Ashu e drysius.\r\nVers\u00e3o: 1.6\r\nLingua:Portugu\u00eas Brasileiro.\r\nNecessidade: Precisa de internet para funcionar.\r\nGithub: https:\/\/github.com\/drysius\/\r\nGithub: https:\/\/github.com\/Ashu11-A\/",
     "features": null,
     "docker_images": {
-        "Docker Lite": "drysius\/gta:lite",
-        "Docker Full": "drysius\/gta:full"
+        "Docker Lite": "ghcr.io\/drysius\/gta:lite",
+        "Docker Full": "ghcr.io\/drysius\/gta:full"
     },
     "file_denylist": [],
     "startup": "bash <(curl -s https:\/\/raw.githubusercontent.com\/drysius\/Eggs\/main\/Connect\/Samp.sh)",
