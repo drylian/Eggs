@@ -25,7 +25,7 @@ if [[ -f "./samp03svr" ]]; then
       echo "${bold}${lightgreen}==> O Samp Npc foi detectado, O Sistema de download não será necessario.   <=="
       else 
       echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
-      curl -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+      curl -L -o /home/container/samp-npc "https://github.com/drysius/Eggs/releases/latest/download/samp-npc"
    fi
    # Samp-NPC Fim
    # Announce verificado
@@ -33,7 +33,7 @@ if [[ -f "./samp03svr" ]]; then
       echo "${bold}${lightgreen}==> O Announce foi detectado, O Sistema de download não será necessario.   <=="
       else
       echo "${bold}${lightgreen}==> O Announce ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
-      curl -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+      curl -L -o /home/container/announce "https://github.com/drysius/Eggs/releases/latest/download/announce"
    fi
    # Announce Fim
       echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="
@@ -69,7 +69,7 @@ if [[ -f "./samp03svr" ]]; then
 else
 # Samp03svr download
    echo "${bold}${lightgreen}==> O Samp Linux ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.       <=="
-   curl -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
+   curl -L -o /home/container/samp03svr "https://github.com/drysius/Eggs/releases/latest/download/samp03svr"
    # Samp03svr download
    echo "${bold}${lightgreen}==> Download Terminado, iniciando configurações padrões.                   <=="
    # Samp-NPC verificado
@@ -77,7 +77,7 @@ else
       echo "${bold}${lightgreen}==> O Samp Npc foi detectado, O Sistema de download não será necessario.   <=="
       else 
       echo "${bold}${lightgreen}==> O Samp Npc ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
-      curl -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+      curl -L -o /home/container/samp-npc "https://github.com/drysius/Eggs/releases/latest/download/samp-npc"
    fi
    # Samp-NPC Fim
    # Announce verificado
@@ -85,7 +85,7 @@ else
       echo "${bold}${lightgreen}==> O Announce foi detectado, O Sistema de download não será necessario.   <=="
       else
       echo "${bold}${lightgreen}==> O Announce ${bold}${vermelho}Não Detectado${bold}${lightgreen}, O Sistema de download será iniciado.         <=="
-      curl -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+      curl -L -o /home/container/announce "https://github.com/drysius/Eggs/releases/latest/download/announce"
       fi
    # Announce Fim
    echo "${bold}${lightgreen}==> Setando permissões padrões.                                            <=="

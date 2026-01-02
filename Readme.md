@@ -9,7 +9,7 @@ Alguns deles trabalham no ARM e também no ARM do Oracle Free Tier
 
 | Egg | Arquivo | AMD64 | ARM64 | ARM Oracle | Descrição |
 |--|--|--|--|--|--|
-| Open-MP | [Egg do Open-MP](https://github.com/drylian/Eggs/releases/download/1.0.0/egg-base--drylian.json) | ✅ | ✅ | ✅ |Emulado no ARM com Box86|
+| Open-MP | [Egg do Open-MP](https://github.com/drysius/Eggs/releases/download/1.0.0/egg-base--drysius.json) | ✅ | ✅ | ✅ |Emulado no ARM com Box86|
 
 
 |        Eggs Connect         |
@@ -17,19 +17,19 @@ Alguns deles trabalham no ARM e também no ARM do Oracle Free Tier
 
 | Egg | Arquivo | AMD64 | ARM64 | ARM Oracle | Descrição |
 |--|--|--|--|--|--|
-| SA-MP | [Egg do Samp](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-s-a--m-p--a-r-m--a-m-d.json) | ✅ | ✅ | ✅ |Emulado no ARM com Box86|
-| MTA | [Com acelerador](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-mta-with-download-accelerator.json) | ✅ | ❌ | ❌ | Acelerador é x64 |
-| Nginx Explorer |[Egg do Nginx](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-nginx-file-explorer.json)| ✅ | ✅ | ✅ |Funcionando no Alpine|
-| Node JS | [Node JS](https://github.com/drylian/Eggs/blob/main/Eggs/egg-node-js.json) | ✅ | ✅ | ✅ | MultiStarts|
-| Node JS Chromium | [Node JS Chromium](https://github.com/drylian/Eggs/blob/main/Eggs/egg-node-j-s--chromium.json) | ✅ | ✅ | ✅ | MultiStarts|
-| PHP | [PHP](https://github.com/drylian/Eggs/blob/main/Eggs/egg-php.json) | ✅ | ✅ | ✅ | Multi Versões|
+| SA-MP | [Egg do Samp](https://raw.githubusercontent.com/drysius/Eggs/main/Eggs/egg-s-a--m-p--a-r-m--a-m-d.json) | ✅ | ❌ | ❌ |Apenas x64|
+| MTA | [Com acelerador](https://raw.githubusercontent.com/drysius/Eggs/main/Eggs/egg-mta-with-download-accelerator.json) | ✅ | ❌ | ❌ | Acelerador é x64 |
+| Nginx Explorer |[Egg do Nginx](https://raw.githubusercontent.com/drysius/Eggs/main/Eggs/egg-nginx-file-explorer.json)| ✅ | ✅ | ✅ |Funcionando no Alpine|
+| Node JS | [Node JS](https://github.com/drysius/Eggs/blob/main/Eggs/egg-node-js.json) | ✅ | ✅ | ✅ | MultiStarts|
+| Node JS Chromium | [Node JS Chromium](https://github.com/drysius/Eggs/blob/main/Eggs/egg-node-j-s--chromium.json) | ✅ | ✅ | ✅ | MultiStarts|
+| PHP | [PHP](https://github.com/drysius/Eggs/blob/main/Eggs/egg-php.json) | ✅ | ✅ | ✅ | Multi Versões|
 
 |      Eggs Connect BETA      |
 |-----------------------------|
 
 | Egg | Arquivo | AMD64 | ARM64 | ARM Oracle | Descrição |
 |--|--|--|--|--|--|
-| SA-MP | [Egg do Samp 2.0](https://raw.githubusercontent.com/drylian/Eggs/main/Eggs/egg-s-a--m-p-connect.json) | ✅ | ✅ | ✅ |Emulado no ARM com Box86|
+| SA-MP | [Egg do Samp 2.0](https://raw.githubusercontent.com/drysius/Eggs/main/Eggs/egg-s-a--m-p-connect.json) | ✅ | ✅ | ✅ |Emulado no ARM com Box86|
 
 ### Oque é Connect?
 

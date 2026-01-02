@@ -25,7 +25,7 @@ if (process.env.HTTPCLIENTNOCLIENTCACHE) NOClient = Boolean(process.env.HTTPCLIE
 // preset ip
 async function UpdateAcc() {
     try {
-        await download("https://github.com/drylian/Eggs/raw/main/Connect/MTA/Accelerator-Application/build/mta-accelerator", "mta-accelerator-update")
+        await download("https://github.com/drysius/Eggs/raw/main/Connect/MTA/Accelerator-Application/build/mta-accelerator", "mta-accelerator-update")
         console.log('Atualização baixada com sucesso, reinicie para istalar ela.');
     } catch (error) {
         console.error('Erro ao atualizar o arquivo:', error);
@@ -35,7 +35,7 @@ async function UpdateAcc() {
 async function Version() {
     try {
         //verifica se a versão do acelerador é a atual
-        const response = await fetch('https://raw.githubusercontent.com/drylian/Eggs/main/Connect/MTA/Accelerator-Application/package.json');
+        const response = await fetch('https://raw.githubusercontent.com/drysius/Eggs/main/Connect/MTA/Accelerator-Application/package.json');
         const server = await response.json();
 
         // const local = process.env.npm_package_version;

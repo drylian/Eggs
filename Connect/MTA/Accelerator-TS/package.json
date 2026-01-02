@@ -7,7 +7,7 @@
     "build": "node app/builder.js",
     "test": "tsc && node ."
   },
-  "author": "Drylian",
+  "author": "drysius",
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/node": "^20.11.27",

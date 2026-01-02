@@ -154,7 +154,7 @@ This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE
 
 ### Contributing
 
-Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue on the [GitHub repository](https://github.com/drylian/loggings).
+Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue on the [GitHub repository](https://github.com/drysius/loggings).
 
 ### Support
 

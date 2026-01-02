@@ -14,7 +14,7 @@ if [[ -f "./mta-accelerator" ]]; then
 else
     echo "Acelerador não encontrado, baixando."
     # Baixando o httpserver se não estiver presente
-    curl -L -o /home/container/mta-accelerator "https://github.com/drylian/Eggs/raw/main/Connect/MTA/Accelerator-Application/build/mta-accelerator"
+    curl -L -o /home/container/mta-accelerator "https://github.com/drysius/Eggs/raw/main/Connect/MTA/Accelerator-Application/build/mta-accelerator"
 fi
 
 chmod 777 mta-accelerator

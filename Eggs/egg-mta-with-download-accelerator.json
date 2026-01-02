@@ -10,10 +10,10 @@
     "description": "O que mais voc\u00ea poderia querer? Multi Theft Auto fornece a melhor experi\u00eancia online Grand Theft Auto que existe. Continue lendo para saber mais, diferente do mta convencional esse possue um que seria o fast-dl , ou acelerador de downloads(muito conhecido)",
     "features": null,
     "docker_images": {
-        "MTA Server ": " ghcr.io\/drylian\/mta:server"
+        "MTA Server ": " ghcr.io\/drysius\/mta:server"
     },
     "file_denylist": [],
-    "startup": "bash <(curl -s https:\/\/raw.githubusercontent.com\/drylian\/Eggs\/main\/Connect\/MTA\/server.sh)",
+    "startup": "bash <(curl -s https:\/\/raw.githubusercontent.com\/drysius\/Eggs\/main\/Connect\/MTA\/server.sh)",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Server started and is ready to accept connections\"\r\n}",

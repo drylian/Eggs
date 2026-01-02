@@ -21,7 +21,7 @@ if [[ -f "./accelerator" ]]; then
 else
     echo -e "${RED}Accelerator not found, downloading.${NC}"
     # Downloading the accelerator if not present
-    curl -L -o /home/container/accelerator "https://github.com/drylian/Accelerator/raw/main/release/accelerator-rs"
+    curl -L -o /home/container/accelerator "https://github.com/drysius/Accelerator/raw/main/release/accelerator-rs"
 fi
 
 chmod 777 accelerator

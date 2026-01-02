@@ -1,6 +1,6 @@
 #!/bin/bash
 #        ====================================================
-#                 Base Script Egg Criado por Drylian
+#                 Base Script Egg Criado por drysius
 #        ====================================================
 # Icones 🔴 🟠 🟡 🟢 🔵 🟣 🟤 ⚫ ⚪ ✅ ❌ 📍 ✂️ 🗑️ 🟧 🟨 ⬜ 
 # Icones ☑️ ✖️ ❎ 💾 📓 📗 📘 📙 📝 📖 📚 📰 🗞️ 🏷️ 🟥 🟩 🟦 ⚙️ 
@@ -19,9 +19,9 @@ Pasta_Base="📂Informações" # O Nome da pasta onde vai ser armazenada todas a
 Base_txt="🟢Informações.txt" # Nome do Arquivo Onde vai Ficar os Verificadores do egg.
 script_log="📔Script.log.txt" # Nome da Log que o Script vai Rodar.
 debug_log="📔Debug.log.txt" # Nome da Log que vai rodar o Debug.
-Base_Url="https://github.com/drylian/Eggs" #Link do github onde pode achar o egg.
+Base_Url="https://github.com/drysius/Eggs" #Link do github onde pode achar o egg.
 version_file="./${Pasta_Base}/${Base_txt}" # Local onde a versão vai ser Armazenada.
-version_remote="https://raw.githubusercontent.com/drylian/Eggs/main/Connect/SA-MP/Vers%C3%A3o.txt" #Local onde a Versão Latest vai ser vista
+version_remote="https://raw.githubusercontent.com/drysius/Eggs/main/Connect/SA-MP/Vers%C3%A3o.txt" #Local onde a Versão Latest vai ser vista
 # Cores do Terminal
 C0=$(echo -en "\u001b[0m") # Padrão
 C1=$(echo -en "\e[1m\u001b[36m") # Cor Ciano Com negrito.
@@ -32,7 +32,7 @@ C5=$(echo -en "\e[1m\u001b[35m") # Cor Margeta Com Negrito.
 B0="\e[1m" # Negrito
 # Dependencias do Script
 # Criação da Pasta de Vefiricação
-if [[ ! -f "./${Pasta_Base}/${Base_txt}" ]]; then mkdir -p ./${Pasta_Base}; echo -e "🟢Informações Do Script\n#\n🟢Criado por Drylian\n🟢Github: https://github.com/drylian/Eggs\n🟢Versão Atual: PRÉ" > ./${Pasta_Base}/${Base_txt}; fi # Cria a pasta e o primeiro arquivo de versão.
+if [[ ! -f "./${Pasta_Base}/${Base_txt}" ]]; then mkdir -p ./${Pasta_Base}; echo -e "🟢Informações Do Script\n#\n🟢Criado por drysius\n🟢Github: https://github.com/drysius/Eggs\n🟢Versão Atual: PRÉ" > ./${Pasta_Base}/${Base_txt}; fi # Cria a pasta e o primeiro arquivo de versão.
 if [[ ! -d "${Pasta_Base}/Logs" ]]; then mkdir -p ./${Pasta_Base}/Logs; fi
 Arquitetura=$([ "$(uname -m)" == "x86_64" ] && echo "AMD64" || echo "ARM64") # Pega a Arquitetura da maquina
 StartUP_CMD=${StartARM} [ "${Arquitetura}" == "ARM64" ] || StartUP_CMD=${StartAMD} # isto é o que de fato vai executar como StartUP_CMD
@@ -73,7 +73,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     echo "
     ${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-.
     ${C3}|   UMA OU MAIS VARIANTES DO EGG ESTÃO EM FALTA, BAIXE A VERSÃO MAIS RECENTE DO EGG NO GITHUB.   |
-    ${C3}|                                 https://github.com/drylian/Eggs                                |
+    ${C3}|                                 https://github.com/drysius/Eggs                                |
     ${C3}*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.* 
     ${C0}"
     fi

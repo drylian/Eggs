@@ -1,6 +1,6 @@
 #!/bin/bash
 #        ====================================================
-#                 SA-MP Script Egg Criado por Drylian
+#                 SA-MP Script Egg Criado por drysius
 #        ====================================================
 # Icones 🔴 🟠 🟡 🟢 🔵 🟣 🟤 ⚫ ⚪ ✅ ❌ 📍 ✂️ 🗑️ 🟧 🟨 ⬜ 
 # Icones ☑️ ✖️ ❎ 💾 📓 📗 📘 📙 📝 📖 📚 📰 🗞️ 🏷️ 🟥 🟩 🟦 ⚙️ 
@@ -19,9 +19,9 @@ Pasta_Base="📂Informações" # O Nome da pasta onde vai ser armazenada todas a
 Base_txt="🟢Informações.txt" # Nome do Arquivo Onde vai Ficar os Verificadores do egg.
 script_log="Script.log.txt" # Nome da Log que o Script vai Rodar.
 debug_log="Debug.log.txt" # Nome da Log que vai rodar o Debug.
-Base_Url="https://github.com/drylian/Eggs" #Link do github onde pode achar o egg.
+Base_Url="https://github.com/drysius/Eggs" #Link do github onde pode achar o egg.
 version_file="./📂Informações/🟢Informações.txt" # Local onde a versão vai ser Armazenada.
-version_remote="https://raw.githubusercontent.com/drylian/Eggs/main/Connect/SAMP/Vers%C3%A3o.txt" #Local onde a Versão Latest vai ser vista
+version_remote="https://raw.githubusercontent.com/drysius/Eggs/main/Connect/SAMP/Vers%C3%A3o.txt" #Local onde a Versão Latest vai ser vista
 # Cores do Terminal
 C0=$(echo -en "\u001b[0m") # Padrão
 C1=$(echo -en "\e[1m\u001b[36m") # Cor Ciano Com negrito.
@@ -32,7 +32,7 @@ C5=$(echo -en "\e[1m\u001b[35m") # Cor Margeta Com Negrito.
 B0="\e[1m" # Negrito
 # Dependencias do Script
 # Criação da Pasta de Vefiricação
-if [[ ! -f "./📂Informações/🟢Informações.txt" ]]; then mkdir -p ./${Pasta_Base}; echo -e "🟢Informações Do Script\n#\n🟢Criado por Drylian\n🟢Github: https://github.com/drylian/Eggs\n🟢Versão Atual: PRÉ" > ./📂Informações/🟢Informações.txt; fi # Cria a pasta e o primeiro arquivo de versão.
+if [[ ! -f "./📂Informações/🟢Informações.txt" ]]; then mkdir -p ./${Pasta_Base}; echo -e "🟢Informações Do Script\n#\n🟢Criado por drysius\n🟢Github: https://github.com/drysius/Eggs\n🟢Versão Atual: PRÉ" > ./📂Informações/🟢Informações.txt; fi # Cria a pasta e o primeiro arquivo de versão.
 if [[ ! -d "${Pasta_Base}/Logs" ]]; then mkdir -p ./${Pasta_Base}/Logs; fi
 Arquitetura=$([ "$(uname -m)" == "x86_64" ] && echo "AMD64" || echo "ARM64") # Pega a Arquitetura da maquina
 if [ "${Arquitetura}" == "ARM64" ]; then StartUP_CMD="${StartARM}"; else StartUP_CMD="${StartAMD}"; fi # isto é o que de fato vai executar como StartUP_CMD
@@ -74,7 +74,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
     echo "
     ${C3}.-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+-.
     ${C3}|   UMA OU MAIS VARIANTES DO EGG ESTÃO EM FALTA, BAIXE A VERSÃO MAIS RECENTE DO EGG NO GITHUB.   |
-    ${C3}|                                 https://github.com/drylian/Eggs                                |
+    ${C3}|                                 https://github.com/drysius/Eggs                                |
     ${C3}*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*+-+*-+*-+*+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+*-+.* 
     ${C0}"
     
@@ -193,7 +193,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi verificado, Continuando iniciação..."
         else
             echo " 🟡   O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
-            curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
+            curl -s -L -o /home/container/samp03svr "https://github.com/drysius/Eggs/releases/latest/download/samp03svr"
             echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
         fi
     else
@@ -202,12 +202,12 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🟡   O Arquivo ${C1}SA-MP${C0} foi encontrado, porém não está nas normas do script, Deletando..."
             rm -f ./samp03svr
             echo " 🟢   O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
-            curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
+            curl -s -L -o /home/container/samp03svr "https://github.com/drysius/Eggs/releases/latest/download/samp03svr"
             echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             echo "🟢SAMP Instalado" >> "./📂Informações/🟢Informações.txt"
         else
             echo " 🔵   O Arquivo ${C1}SA-MP${C0} ${C3}não${C0} foi encontrado, Baixando..."
-            curl -s -L -o /home/container/samp03svr "https://github.com/drylian/Eggs/releases/latest/download/samp03svr"
+            curl -s -L -o /home/container/samp03svr "https://github.com/drysius/Eggs/releases/latest/download/samp03svr"
             echo " 🔵   O Arquivo ${C1}SA-MP${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             echo "🟢SAMP Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
@@ -221,7 +221,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi verificado, Continuando iniciação..."
         else
             echo " 🟡   O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
-            curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+            curl -s -L -o /home/container/samp-npc "https://github.com/drysius/Eggs/releases/latest/download/samp-npc"
             echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
         fi
     else
@@ -230,12 +230,12 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🟡 O Arquivo ${C1}SA-MP Npc${C0} foi encontrado, porém não está nas normas do script, Deletando..."
             rm -f ./samp-npc
             echo " 🟢   O Baixando Arquivo ${C1}SA-MP Npc${C0} verificado..."
-            curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+            curl -s -L -o /home/container/samp-npc "https://github.com/drysius/Eggs/releases/latest/download/samp-npc"
             echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             echo "🟢SAMP Npc Instalado" >> "./📂Informações/🟢Informações.txt"
         else
             echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} ${C3}não${C0} foi encontrado, Baixando..."
-            curl -s -L -o /home/container/samp-npc "https://github.com/drylian/Eggs/releases/latest/download/samp-npc"
+            curl -s -L -o /home/container/samp-npc "https://github.com/drysius/Eggs/releases/latest/download/samp-npc"
             echo " 🔵   O Arquivo ${C1}SA-MP Npc${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             echo "🟢SAMP Npc Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
@@ -250,7 +250,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi verificado, Continuando iniciação..."
         else
             echo " 🟡   O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
-            curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+            curl -s -L -o /home/container/announce "https://github.com/drysius/Eggs/releases/latest/download/announce"
             echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
         fi
     else
@@ -259,12 +259,12 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
             echo " 🟡   O Arquivo ${C1}SA-MP Announce${C0} foi encontrado, porém não está nas normas do script, Deletando..."
             rm -f ./announce
             echo " 🟢   O Baixando Arquivo ${C1}SA-MP${C0} verificado..."
-            curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+            curl -s -L -o /home/container/announce "https://github.com/drysius/Eggs/releases/latest/download/announce"
             echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             echo "🟢SAMP Announce Instalado" >> "./📂Informações/🟢Informações.txt"
         else
             echo " 🟡   O Arquivo ${C1}SA-MP Announce${C0} ${C3}não${C0} foi encontrado, Baixando..."
-            curl -s -L -o /home/container/announce "https://github.com/drylian/Eggs/releases/latest/download/announce"
+            curl -s -L -o /home/container/announce "https://github.com/drysius/Eggs/releases/latest/download/announce"
             echo " 🔵   O Arquivo ${C1}SA-MP Announce${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
             echo "🟢SAMP Announce Instalado" >> "./📂Informações/🟢Informações.txt"
         fi
@@ -282,7 +282,7 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
                     echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi verificado, Continuando iniciação..."
                 else
                     echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
-                    curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
+                    curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drysius/Eggs/releases/latest/download/sampvoice.so"
                     echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
                 fi
             else
@@ -291,12 +291,12 @@ if [ -z ${SUPORTE_ATIVO} ] || [ "${SUPORTE_ATIVO}" == "1" ]; then
                     echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} foi encontrado, porém não está nas normas do script, Deletando..."
                     rm -f ./plugins/sampvoice.so
                     echo " 🟢   O Baixando Arquivo ${C1}SA-MP Voip${C0} verificado..."
-                    curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
+                    curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drysius/Eggs/releases/latest/download/sampvoice.so"
                     echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
                     echo "🟢SAMP Voip Instalado" >> "./📂Informações/🟢Informações.txt"
                 else
                     echo " 🟡   O Arquivo ${C1}SA-MP Voip${C0} ${C3}não${C0} foi encontrado, Baixando..."
-                    curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drylian/Eggs/releases/latest/download/sampvoice.so"
+                    curl -s -L -o /home/container/plugins/sampvoice.so "https://github.com/drysius/Eggs/releases/latest/download/sampvoice.so"
                     echo " 🔵   O Arquivo ${C1}SA-MP Voip${C0} foi ${C2}baixado${C0}, Continuando iniciação..."
                     echo "🟢SAMP Voip Instalado" >> "./📂Informações/🟢Informações.txt"
                 fi

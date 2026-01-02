@@ -3,7 +3,7 @@ const port = process.env.SERVER_PORT;
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  const logo = "https://raw.githubusercontent.com/drylian/Eggs/main/Connect/Templates/imgs/nodejs.png"
+  const logo = "https://raw.githubusercontent.com/drysius/Eggs/main/Connect/Templates/imgs/nodejs.png"
   const content = `
   <!DOCTYPE html>
   <html lang="en">

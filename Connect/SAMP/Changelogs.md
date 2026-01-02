@@ -100,6 +100,6 @@
 
 ╭────────────────────────────╯
 
-│ ⚠️ • Github:        https://github.com/drylian/Eggs/
+│ ⚠️ • Github:        https://github.com/drysius/Eggs/
 
 ╰─────────── ·﻿ ﻿ ﻿· ﻿ ·﻿ ﻿ ﻿· ﻿✦

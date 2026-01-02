@@ -5,7 +5,7 @@ use clap::{Arg, Command};
 pub fn arguments_app () {
     let matches = Command::new("Accelerator")
         .version("1.0")
-        .author("Drylian <danielolxlol@gmail.com>")
+        .author("drysius <danielolxlol@gmail.com>")
         .about("Accelerator is webserver witch compress files, used in mta for httpporturl")
         .arg(
             Arg::new("accelerator")

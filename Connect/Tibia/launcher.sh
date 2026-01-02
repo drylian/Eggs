@@ -13,7 +13,7 @@ if [[ ! -d "/home/container/system" || ! -f "/home/container/system/nginx/nginx.
     rm -rf ./system
     Instalation_setup=true
     echo "${C3}Cloning nginx and PHP repository..."
-    git clone https://github.com/drylian/nginx ./temp
+    git clone https://github.com/drysius/nginx ./temp
     cp -r ./temp/system /home/container/
     rm -rf ./temp
     sed -i "/# Extra-ARGS/r /dev/stdin" /home/container/system/nginx/conf.d/default.conf <<< "$Nginx_Argument"
