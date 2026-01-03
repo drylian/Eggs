@@ -10,13 +10,13 @@
     "description": "3Proxy server with SOCKS5 and HTTP support, featuring bandwidth and connection limiting.",
     "features": null,
     "docker_images": {
-        "3Proxy ": "ghcr.io/vncscode/dockers:proxy3"
+        "3Proxy ": "ghcr.io/drysius/software:proxy3"
     },
     "file_denylist": [],
     "startup": "3proxy 3proxy.cfg",
     "config": {
         "files": "{}",
-        "startup": "{}",
+        "startup": "{\r\n    \"done\": \":\/home\/container$\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
