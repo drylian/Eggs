@@ -20,6 +20,7 @@ Alguns deles trabalham no ARM e também no ARM do Oracle Free Tier
 | SA-MP | [Egg do Samp](https://raw.githubusercontent.com/drysius/Eggs/main/Eggs/egg-s-a--m-p--a-r-m--a-m-d.json) | ✅ | ❌ | ❌ |Apenas x64|
 | MTA | [Com acelerador](https://raw.githubusercontent.com/drysius/Eggs/main/Eggs/egg-mta-with-download-accelerator.json) | ✅ | ❌ | ❌ | Acelerador é x64 |
 | Nginx Explorer |[Egg do Nginx](https://raw.githubusercontent.com/drysius/Eggs/main/Eggs/egg-nginx-file-explorer.json)| ✅ | ✅ | ✅ |Funcionando no Alpine|
+| Socks 3Proxy |[Socks 3Proxy](https://raw.githubusercontent.com/drysius/Eggs/main/Eggs/socks5-3proxy.json)| ✅ | ✅ | ✅ | Socks 5 Proxy pro Pterodactyl|
 | Node JS | [Node JS](https://github.com/drysius/Eggs/blob/main/Eggs/egg-node-js.json) | ✅ | ✅ | ✅ | MultiStarts|
 | Node JS Chromium | [Node JS Chromium](https://github.com/drysius/Eggs/blob/main/Eggs/egg-node-j-s--chromium.json) | ✅ | ✅ | ✅ | MultiStarts|
 | PHP | [PHP](https://github.com/drysius/Eggs/blob/main/Eggs/egg-php.json) | ✅ | ✅ | ✅ | Multi Versões|
